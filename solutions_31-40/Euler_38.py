@@ -14,6 +14,7 @@ def euler_38():
                      if ''.join(sorted([k for k in str(map(pandigitize, [i] * 2, [1, 2])) if k.isdigit()])) == digits[1:]])
     return pandigital
 
+
 print "Answer: %s" % euler_38() 
 stop = timeit.default_timer()
 print "Time: %s" % str(stop - start)
