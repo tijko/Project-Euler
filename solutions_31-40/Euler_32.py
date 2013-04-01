@@ -1,4 +1,5 @@
 ## Pandigital number 987654321 --- say 39 * 186 = 7254 all ##
+
 ## So whats the combinations of products to equal 9 digits? ##
 
 import timeit

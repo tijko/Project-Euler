@@ -1,4 +1,5 @@
-## Truncatable primes from left to right ---> Ex: 3797 ~ 797 ~ 97 ~ 7 and 3797 ~ 379 ~ 37 ~ 3 ##
+# Truncatable primes from left to right ---> 
+#Ex: 3797 ~ 797 ~ 97 ~ 7 and 3797 ~ 379 ~ 37 ~ 3 ##
 
 import math
 import timeit

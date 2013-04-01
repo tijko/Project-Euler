@@ -1,9 +1,9 @@
 ## maximum set of answers for triangle with perimeter <= 1000 ##
 
-## Ex: perimeter = 120 sides = {30,40,50}, {32,48,52}, {24,45,51} ##
-## peri = range(4,1001) | a < b < c | a**2 + b**2 == c**2 ##
+# Ex: perimeter = 120 sides = {30,40,50}, {32,48,52}, {24,45,51} ##
+# peri = range(4,1001) | a < b < c | a**2 + b**2 == c**2 ##
 
-## first integral perimeter triangle [3,4,5] = 12 ##
+# first integral perimeter triangle [3,4,5] = 12 ##
 
 import timeit
 import math

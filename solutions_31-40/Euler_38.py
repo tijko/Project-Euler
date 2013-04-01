@@ -1,4 +1,4 @@
-## largest concatenated pandigital number from product ##
+## largest concatenated pandigital number from product
 
 import timeit
 from string import digits

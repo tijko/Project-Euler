@@ -39,4 +39,3 @@ print "Answer: %s" % euler_31()
 stop = timeit.default_timer()
 print "Time: %s" % str(stop - start)
 
-

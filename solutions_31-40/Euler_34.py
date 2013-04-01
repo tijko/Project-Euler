@@ -1,4 +1,5 @@
 ## Find sum of all numbers where the factorials of its digit add up to itself ##
+
 ## Say 145 = 1! + 4! + 5! = 1 + 24 + 120 ##
 
 import timeit
