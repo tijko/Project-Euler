@@ -1,4 +1,4 @@
-# poker hands -- caculate the amount of winning hands for player-one for the last thousand hands vs. player-two
+# poker hands -- calculate the amount of winning hands for player-one for the last thousand hands vs. player-two
 
 import timeit
 import os
