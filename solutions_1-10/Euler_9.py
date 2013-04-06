@@ -1,7 +1,8 @@
-## find the only pythagorean triplet that a + b + c = 1000 ##
+# find the only pythagorean triplet that a + b + c = 1000 
 
 import math
 import timeit
+
 
 start = timeit.default_timer()
 
