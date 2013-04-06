@@ -1,4 +1,5 @@
-## what is the smallest number that can be divided evenly by all the numbers from 1-20 ? ## 
+# what is the smallest number that can be divided evenly by all the numbers from 1-20 ?  
+
 import timeit
 
 
@@ -20,6 +21,6 @@ def euler_5():
                 return count
                     
 
-print euler_5()
+print "Answer: %s" % euler_5()
 stop = timeit.default_timer()
-print stop - start
+print "Time: %s" % str(stop - start)

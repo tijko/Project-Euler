@@ -1,7 +1,10 @@
 # What is the 10001st prime number?
 
 import math
+import timeit
 
+
+start = timeit.default_timer()
 
 def is_prime(n):
     if n == 2:
@@ -22,4 +25,6 @@ def euler_7():
         inc += 1
     return answer[len(answer) - 1]
 
-print euler_7()
+print "Answer: %s" % euler_7()
+stop = timeit.default_timer()
+print "Time: %s" % str(stop - start)
