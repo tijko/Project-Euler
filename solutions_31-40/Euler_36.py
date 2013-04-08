@@ -14,5 +14,5 @@ def euler_36():
 
 print "Answer: %s" % euler_36()
 stop = timeit.default_timer()
-print "Time: %s" % str(stop - start)
+print "Time: %f" % (stop - start)
 

@@ -24,4 +24,4 @@ def euler_40():
 
 print "Answer: %s" % euler_40()
 stop = timeit.default_timer()
-print "Time: %s" % str(stop - start)
+print "Time: %f" % (stop - start)
