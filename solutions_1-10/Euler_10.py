@@ -24,5 +24,5 @@ def euler_10(n):
 
 print sum([i for i in euler_10(2000001)])
 stop = timeit.default_timer()
-print 'Time: %s' % str(stop - start)
+print 'Time: %f' % (stop - start)
 

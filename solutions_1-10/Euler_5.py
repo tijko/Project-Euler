@@ -6,21 +6,16 @@ import timeit
 start = timeit.default_timer()
 
 def euler_5():
-    pos = 0
-    count = 20 
-    divs = [i for i in range(1, 20 + 1)]
-    while pos != 20:
+    count = 20
+    divs = [i for i in xrange(1, 20 + 1)]
+    while True:
         for i in divs:
             if count % i != 0:
-                count += 1
-                pos = 0
+                count += 20
                 break
-            if count % i == 0:
-                pos += 1
-            if pos == 20:
+            if i == 20:
                 return count
-                    
 
 print "Answer: %s" % euler_5()
 stop = timeit.default_timer()
-print "Time: %s" % str(stop - start)
+print "Time: %f" % (stop - start)

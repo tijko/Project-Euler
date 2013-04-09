@@ -18,4 +18,4 @@ def Euler_2(limit):
 
 print "Answer: %s" % sum([i for i in Euler_2(4000000)])
 stop = timeit.default_timer()
-print "Time: %s" % str(stop - start)
+print "Time: %f" % (stop - start)

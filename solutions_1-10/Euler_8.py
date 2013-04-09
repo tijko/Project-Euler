@@ -45,4 +45,4 @@ def euler_8(n):
 
 print "Answer: %s" % euler_8(big_num)
 stop = timeit.default_timer()
-print "Time: %s" % str(stop - start)
+print "Time: %f" % (stop - start)
