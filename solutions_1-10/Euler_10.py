@@ -1,5 +1,4 @@
-## Find the sum of all the primes below two million. ##
-
+# Find the sum of all the primes below two million. 
 
 from math import sqrt
 import timeit

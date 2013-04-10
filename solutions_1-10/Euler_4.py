@@ -1,4 +1,4 @@
-## find the largest palindrome number made from the product of two digit numbers ? ##
+# find the largest palindrome number made from the product of two digit numbers ?
 
 import itertools
 import timeit
@@ -7,7 +7,7 @@ import timeit
 start = timeit.default_timer()
 
 def euler_4():
-    canidates = [i for i in xrange(100,1000)]
+    canidates = [i for i in xrange(100, 1000)]
     canidates = [i for i in itertools.combinations(canidates, 2)]
     current_high = 0
     for canidate in canidates:

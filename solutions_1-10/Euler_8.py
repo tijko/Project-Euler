@@ -1,4 +1,4 @@
-## find the greatest product of 5 consecutive digits in this 1000 digit number ##
+# find the greatest product of 5 consecutive digits in this 1000 digit number 
 
 import timeit
 

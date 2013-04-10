@@ -1,4 +1,4 @@
-## what is the largest prime factor of 600851475143 ? ##
+# what is the largest prime factor of 600851475143 ? 
 
 import math
 import timeit
@@ -17,7 +17,7 @@ def is_prime(x):
     return True
 
 def euler_3():
-    prims = [i for i in xrange(1,1000000) if is_prime(i) and 600851475143 % i == 0]
+    prims = [i for i in xrange(1, 1000000) if is_prime(i) and 600851475143 % i == 0]
     return max(prims)
 
 print "Answer: %s" % euler_3()
