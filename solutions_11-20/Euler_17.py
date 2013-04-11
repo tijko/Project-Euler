@@ -11,40 +11,43 @@ The use of "and" when writing out numbers is in compliance with British usage.
 
 import timeit
 
+
 start = timeit.default_timer()
 
-new = ''
-new = new + 'one' * 191 
-new = new + 'two' * 190
-new = new + 'three' * 190
-new = new + 'four'  * 190
-new = new + 'five'  * 190
-new = new + 'six'  * 190
-new = new + 'seven'  * 190
-new = new + 'eight'  * 190
-new = new + 'nine' * 190
-new = new + 'ten' * 10
-new = new + 'eleven' * 10
-new = new + 'twelve' * 10
-new = new + 'thirteen' * 10
-new = new + 'fourteen' * 10
-new = new + 'fifteen' * 10
-new = new + 'sixteen' * 10
-new = new + 'seventeen' * 10
-new = new + 'eighteen' * 10
-new = new + 'nineteen' * 10
-new = new +'twenty' * 100
-new = new + 'thirty' * 100
-new = new + 'forty' * 100
-new = new + 'fifty' * 100
-new = new + 'sixty' * 100
-new = new + 'seventy' * 100
-new = new + 'eighty' * 100
-new = new + 'ninety' * 100
-new = new + 'hundredand' * 891
-new = new + 'hundred' * 9
-new = new + 'thousand' * 1
+def euler_17():
+    new = ''
+    new += 'one' * 191 
+    new += 'two' * 190
+    new += 'three' * 190
+    new += 'four'  * 190
+    new += 'five'  * 190
+    new += 'six'  * 190
+    new += 'seven'  * 190
+    new += 'eight'  * 190
+    new += 'nine' * 190
+    new += 'ten' * 10
+    new += 'eleven' * 10
+    new += 'twelve' * 10
+    new += 'thirteen' * 10
+    new += 'fourteen' * 10
+    new += 'fifteen' * 10
+    new += 'sixteen' * 10
+    new += 'seventeen' * 10
+    new += 'eighteen' * 10
+    new += 'nineteen' * 10
+    new += 'twenty' * 100
+    new += 'thirty' * 100
+    new += 'forty' * 100
+    new += 'fifty' * 100
+    new += 'sixty' * 100
+    new += 'seventy' * 100
+    new += 'eighty' * 100
+    new += 'ninety' * 100
+    new += 'hundredand' * 891
+    new += 'hundred' * 9
+    new += 'thousand' * 1
+    return len(new)
 
-print "Answer: %s" % len(new)
+print "Answer: %s" % euler_17()
 stop = timeit.default_timer()
-print "Time: %s" % str(stop - start)
+print "Time: %f" % (stop - start)

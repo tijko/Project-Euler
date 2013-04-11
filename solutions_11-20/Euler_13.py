@@ -1,6 +1,7 @@
-## work out the first ten digits of the sum of the 100, 50 digit numbers? ##
+# work out the first ten digits of the sum of the 100, 50 digit numbers? 
 
 import timeit
+
 
 start = timeit.default_timer()
 
@@ -116,4 +117,4 @@ def euler_13(data):
 
 print "Answer: %s" % euler_13(n)
 stop = timeit.default_timer()
-print "Time: %s" % str(stop - start)
+print "Time: %f" % (stop - start)

@@ -1,10 +1,10 @@
-## What is the greatest product of four adjacent numbers in any direction (up, down, left, right, or diagonally) in the 20X20 grid? ##
+# What is the greatest product of four adjacent numbers in any direction (up, down, left, right, or diagonally) in the 20X20 grid? 
 
 import numpy
 import timeit
 
-start = timeit.default_timer()
 
+start = timeit.default_timer()
 
 n = '''08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
        49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
@@ -28,13 +28,11 @@ n = '''08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
        01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48'''
 
 
-
 def prod_eval(seq):
     total = 1
     for i in seq:
         total *= i
     return total
-
 
 def euler_11(x):
     grid = [map(int, row.split()) for row in x.splitlines()]
@@ -44,7 +42,7 @@ def euler_11(x):
     row = 0
     col = 0
     while row + 4 <= len(grid):
-        chk = grid[row, shift:shift+4:]
+        chk = grid[row, shift:shift + 4:]
         if prod_eval(chk) > high: 
             high = prod_eval(chk)
         if col < 20:
@@ -52,11 +50,11 @@ def euler_11(x):
             if prod_eval(chk) > high:
                 high = prod_eval(chk)
         if col < 17 and row + 4 <= len(grid):
-            chk = [grid[i+row][i+col] for i in range(4)]
+            chk = [grid[i + row][i + col] for i in range(4)]
             if prod_eval(chk) > high: 
                 high = prod_eval(chk)
         if col > 3 and row + 4 <= len(grid):
-            chk = [grid[i+row][col-i-1] for i in range(4)]
+            chk = [grid[i + row][col - i - 1] for i in range(4)]
             if prod_eval(chk) > high:
                 high = prod_eval(chk)
         if shift + 4 < len(grid) and col < len(grid):
@@ -72,6 +70,5 @@ def euler_11(x):
     return high
 
 print "Answer: %s" % euler_11(n)    
-
 stop = timeit.default_timer()
-print "Time: %s" % str(stop - start)
+print "Time: %f" % (stop - start)

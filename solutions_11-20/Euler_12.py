@@ -1,4 +1,4 @@
-## What is the value of the first triangle number to have over five hundred divisors? ##
+# What is the value of the first triangle number to have over five hundred divisors?
 
 from math import sqrt
 from operator import mul
@@ -16,7 +16,6 @@ def is_prime(n):
         if n % i == 0:
             return False
     return True
-
 
 def decompose(n, divisors):
     total = []
@@ -41,4 +40,4 @@ def euler_12():
 
 print "Answer: %s" % euler_12() 
 stop = timeit.default_timer()
-print "Time: %s" % str(stop - start)
+print "Time: %f" % (stop - start)

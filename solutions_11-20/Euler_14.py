@@ -33,14 +33,12 @@ def collatz(n):
             var.append(n)
     return len(var)
 
-
 def euler_14():
     data = map(collatz,range(1,1000000))
     enum_data = list(enumerate(data, 1))
     enum_data.sort(key=operator.itemgetter(1))
     return enum_data[len(enum_data)-1]  
 
-
 print "Answer: %s" % euler_14()[0]
 stop = timeit.default_timer()
-print "Time: %s" % str(stop - start)
+print "Time: %f" % (stop - start)
