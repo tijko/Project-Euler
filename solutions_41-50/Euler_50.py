@@ -1,4 +1,4 @@
-## prime under a million that is the biggest of the sum of the most consecutive primes ##
+# prime under a million that is the biggest of the sum of the most consecutive primes 
 
 import math
 import timeit
@@ -32,4 +32,4 @@ def euler_50():
 
 print "Answer: %s" % euler_50()
 stop = timeit.default_timer()
-print "Time: %s" % str(stop - start)    
+print "Time: %f" % (stop - start)    

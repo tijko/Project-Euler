@@ -1,4 +1,4 @@
-## find the first of the four consecutive integer to have four distinct prime factors. 
+# find the first of the four consecutive integer to have four distinct prime factors. 
 
 import timeit
 import math
@@ -30,4 +30,4 @@ def euler_47():
 
 print "Answer: %s" % euler_47()
 stop = timeit.default_timer()
-print "Time: %s" % str(stop - start)
+print "Time: %f" % (stop - start)

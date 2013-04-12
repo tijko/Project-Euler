@@ -1,4 +1,4 @@
-## largest prime pan-digital number ##
+# largest prime pan-digital number 
 
 import timeit
 import math
@@ -31,4 +31,4 @@ def euler_41():
 
 print "Answer: %s" % euler_41()
 stop = timeit.default_timer()
-print "Time: %s" % str(stop - start)
+print "Time: %f" % (stop - start)
