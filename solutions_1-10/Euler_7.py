@@ -16,15 +16,23 @@ def is_prime(n):
             return False
     return True
 
+def prime_gen():
+    number_prime = 0
+    n = 0
+    while number_prime < 10001:
+        if is_prime(n):
+            number_prime += 1
+            yield n
+        n += 1
+
 def euler_7():
-    answer = []
-    inc = 0
-    while len(answer) < 10001:
-        if is_prime(inc):
-            answer.append(inc)
-        inc += 1
-    return answer[len(answer) - 1]
+    prime = prime_gen()
+    while True:
+        try:
+            answer = prime.next()
+        except StopIteration:
+            return answer
 
 print "Answer: %s" % euler_7()
 stop = timeit.default_timer()
-print "Time: %f" % (stop - start)
+print "Time: %f" % (stop - start)    
