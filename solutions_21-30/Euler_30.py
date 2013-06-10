@@ -6,16 +6,15 @@ import timeit
 start = timeit.default_timer()
 
 def euler_30():
-    trial = [str(i) for i in range(2,1000000)]
+    canidates = (i for i in xrange(2, 1000000))
     total = 0
-    answer = []
-    for i in trial:
-        for v in i:
-            total += int(v)**5
-        if total == int(i):
-            answer.append(int(i))
-        total = 0
-    return sum(answer)
+    while True:
+        try:
+            i = canidates.next()
+            if sum(int(v)**5 for v in str(i)) == i:
+                total += i
+        except StopIteration:
+            return total
 
 
 print "Answer: %s" % euler_30()
