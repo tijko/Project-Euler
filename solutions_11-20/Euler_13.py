@@ -109,10 +109,7 @@ n = """37107287533902102798797998220837590246510135740250
 
 
 def euler_13(data):
-    data = data.split() 
-    total = 0
-    for i in data:
-        total += + int(i)
+    total = sum([int(i) for i in  data.split()]) 
     return str(total)[:10]
 
 print "Answer: %s" % euler_13(n)
