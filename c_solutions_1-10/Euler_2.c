@@ -2,7 +2,7 @@
 #include <time.h>
 
 
-int fib_sum(int limit) {
+int fib_sum(long limit) {
 
     int a1, b1 = 1;
     int b2, total = 0;
@@ -20,16 +20,15 @@ int fib_sum(int limit) {
 
 int main(void) {
 
-    clock_t start;
-    clock_t stop;
+    clock_t start, stop;
 
     start = clock();
 
-    const int limit = 4000000;
+    const long limit = 4000000;
 
-    int ans = fib_sum(limit);
+    long ans = fib_sum(limit);
 
-    printf ("Answer: %d\n", ans);
+    printf ("Answer: %ld\n", ans);
 
     stop = clock();
     printf ("Time: %f\n", ((float)stop - (float)start) / CLOCKS_PER_SEC);
