@@ -4,7 +4,7 @@
 
 int multiples_three_five(int limit) {
 
-    int total = 0;
+    long total = 0;
 
     int i;
     for (i=1; i < limit; i++) {
@@ -17,13 +17,12 @@ int multiples_three_five(int limit) {
 
 int main(void) {
 
-    clock_t start;
-    clock_t stop;
+    clock_t start, stop;
 
     start = clock();
-    int ans = multiples_three_five(1000);
+    long ans = multiples_three_five(1000);
 
-    printf ("Answer: %d\n", ans); 
+    printf ("Answer: %ld\n", ans); 
 
     stop = clock(); 
     printf ("Time: %f\n", ((float)stop - (float)start) / CLOCKS_PER_SEC);
