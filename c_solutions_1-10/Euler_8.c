@@ -1,13 +1,11 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <time.h>
 #include <string.h>
 
 
 int main(void) {
 
-    clock_t start;
-    clock_t stop;
+    clock_t start, stop;
 
     start = clock();
 
