@@ -5,8 +5,7 @@
 
 int main(void) {
 
-    clock_t start;
-    clock_t stop;
+    clock_t start, stop;
 
     start = clock();
 
