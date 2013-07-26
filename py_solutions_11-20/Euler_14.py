@@ -9,7 +9,8 @@ n → 3n + 1 (n is odd)
 Using the rule above and starting with 13, we generate the following sequence:
 13 → 40 → 20 → 10 → 5 → 16 → 8 → 4 → 2 → 1
 
-It can be seen that this sequence (starting at 13 and finishing at 1) contains 10 terms. Although it has not been proved yet (Collatz Problem), it is thought that all starting numbers finish at 1.
+It can be seen that this sequence (starting at 13 and finishing at 1) contains 10 terms. 
+Although it has not been proved yet (Collatz Problem), it is thought that all starting numbers finish at 1.
 
 Which starting number, under one million, produces the longest chain?
 
@@ -23,22 +24,23 @@ import operator
 start = timeit.default_timer()
 
 def collatz(n):
-    var = []
+    count = 0
     while n != 1:
         if n % 2 != 0:
-            n = (n * 3) + 1
-            var.append(n)
+            n *= 3 
+            n += 1
+            count += 1
         if n % 2 == 0:
-            n = n / 2 
-            var.append(n)
-    return len(var)
+            n /= 2 
+            count += 1
+    return count 
 
 def euler_14():
-    data = map(collatz,range(1,1000000))
-    enum_data = list(enumerate(data, 1))
-    enum_data.sort(key=operator.itemgetter(1))
-    return enum_data[len(enum_data)-1]  
+    canidates = xrange(3, 1000000, 2)
+    number_sequences = {collatz(i):i for i in canidates}
+    seq_high = max(number_sequences.keys()) 
+    return number_sequences[seq_high]
 
-print "Answer: %s" % euler_14()[0]
+print "Answer: %s" % euler_14()
 stop = timeit.default_timer()
 print "Time: %f" % (stop - start)
