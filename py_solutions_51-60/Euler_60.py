@@ -24,7 +24,7 @@ def prime_combos(*args):
     return True
 
 def euler_60():
-    prime = [w for w in xrange(1, 10000) if is_prime(w) and w != 5 and w != 2]
+    prime = [w for w in xrange(7, 10000) if is_prime(w)] 
     for i in prime:
         for j in prime[prime.index(i):]:
             if prime_combos(str(i), str(j)):
