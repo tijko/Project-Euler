@@ -8,7 +8,6 @@ Moving up, down, left, or right directions.
 
 import timeit
 import os
-import time
 
 start = timeit.default_timer()
 
@@ -16,9 +15,9 @@ global edges
 global traveled
 global heap
 
-path = os.getcwd()
+path = os.getcwd().strip('py_solutions_81-90')
 
-with open(path + '/matrix.txt') as f:
+with open(path + 'euler_txt/matrix.txt') as f:
     grid = f.read()
 
 edges = [[int(i) for i in v.split(',')] for v in grid.split('\r\n') if v]      
@@ -31,7 +30,7 @@ for i in range(80):
 x = y = 0
 heap = [[y, x]]
 
-def dijkstra(y, x):
+def euler_83(y, x):
     bounds = 80 
     r_vertex = d_vertex = u_vertex = l_vertex = False 
     if traveled[y][x] == 'inf':
@@ -64,7 +63,6 @@ def dijkstra(y, x):
             traveled[y-1][x] = u_vertex
         else:
             u_vertex = False
-
     if x - 1 >= 0:
         l_vertex = curr + edges[y][x-1]
         if traveled[y][x-1] == 'inf':
@@ -73,7 +71,6 @@ def dijkstra(y, x):
             traveled[y][x-1] = l_vertex
         else:
             l_vertex = False
-
     mvs = {d_vertex:'d_vertex',
            r_vertex:'r_vertex',
            u_vertex:'u_vertex',
@@ -90,7 +87,7 @@ def dijkstra(y, x):
                 heap.append([y-1,x])
             if 'l_vertex' in heap_mv:
                 heap.append([y,x-1])
-            dijkstra(y+1, x)
+            euler_83(y+1, x)
         elif mvs[next_mv] == 'r_vertex':
             if 'd_vertex' in heap_mv:
                 heap.append([y+1,x])
@@ -98,7 +95,7 @@ def dijkstra(y, x):
                 heap.append([y-1,x])
             if 'l_vertex' in heap_mv:
                 heap.append([y,x-1])
-            dijkstra(y, x+1)
+            euler_83(y, x+1)
         elif mvs[next_mv] == 'u_vertex':
             if 'd_vertex' in heap_mv:
                 heap.append([y+1,x])
@@ -106,7 +103,7 @@ def dijkstra(y, x):
                 heap.append([y,x+1])
             if 'l_vertex' in heap_mv:
                 heap.append([y,x-1])
-            dijkstra(y-1,x)
+            euler_83(y-1,x)
         else:
             if 'd_vertex' in heap_mv:
                 heap.append([y+1,x])
@@ -114,13 +111,13 @@ def dijkstra(y, x):
                 heap.append([y,x+1])
             if 'u_vertex' in heap_mv:
                 heap.append([y-1,x])
-            dijkstra(y,x-1)
+            euler_83(y,x-1)
     else:
         return    
 
 while heap:
     y, x = heap.pop(0)
-    dijkstra(y, x)      
+    euler_83(y, x)      
 
 stop = timeit.default_timer()
 print "Answer: %d" % traveled[79][79]
