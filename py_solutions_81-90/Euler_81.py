@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 
 '''
-Minimal path in a 80x80 matrix, going from top left to bottom right
+Minimal path in a 80x80 matrix, going from top left node to bottom right node.
+Moving only in the right and down direction.
 '''
 
 import timeit
