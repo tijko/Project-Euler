@@ -3,7 +3,7 @@
 
 '''
 Minimal path in 80x80 matrix, going from any node on left to
-any node on right.
+any node on right.  Moving only in up, down, or right directions.
 '''
 
 import timeit
