@@ -29,7 +29,7 @@ for i in range(80):
 x = y = 0
 heap = [[y, x]]
 
-def dijkstra(y, x):
+def euler_81(y, x):
     bounds = 80
     r_vertex = d_vertex = False
     if traveled[y][x] == 'inf':
@@ -57,20 +57,20 @@ def dijkstra(y, x):
     if d_vertex and r_vertex:
         if d_vertex < r_vertex:
             heap.append([y, x+1])
-            dijkstra(y+1, x) 
+            euler_81(y+1, x) 
         else:
             heap.append([y+1, x])
-            dijkstra(y, x+1)
+            euler_81(y, x+1)
     elif d_vertex:
-        dijkstra(y+1, x)
+        euler_81(y+1, x)
     elif r_vertex:
-        dijkstra(y, x+1)
+        euler_81(y, x+1)
     else:
         return    
 
 while heap:
     y, x = heap.pop(0)
-    dijkstra(y, x)         
+    euler_81(y, x)         
 
 stop = timeit.default_timer()
 print "Answer: %d" % traveled[79][79]
