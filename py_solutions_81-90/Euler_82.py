@@ -8,7 +8,6 @@ any node on right.  Moving only in up, down, or right directions.
 
 import timeit
 import os
-import time
 
 start = timeit.default_timer()
 
@@ -32,7 +31,7 @@ def traveler():
 
 traveled = traveler() 
 
-def dijkstra(y, x):
+def euler_82(y, x):
     bounds = 80 
     r_vertex = d_vertex = u_vertex = False 
     if traveled[y][x] == 'inf':
@@ -65,7 +64,6 @@ def dijkstra(y, x):
             traveled[y-1][x] = u_vertex
         else:
             u_vertex = False
-
     mvs = {d_vertex:'d_vertex',
            r_vertex:'r_vertex',
            u_vertex:'u_vertex'
@@ -78,19 +76,19 @@ def dijkstra(y, x):
                 heap.append([y,x+1])
             if 'u_vertex' in mvs.values():
                 heap.append([y-1,x])
-            dijkstra(y+1, x)
+            euler_82(y+1, x)
         elif mvs[next_mv] == 'r_vertex':
             if 'd_vertex' in mvs.values():
                 heap.append([y+1,x])
             if 'u_vertex' in mvs.values():
                 heap.append([y-1,x])
-            dijkstra(y, x+1)
+            euler_82(y, x+1)
         else:
             if 'd_vertex' in mvs.values():
                 heap.append([y+1, x])
             if 'r_vertex' in mvs.values():
                 heap.append([y,x+1])
-            dijkstra(y-1,x)
+            euler_82(y-1,x)
     else:
         return    
 
@@ -100,7 +98,7 @@ for col in cols:
     heap = [col]
     while heap:
         y, x = heap.pop(0)
-        dijkstra(y, x)      
+        euler_82(y, x)      
     small = [traveled[i][79] for i in range(80) if traveled[i][79] != 'inf']
     sopf.append(min(small))
     traveled = traveler()
