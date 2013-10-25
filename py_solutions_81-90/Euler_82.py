@@ -41,56 +41,73 @@ def euler_82(y, x):
     if x + 1 >= bounds: 
         return
     if y + 1 < bounds:
-        d_vertex = curr + edges[y+1][x]
-        if traveled[y+1][x] == 'inf':
-            traveled[y+1][x] = d_vertex
-        elif curr + edges[y+1][x] < traveled[y+1][x]:
-            traveled[y+1][x] = d_vertex 
-        else:
-            d_vertex = False
+        d_vertex = d_edge(y, x, curr)
     if x + 1 < bounds:
-        r_vertex = curr + edges[y][x+1]
-        if traveled[y][x+1] == 'inf':
-            traveled[y][x+1] = r_vertex
-        elif curr + edges[y][x+1] < traveled[y][x+1]:
-            traveled[y][x+1] = r_vertex
-        else:
-            r_vertex = False
+        r_vertex = r_edge(y, x, curr)
     if y - 1 >= 0:  
-        u_vertex = curr + edges[y-1][x]
-        if traveled[y-1][x] == 'inf':
-            traveled[y-1][x] = u_vertex
-        elif curr + edges[y-1][x] < traveled[y-1][x]:
-            traveled[y-1][x] = u_vertex
-        else:
-            u_vertex = False
+        u_vertex = u_edge(y, x, curr)
     mvs = {d_vertex:'d_vertex',
            r_vertex:'r_vertex',
            u_vertex:'u_vertex'
           }
     if any(mvs):
-        mvs = {k:v for k,v in mvs.items() if k}
-        next_mv = min(mvs)
-        if mvs[next_mv] == 'd_vertex':
-            if 'r_vertex' in mvs.values():
-                heap.append([y,x+1])
-            if 'u_vertex' in mvs.values():
-                heap.append([y-1,x])
-            euler_82(y+1, x)
-        elif mvs[next_mv] == 'r_vertex':
-            if 'd_vertex' in mvs.values():
-                heap.append([y+1,x])
-            if 'u_vertex' in mvs.values():
-                heap.append([y-1,x])
-            euler_82(y, x+1)
-        else:
-            if 'd_vertex' in mvs.values():
-                heap.append([y+1, x])
-            if 'r_vertex' in mvs.values():
-                heap.append([y,x+1])
-            euler_82(y-1,x)
+        min_mv(mvs, y, x)
     else:
         return    
+
+def d_edge(y, x, curr):
+    d_vertex = curr + edges[y+1][x]
+    if traveled[y+1][x] == 'inf':
+        traveled[y+1][x] = d_vertex
+    elif curr + edges[y+1][x] < traveled[y+1][x]:
+        traveled[y+1][x] = d_vertex 
+    else:
+        d_vertex = False
+    return d_vertex
+
+def r_edge(y, x, curr):
+    r_vertex = curr + edges[y][x+1]
+    if traveled[y][x+1] == 'inf':
+        traveled[y][x+1] = r_vertex
+    elif curr + edges[y][x+1] < traveled[y][x+1]:
+        traveled[y][x+1] = r_vertex
+    else:
+        r_vertex = False
+    return r_vertex
+
+def u_edge(y, x, curr):
+    u_vertex = curr + edges[y-1][x]
+    if traveled[y-1][x] == 'inf':
+        traveled[y-1][x] = u_vertex
+    elif curr + edges[y-1][x] < traveled[y-1][x]:
+        traveled[y-1][x] = u_vertex
+    else:
+        u_vertex = False
+    return u_vertex
+
+def min_mv(mvs, y, x):
+    mvs = {k:v for k,v in mvs.items() if k}
+    next_mv = min(mvs)
+    mv = mvs.values()
+    if mvs[next_mv] == 'd_vertex':
+        if 'r_vertex' in mv:
+            heap.append([y,x+1])
+        if 'u_vertex' in mv:
+            heap.append([y-1,x])
+        euler_82(y+1, x)
+    elif mvs[next_mv] == 'r_vertex':
+        if 'd_vertex' in mv:
+            heap.append([y+1,x])
+        if 'u_vertex' in mv:
+            heap.append([y-1,x])
+        euler_82(y, x+1)
+    else:
+        if 'd_vertex' in mv:
+            heap.append([y+1, x])
+        if 'r_vertex' in mv:
+            heap.append([y,x+1])
+        euler_82(y-1,x)
+    return
 
 sopf = list()
 cols = [[i, 0] for i in range(80)]  
