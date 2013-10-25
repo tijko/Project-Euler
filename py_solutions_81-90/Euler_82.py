@@ -59,7 +59,7 @@ def d_edge(y, x, curr):
     d_vertex = curr + edges[y+1][x]
     if traveled[y+1][x] == 'inf':
         traveled[y+1][x] = d_vertex
-    elif curr + edges[y+1][x] < traveled[y+1][x]:
+    elif d_vertex < traveled[y+1][x]:
         traveled[y+1][x] = d_vertex 
     else:
         d_vertex = False
@@ -69,7 +69,7 @@ def r_edge(y, x, curr):
     r_vertex = curr + edges[y][x+1]
     if traveled[y][x+1] == 'inf':
         traveled[y][x+1] = r_vertex
-    elif curr + edges[y][x+1] < traveled[y][x+1]:
+    elif r_vertex < traveled[y][x+1]:
         traveled[y][x+1] = r_vertex
     else:
         r_vertex = False
@@ -79,7 +79,7 @@ def u_edge(y, x, curr):
     u_vertex = curr + edges[y-1][x]
     if traveled[y-1][x] == 'inf':
         traveled[y-1][x] = u_vertex
-    elif curr + edges[y-1][x] < traveled[y-1][x]:
+    elif u_vertex < traveled[y-1][x]:
         traveled[y-1][x] = u_vertex
     else:
         u_vertex = False
