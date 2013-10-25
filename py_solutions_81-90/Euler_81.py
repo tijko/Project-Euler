@@ -20,11 +20,7 @@ with open(path + 'euler_txt/matrix.txt') as f:
     grid = f.read()
 
 edges = [[int(i) for i in v.split(',')] for v in grid.split('\r\n') if v]      
-traveled = []
-
-for i in range(80):
-    row = ['inf'] * 80
-    traveled.append(row)
+traveled = [['inf'] * 80 for i in xrange(80)]
 
 x = y = 0
 heap = [[y, x]]
@@ -60,7 +56,7 @@ def y_edge(y, x, curr):
     d_vertex = curr + edges[y+1][x]
     if traveled[y+1][x] == 'inf':
         traveled[y+1][x] = d_vertex
-    elif curr + edges[y+1][x] < traveled[y+1][x]:
+    elif d_vertex < traveled[y+1][x]:
         traveled[y+1][x] = d_vertex 
     else:
         d_vertex = False
@@ -70,7 +66,7 @@ def x_edge(y, x, curr):
     r_vertex = curr + edges[y][x+1]
     if traveled[y][x+1] == 'inf':
         traveled[y][x+1] = r_vertex
-    elif curr + edges[y][x+1] < traveled[y][x+1]:
+    elif r_vertex < traveled[y][x+1]:
         traveled[y][x+1] = r_vertex
     else:
         r_vertex = False
