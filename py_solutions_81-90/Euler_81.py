@@ -39,21 +39,9 @@ def euler_81(y, x):
     if y + 1 >= bounds and x + 1 >= bounds:
         return
     if y + 1 < bounds:
-        d_vertex = curr + edges[y+1][x]
-        if traveled[y+1][x] == 'inf':
-            traveled[y+1][x] = d_vertex
-        elif curr + edges[y+1][x] < traveled[y+1][x]:
-            traveled[y+1][x] = d_vertex 
-        else:
-            d_vertex = False
+        d_vertex = y_edge(y, x, curr)
     if x + 1 < bounds:
-        r_vertex = curr + edges[y][x+1]
-        if traveled[y][x+1] == 'inf':
-            traveled[y][x+1] = r_vertex
-        elif curr + edges[y][x+1] < traveled[y][x+1]:
-            traveled[y][x+1] = r_vertex
-        else:
-            r_vertex = False
+        r_vertex = x_edge(y, x, curr)
     if d_vertex and r_vertex:
         if d_vertex < r_vertex:
             heap.append([y, x+1])
@@ -67,6 +55,26 @@ def euler_81(y, x):
         euler_81(y, x+1)
     else:
         return    
+
+def y_edge(y, x, curr): 
+    d_vertex = curr + edges[y+1][x]
+    if traveled[y+1][x] == 'inf':
+        traveled[y+1][x] = d_vertex
+    elif curr + edges[y+1][x] < traveled[y+1][x]:
+        traveled[y+1][x] = d_vertex 
+    else:
+        d_vertex = False
+    return d_vertex 
+
+def x_edge(y, x, curr):
+    r_vertex = curr + edges[y][x+1]
+    if traveled[y][x+1] == 'inf':
+        traveled[y][x+1] = r_vertex
+    elif curr + edges[y][x+1] < traveled[y][x+1]:
+        traveled[y][x+1] = r_vertex
+    else:
+        r_vertex = False
+    return r_vertex
 
 while heap:
     y, x = heap.pop(0)
