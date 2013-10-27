@@ -111,7 +111,6 @@ def push_heap(y, x, heap_mv):
                'u_vertex':[y-1,x],
                'l_vertex':[y,x-1]
               }
-#    [heap.append(mv_coor[i]) for i in heap_mv]
     heap.extend([mv_coor[i] for i in heap_mv])
     return
 
