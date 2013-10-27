@@ -88,25 +88,22 @@ def u_edge(y, x, curr):
 def min_mv(mvs, y, x):
     mvs = {k:v for k,v in mvs.items() if k}
     next_mv = min(mvs)
-    mv = mvs.values()
+    heap_mv = [mv for mv in mvs.values() if mv != mvs[next_mv]]
+    push_heap(y, x, heap_mv)
     if mvs[next_mv] == 'd_vertex':
-        if 'r_vertex' in mv:
-            heap.append([y,x+1])
-        if 'u_vertex' in mv:
-            heap.append([y-1,x])
         euler_82(y+1, x)
     elif mvs[next_mv] == 'r_vertex':
-        if 'd_vertex' in mv:
-            heap.append([y+1,x])
-        if 'u_vertex' in mv:
-            heap.append([y-1,x])
         euler_82(y, x+1)
     else:
-        if 'd_vertex' in mv:
-            heap.append([y+1, x])
-        if 'r_vertex' in mv:
-            heap.append([y,x+1])
         euler_82(y-1,x)
+    return
+
+def push_heap(y, x, heap_mv):
+    mv_coor = {'d_vertex':[y+1,x],
+               'r_vertex':[y,x+1],
+               'u_vertex':[y-1,x]
+              }
+    heap.extend([mv_coor[i] for i in heap_mv])
     return
 
 sopf = list()
