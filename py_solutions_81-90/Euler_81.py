@@ -11,10 +11,6 @@ import os
 
 start = timeit.default_timer()
 
-global edges
-global traveled
-global heap
-
 path = os.getcwd().strip('py_solutions_81-90')
 with open(path + 'euler_txt/matrix.txt') as f:
     grid = f.read()
