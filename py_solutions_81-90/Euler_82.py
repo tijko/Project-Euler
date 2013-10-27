@@ -14,6 +14,7 @@ start = timeit.default_timer()
 global edges
 global traveled
 global heap
+global sopf
 
 path = os.getcwd().strip('py_solutions_81-90')
 
@@ -22,14 +23,7 @@ with open(path + 'euler_txt/matrix.txt') as f:
 
 edges = [[int(i) for i in v.split(',')] for v in grid.split('\r\n') if v]      
 
-def traveler():
-    paths = []
-    for i in range(80): 
-        row = ['inf'] * 80
-        paths.append(row)
-    return paths
-
-traveled = traveler() 
+traveler = lambda: [['inf'] * 80 for i in xrange(80)]
 
 def euler_82(y, x):
     bounds = 80 
@@ -39,6 +33,7 @@ def euler_82(y, x):
     else:
         curr = traveled[y][x]
     if x + 1 >= bounds: 
+        sopf.append(traveled[y][x])
         return
     if y + 1 < bounds:
         d_vertex = d_edge(y, x, curr)
@@ -107,18 +102,14 @@ def push_heap(y, x, heap_mv):
     return
 
 sopf = list()
-cols = [[i, 0] for i in range(80)]  
+cols = [[i, 0] for i in xrange(80)]  
 for col in cols:
     heap = [col]
+    traveled = traveler()
     while heap:
         y, x = heap.pop(0)
         euler_82(y, x)      
-    small = [traveled[i][79] for i in range(80) if traveled[i][79] != 'inf']
-    sopf.append(min(small))
-    traveled = traveler()
 
 stop = timeit.default_timer()
 print "Answer: %d" % min(sopf)
 print "Time: %f" % (stop - start)
-
-
