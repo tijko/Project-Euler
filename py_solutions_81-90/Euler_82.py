@@ -45,7 +45,8 @@ def euler_82(y, x):
            r_vertex:'r_vertex',
            u_vertex:'u_vertex'
           }
-    if any(mvs):
+    mvs = {k:v for k,v in mvs.items() if k}
+    if any(mv<min(sopf) for mv in mvs):
         min_mv(mvs, y, x)
     else:
         return    
@@ -81,7 +82,6 @@ def u_edge(y, x, curr):
     return u_vertex
 
 def min_mv(mvs, y, x):
-    mvs = {k:v for k,v in mvs.items() if k}
     next_mv = min(mvs)
     heap_mv = [mv for mv in mvs.values() if mv != mvs[next_mv]]
     push_heap(y, x, heap_mv)
@@ -101,7 +101,7 @@ def push_heap(y, x, heap_mv):
     heap.extend([mv_coor[i] for i in heap_mv])
     return
 
-sopf = list()
+sopf = [999999] 
 cols = [[i, 0] for i in xrange(80)]  
 for col in cols:
     heap = [col]
