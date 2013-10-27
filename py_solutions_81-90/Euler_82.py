@@ -11,11 +11,6 @@ import os
 
 start = timeit.default_timer()
 
-global edges
-global traveled
-global heap
-global sopf
-
 path = os.getcwd().strip('py_solutions_81-90')
 
 with open(path + 'euler_txt/matrix.txt') as f:
@@ -33,7 +28,8 @@ def euler_82(y, x):
     else:
         curr = traveled[y][x]
     if x + 1 >= bounds: 
-        sopf.append(traveled[y][x])
+        if traveled[y][x] < sopf[0]:
+            sopf[0]= traveled[y][x]
         return
     if y + 1 < bounds:
         d_vertex = d_edge(y, x, curr)
@@ -46,7 +42,7 @@ def euler_82(y, x):
            u_vertex:'u_vertex'
           }
     mvs = {k:v for k,v in mvs.items() if k}
-    if any(mv<min(sopf) for mv in mvs):
+    if any(mv<sopf[0] for mv in mvs):
         min_mv(mvs, y, x)
     else:
         return    
@@ -111,5 +107,5 @@ for col in cols:
         euler_82(y, x)      
 
 stop = timeit.default_timer()
-print "Answer: %d" % min(sopf)
+print "Answer: %d" % sopf[0]
 print "Time: %f" % (stop - start)
