@@ -6,9 +6,8 @@ start = timeit.default_timer()
 
 
 def euler_21():
-    amicable = []
-    first_sum = 0
-    second_sum = 0
+    amicable = set()
+    first_sum = second_sum = 0
     for i in xrange(1, 10000):
         for k in xrange(1, int(i/2) + 1): 
             if i % k == 0: 
@@ -16,10 +15,9 @@ def euler_21():
         for v in xrange(1, int(first_sum/2) + 1): 
             if first_sum % v == 0: 
                 second_sum += v 
-        if second_sum == i and i != first_sum and i not in amicable: 
-            amicable.append(i) 
-        first_sum = 0 
-        second_sum = 0 
+        if second_sum == i and i != first_sum: 
+            amicable.add(i)
+        first_sum = second_sum = 0 
     return sum(amicable)
 
 
