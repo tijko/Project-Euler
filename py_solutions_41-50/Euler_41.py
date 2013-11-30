@@ -20,14 +20,11 @@ def is_prime(x):
 def euler_41():
     pandigital = '987654321'
     while True:
-        primes = [i for i in list(itertools.permutations(pandigital)) if
+        primes = [i for i in itertools.permutations(pandigital) if
                      is_prime(int(''.join(i)))]
         if primes:
-            prime = ''.join(max(primes))
-            break
-        if not primes:
-            pandigital = pandigital[1:]                    
-    return prime
+            return ''.join(primes[0])
+        pandigital = pandigital[1:]                    
 
 print "Answer: %s" % euler_41()
 stop = timeit.default_timer()
