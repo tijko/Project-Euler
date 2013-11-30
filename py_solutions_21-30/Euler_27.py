@@ -24,13 +24,11 @@ def euler_27():
         for v in xrange(-999, 1000):
             count = 0
             n = 0
-            while True:
+            quad = n**2 + (n*v) + i
+            while is_prime(abs(quad)):
+                count += 1
+                n += 1
                 quad = n**2 + (n*v) + i
-                if is_prime(abs(quad)):
-                    count += 1
-                    n += 1
-                if not is_prime(abs(quad)):
-                    break
             if count > high:
                 high = count
                 total =  i*v
@@ -39,7 +37,4 @@ def euler_27():
 
 print "Answer: %s" % euler_27()
 stop = timeit.default_timer()
-print "Time: %s" % str(stop - start)
-
-
-
+print "Time: %f" % (stop - start)
