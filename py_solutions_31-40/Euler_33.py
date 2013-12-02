@@ -1,8 +1,9 @@
-## trivial example = 30/50 = 3/5 ##
-## non-trivial example = 49/98 = 4/8 ##
+# trivial example = 30/50 = 3/5 
+# non-trivial example = 49/98 = 4/8 
 
-## There are 4 non-trivial types of these fractions < 1 and both numerator and denominator contain  two digits ##
-## find the the product of the four in its lowest common terms, what is the denominator? ##
+# There are 4 non-trivial types of these fractions < 1 and both numerator and 
+# denominator contain  two digits find the the product of the four in its 
+# lowest common terms, what is the denominator? 
 
 import timeit
 import itertools
