@@ -17,8 +17,7 @@ def euler_33():
     product = lambda x, y: x * y
     to_string = lambda x, y: str(x).replace(y, '')
     fractions = [f for f in itertools.permutations(xrange(10, 100), 2) 
-                 if f[0] < f[1] and not any(i % 10 == 0 or
-                                            i / 10 == i % 10 for i in f)]
+                 if f[0] < f[1] and not any(i % 10 == 0 or i % 11 == 0 for i in f)]
     for f in fractions:
         n_cpm = {d for d in str(f[0])}
         d_cpm = {d for d in str(f[1])}
