@@ -18,15 +18,7 @@ def is_prime(x):
     return True
 
 def euler_37():
-    truncatable = list()
-    primes = [i for i in xrange(11, 1000000) if is_prime(i) and 
-             not any([v for v in str(i) if int(v) in [0, 4, 6, 8]])]
-    for prime in primes:
-        if (all([is_prime(int(str(prime)[:-v])) for v in xrange(1, len(str(prime)))]) and
-            all([is_prime(int(str(prime)[v:])) for v in xrange(1, len(str(prime)))])):
-            truncatable.append(prime)
-    return sum(truncatable)
-
+    return sum([p for p in [i for i in xrange(11, 1000000) if is_prime(i) and not set(str(i)).intersection(['0', '4', '6', '8'])] if all([is_prime(int(str(p)[:-v])) for v in xrange(1, len(str(p)))]) and all([is_prime(int(str(p)[v:])) for v in xrange(1, len(str(p)))])])
 
 print "Answer: %s" % euler_37()
 stop = timeit.default_timer()
