@@ -6,14 +6,9 @@ from string import digits
 
 start = timeit.default_timer()
 
-def pandigitize(x, y):
-    return x * y
-
 def euler_38():
-    pandigital = max([''.join([i for i in str(map(pandigitize, [i] * 2, [1, 2])) if i.isdigit()]) for i in xrange(192, 10000) 
-                     if ''.join(sorted([k for k in str(map(pandigitize, [i] * 2, [1, 2])) if k.isdigit()])) == digits[1:]])
-    return pandigital
-
+    pandigitize = lambda x, y: x * y
+    return max([''.join([i for i in str(map(pandigitize, [i] * 2, [1, 2])) if i.isdigit()]) for i in xrange(192, 10000) if ''.join(sorted([k for k in str(map(pandigitize, [i] * 2, [1, 2])) if k.isdigit()])) == digits[1::]])
 
 print "Answer: %s" % euler_38() 
 stop = timeit.default_timer()
