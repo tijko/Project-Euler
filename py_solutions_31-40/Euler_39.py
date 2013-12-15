@@ -7,21 +7,20 @@
 
 import timeit
 import math
+import collections
+import operator
 
 
 start = timeit.default_timer()
 
 def euler_39():
-    answer = list()
+    answer = collections.defaultdict(int)
     for x in xrange(999):
         for i in xrange(3, 1001):
-            if (str(math.sqrt(x**2 + i**2))[::-1][:1] == '0' and 
-                sum([x, i, math.sqrt(x**2 + i**2)]) <= 1000):
-                answer.append(sum([x, i, math.sqrt(x**2 + i**2)]))
-    return int([i for i in answer if  
-                max([answer.count(v) for v in answer]) == answer.count(i)][0])
-
-
+            if (math.sqrt(x**2 + i**2) % 1 == 0 and 
+                sum([x, i, math.sqrt(x**2 + i**2)]) <= 1000):                                        
+                answer[sum([x, i, math.sqrt(x**2 + i**2)])] += 1
+    return sorted(answer.items(), key=lambda x: x[1])[-1][0]
 
 print "Answer: %s" % euler_39()
 stop = timeit.default_timer()
