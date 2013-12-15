@@ -8,7 +8,6 @@
 import timeit
 import math
 import collections
-import operator
 
 
 start = timeit.default_timer()
