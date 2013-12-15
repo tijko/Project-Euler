@@ -19,7 +19,7 @@ def euler_39():
             if (math.sqrt(x**2 + i**2) % 1 == 0 and 
                 sum([x, i, math.sqrt(x**2 + i**2)]) <= 1000):                                        
                 answer[sum([x, i, math.sqrt(x**2 + i**2)])] += 1
-    return sorted(answer.items(), key=lambda x: x[1])[-1][0]
+    return max(answer.items(), key=lambda x: x[1])[0]
 
 print "Answer: %s" % euler_39()
 stop = timeit.default_timer()
