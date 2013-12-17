@@ -17,10 +17,8 @@ import timeit
 start = timeit.default_timer()
 
 def euler_40():
-    string = ''.join([str(i) for i in xrange(1, 1000500)])
-    string = '0' + string
-    return int(string[1]) * int(string[10]) * int(string[100]) * int(string[1000]) * int(string[10000]) * int(string[100000]) * int(string[1000000])
-
+    string = ''.join(map(str, xrange(1000500)))
+    return reduce(lambda x, y: x * y, map(int, [string[10**e] for e in xrange(6)]))
 
 print "Answer: %s" % euler_40()
 stop = timeit.default_timer()
