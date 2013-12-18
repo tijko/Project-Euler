@@ -11,9 +11,9 @@ import itertools
 start = timeit.default_timer()
 
 def euler_44():
-    pent = set([(i * ((3 * i) - 1) / 2) for i in xrange(1, 6000)])
+    pent  = {i * ((3 * i) - 1) / 2 for i in xrange(1, 6000)}
     for i in itertools.combinations(pent, 2):
-        if pent.intersection([i[1] + i[0]]) and pent.intersection([i[1] - i[0]]):
+        if i[1] + i[0] in pent and i[1] - i[0] in pent:
             return i[1] - i[0]
 
 print "Answer: %s" % euler_44()
