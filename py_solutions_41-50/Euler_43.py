@@ -24,19 +24,7 @@ import timeit
 start = timeit.default_timer()
 
 def euler_43():
-    pandigitals = [i for i in list(itertools.permutations('9876543210')) if i[0] != '0']
-    special = list() 
-    for i in pandigitals:
-        pandigital = ''.join(i)
-        if (int(pandigital[1:4]) % 2 == 0 and 
-            int(pandigital[2:5]) % 3 == 0 and 
-            int(pandigital[3:6]) % 5 == 0 and 
-            int(pandigital[4:7]) % 7 == 0 and 
-            int(pandigital[5:8]) % 11 == 0 and 
-            int(pandigital[6:9]) % 13 == 0 and 
-            int(pandigital[7:10]) % 17 == 0):
-            special.append(int(pandigital))
-    return sum(special)
+    return sum([int(''.join(i)) for i in itertools.permutations('9876543210') if not sum(map(lambda x: x[0] % x[1], zip(map(int, [''.join(i)[j:j+3] for j in xrange(1, 8)]), [2, 3, 5, 7, 11, 13, 17])))]) 
 
 print "Answer: %s" % euler_43()
 stop = timeit.default_timer() 
