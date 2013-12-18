@@ -18,7 +18,6 @@ NOTE: Once the chain starts the terms are allowed to go above one million.
 '''
 
 import timeit
-import operator
 
 
 start = timeit.default_timer()
@@ -38,8 +37,7 @@ def collatz(n):
 def euler_14():
     canidates = xrange(3, 1000000, 2)
     number_sequences = {collatz(i):i for i in canidates}
-    seq_high = max(number_sequences.keys()) 
-    return number_sequences[seq_high]
+    return number_sequences[max(number_sequences)]
 
 print "Answer: %s" % euler_14()
 stop = timeit.default_timer()
