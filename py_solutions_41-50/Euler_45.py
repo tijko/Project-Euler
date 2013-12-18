@@ -12,7 +12,7 @@ import timeit
 start = timeit.default_timer()
 
 def euler_45():
-    triangle = set([(i * (i + 1) / 2) for i in xrange(286, 100000)])
+    triangle = {i * (i + 1) / 2 for i in xrange(286, 100000)}
     pent = [(i * (3 * i - 1) / 2) for i in xrange(166, 100000)]
     hexa = [(i * (2 * i - 1)) for i in xrange(144, 100000)]
     return list(triangle.intersection(pent, hexa))[0]
