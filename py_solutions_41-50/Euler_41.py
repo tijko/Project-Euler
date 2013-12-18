@@ -23,7 +23,7 @@ def euler_41():
         primes = [i for i in itertools.permutations(pandigital) if
                      is_prime(int(''.join(i)))]
         if primes:
-            return ''.join(primes[0])
+            return ''.join(max(primes))
         pandigital = pandigital[1:]                    
 
 print "Answer: %s" % euler_41()
