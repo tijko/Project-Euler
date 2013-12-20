@@ -28,19 +28,13 @@ big_num = """73167176531330624919225119674426574742355349194934
 
 
 def euler_8(n):
-    n = n.replace('\n', '')
-    n = ''.join([i for i in n if i != ' '])
-    position = 0
-    seq = ''
+    n = ''.join(n.split())    
     high = 0
-    while (position - 5) <= len(n):
-        total = 1
-        for i in n[position:position + 5]:
-            total = total * int(i)
+    mul = lambda x, y: x * y
+    for v in xrange(len(n) - 5):
+        total = reduce(mul, map(int, n[v:v + 5]))        
         if total > high:
             high = total
-            seq = n[position:position + 5]
-        position += 1
     return high
 
 print "Answer: %s" % euler_8(big_num)
