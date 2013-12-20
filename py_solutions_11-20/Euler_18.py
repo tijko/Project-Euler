@@ -7,23 +7,18 @@ import timeit
 start = timeit.default_timer()
 
 def euler_18():
-    with open(os.path.abspath('').strip('solutions_11-20') + 'euler_txt/triangle1.txt') as f:
-        x = list()
-        for line in f.readlines():
-            x.append(line.split())
-    tot = 10
-    row = 0
-    position = 0
-    tot += int(x[row][position])
-    row += 1
-    while row < len(x):
-        if int(x[row][position]) > int(x[row][position+1]):
-            tot += int(x[row][position])
+    path = os.getcwd().strip('py_solutions_11-20')
+    with open(path + '/euler_txt/triangle1.txt') as f:
+        tri = [map(int, i.split()) for i in f.readlines()]
+    col = 0
+    total = tri[0][0] + 10
+    for row in xrange(1, len(tri)):
+        if tri[row][col] > tri[row][col + 1]:
+            total += tri[row][col]
         else:
-            tot += int(x[row][position+1])
-            position += 1
-        row += 1
-    return tot
+            total += tri[row][col + 1]
+            col += 1
+    return total
 
 print "Answer: %s" % euler_18()
 stop = timeit.default_timer()
