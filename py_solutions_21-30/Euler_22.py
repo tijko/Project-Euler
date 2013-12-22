@@ -1,4 +1,4 @@
-## number amount of names ##
+# number amount of names
 
 import timeit
 import os
@@ -7,18 +7,13 @@ import os
 start = timeit.default_timer()
 
 def euler_22():
-    total = 0
-    name = 0
-    with open(os.path.abspath('').strip('solutions_21-30') + 
-                                  '/euler_txt/names1.txt') as f:
-        name_list = f.readlines()
-    name_list = sorted([i for i in name_list[0].split('"') if i != ',' and i != ''])
-    for v in xrange(len(name_list)):
-        for i in name_list[v]:
-            name += ord(i) - 64 
-        total += name * (v + 1)
-        name = 0
-    return total
+    with open(os.path.abspath('').strip('py_solutions_21-30') + 
+                                        '/euler_txt/names1.txt') as f:
+        name_list = f.read()
+    name_list = name_list.replace('"', '')
+    name_list = sorted(name_list.split(','))
+    return sum([(v + 1) * sum([ord(i) - 64 for i in k]) 
+                for v,k in enumerate(name_list)])
 
 print "Answer: %s" % euler_22()
 stop = timeit.default_timer()
