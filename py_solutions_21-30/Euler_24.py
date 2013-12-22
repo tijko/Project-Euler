@@ -18,13 +18,12 @@ import timeit
 start = timeit.default_timer()
 
 def euler_24():
-    answer = []
+    answer = list() 
+    pandigital = permutations('0123456789')
     while len(answer) < 1000000:
-        for i in list(map("".join, permutations('0123456789'))):
-            answer.append(i)
+            answer.append(''.join(pandigital.next()))
     return answer[999999]
-
 
 print "Answer: %s" % euler_24()
 stop = timeit.default_timer()
-print "Time: %s" % str(stop - start) 
+print "Time: %f" % (stop - start) 
