@@ -22,7 +22,7 @@ import timeit
 start = timeit.default_timer()
 
 def euler_29():
-    return len(set([i**v for i in xrange(2, 101) for v in xrange(2, 101)]))
+    return len({i**v for i in xrange(2, 101) for v in xrange(2, 101)})
 
 
 print "Answer: %s" % euler_29()
