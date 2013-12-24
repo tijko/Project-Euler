@@ -17,11 +17,11 @@ def is_prime(n):
     return True
 
 def euler_10(n):
-    for i in xrange(1, n):
+    for i in xrange(1, n, 2):
         if is_prime(i):
             yield i
 
-print sum([i for i in euler_10(2000001)])
+print sum([i for i in euler_10(2000001)]) + 2
 stop = timeit.default_timer()
 print 'Time: %f' % (stop - start)
 
