@@ -17,8 +17,12 @@ def is_prime(x):
     return True
 
 def euler_3():
-    prims = [i for i in xrange(1, 1000000) if is_prime(i) and 600851475143 % i == 0]
-    return max(prims)
+    high = 0
+    for i in xrange(1, 1000000, 2):
+        if is_prime(i) and 600851475143 % i == 0 and i > high:
+            high = i
+    return high
+
 
 print "Answer: %s" % euler_3()
 stop = timeit.default_timer()
