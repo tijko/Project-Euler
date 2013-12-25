@@ -24,10 +24,10 @@ def composite_gen():
         yield composite
         composite += 1
 
-def composite_chk(comp, twice_exp, primes):
-    for exp in twice_exp:
+def composite_chk(comp, twice_sq, primes):
+    for sq in twice_sq:
         for prime in primes:
-            if exp + prime == comp:
+            if sq + prime == comp:
                 return False
     return True
 
@@ -35,9 +35,9 @@ def euler_46():
     cg = composite_gen() 
     while True:
         composite = cg.next() 
-        twice_exp = (2 * v**2 for v in xrange(int(math.sqrt(composite))))
+        twice_sq = (2 * v**2 for v in xrange(int(math.sqrt(composite))))
         primes = [k for k in xrange(composite + 1) if is_prime(k)]
-        if composite_chk(composite, twice_exp, primes): return composite        
+        if composite_chk(composite, twice_sq, primes): return composite        
 
 
 print "Answer: %s" % euler_46()
