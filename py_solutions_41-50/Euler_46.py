@@ -16,23 +16,29 @@ def is_prime(x):
             return False
     return True
 
-def euler_46():   
-    composite = 10
+def composite_gen():
+    composite = 2
     while True:
         while composite % 2 == 0 or is_prime(composite):
             composite += 1
-        total = [2 * v**2 for v in xrange(int(math.sqrt(composite)))]
-        primes = [k for k in xrange(composite + 1) if is_prime(k)]
-        for v in total:
-            for j in primes:
-                odds = v + j 
-                if odds == composite: 
-                    break 
-            if odds == composite: 
-                break 
-        if odds != composite:
-            return composite
+        yield composite
         composite += 1
+
+def composite_chk(comp, twice_exp, primes):
+    for exp in twice_exp:
+        for prime in primes:
+            if exp + prime == comp:
+                return False
+    return True
+
+def euler_46():   
+    cg = composite_gen() 
+    while True:
+        composite = cg.next() 
+        twice_exp = (2 * v**2 for v in xrange(int(math.sqrt(composite))))
+        primes = [k for k in xrange(composite + 1) if is_prime(k)]
+        if composite_chk(composite, twice_exp, primes): return composite        
+
 
 print "Answer: %s" % euler_46()
 stop = timeit.default_timer()
