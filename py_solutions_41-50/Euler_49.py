@@ -26,11 +26,17 @@ def is_prime(x):
     return True
 
 def euler_49():
-    primes = [set([int(''.join(v)) for v in itertools.permutations(str(i)) if is_prime(int(''.join(v))) and int(''.join(v)) > 999]) for i in xrange(1000, 10000) if is_prime(i)]
+    primes = [set(int(''.join(v)) for v in itertools.permutations(str(i)) if 
+              is_prime(int(''.join(v))) and int(''.join(v)) > 999) for i in 
+              xrange(1000, 10000) if is_prime(i)]
     primes = [sorted(i) for i in primes if len(i) > 2]
     for prime in primes:
-        if [str(prime[i]) + str(prime[i+1]) + str((prime[i+1] - prime[i]) + prime[i+1])  for i in xrange(len(prime) - 1) if (prime[i+1] - prime[i]) + prime[i+1] in prime]:
-            return [str(prime[i]) + str(prime[i+1]) + str((prime[i+1] - prime[i]) + prime[i+1])  for i in xrange(len(prime) - 1) if (prime[i+1] - prime[i]) + prime[i+1] in prime][0]
+        if [str(prime[i]) + str(prime[i+1]) + str((prime[i+1] - prime[i]) + 
+            prime[i+1])  for i in xrange(len(prime) - 1) if (prime[i+1] - 
+            prime[i]) + prime[i+1] in prime]:
+            return [str(prime[i]) + str(prime[i+1]) + str((prime[i+1] - prime[i]) 
+                    + prime[i+1])  for i in xrange(len(prime) - 1) if (prime[i+1] - 
+                    prime[i]) + prime[i+1] in prime][0]
 
 
 print "Answer: %s" % euler_49()
