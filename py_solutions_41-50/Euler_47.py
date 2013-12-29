@@ -19,9 +19,8 @@ def is_prime(x):
 def comp_gen():
     composite = 10 
     while True:
-        while is_prime(composite):
-            composite += 1
-        yield composite
+        if not is_prime(composite):
+            yield composite
         composite += 1
  
 def prime_gen(comp, p):
