@@ -19,9 +19,8 @@ def is_prime(x):
 def composite_gen():
     composite = 2
     while True:
-        while composite % 2 == 0 or is_prime(composite):
-            composite += 1
-        yield composite
+        if composite % 2 != 0 and not is_prime(composite):
+            yield composite
         composite += 1
 
 def composite_chk(comp, twice_sq, primes):
