@@ -3,6 +3,7 @@
 import timeit
 import math
 
+
 start = timeit.default_timer()
 
 def is_prime(x):
@@ -18,34 +19,19 @@ def is_prime(x):
 def euler_58():
     n = 16
     d = 33
-    three = [i for i in xrange(66, 200000,8)]
-    five = [i for i in xrange(68, 200000,8)]
-    seven = [i for i in xrange(70, 200000,8)]
-    nine = [i for i in xrange(72, 200000,8)]
-    row_3 = 241
-    row_5 = 257
-    row_7 = 273
-    row_9 = 289
+    add = lambda x: x[0] + x[1]
+    row_pos = xrange(66, 73, 2)
+    row_cnt = xrange(241, 290, 16)
     lin = 11
-    count = 0
     while float(n) / d * 100 >= 10:
-        row_3 = row_3 + three[count]
-        row_5 = row_5 + five[count]
-        row_7 = row_7 + seven[count]
-        row_9 = row_9 + nine[count]
-        d += 4
-        if is_prime(row_3):
-          n += 1
-        if is_prime(row_5):
-          n+= 1
-        if is_prime(row_7):
-          n+= 1
-        if is_prime(row_9):
-          n += 1
-        count += 1
+        row_cnt = map(add, zip(row_cnt, row_pos))
+        row_pos = map(add, zip(row_pos, [8] * 4))
+        if any(is_prime(i) for i in row_cnt):
+            n += sum([1 for i in row_cnt if is_prime(i)])
         lin += 2
+        d += 4
     return lin
 
 print "Answer: %s" % euler_58()
 stop = timeit.default_timer()
-print "Time: %s" % str(stop - start)
+print "Time: %f" % (stop - start)
