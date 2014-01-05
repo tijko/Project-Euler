@@ -17,8 +17,7 @@ def is_prime(x):
     return True
 
 def euler_58():
-    n = 16
-    d = 33
+    n, d = 16, 33
     add = lambda x: x[0] + x[1]
     row_pos = xrange(66, 73, 2)
     row_cnt = xrange(241, 290, 16)
