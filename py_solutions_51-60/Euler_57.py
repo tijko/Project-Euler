@@ -5,22 +5,29 @@ import timeit
 
 start = timeit.default_timer()
 
-def euler_57():
-    n = 3
-    d = 2
-    exp = [] 
-    old_n = 1
-    old_d = 1
-    for i in xrange(1000):
-        exp.append([n, d])
-        new_n = (n * 2) + old_n 
-        new_d = (d * 2) + old_d
-        old_n = n
-        old_d = d    
-        n = new_n
-        d = new_d
-    return len([i for i in exp if len(str(i[0])) > len(str(i[1]))])
+def numr_gen():
+    prev_n = 1
+    numerator = 3
+    for _ in xrange(1001):
+        yield numerator
+        next_n = (numerator * 2) + prev_n
+        prev_n = numerator
+        numerator = next_n
 
+def denom_gen():
+    prev_d = 1
+    denominator = 2 
+    for _ in xrange(1001):
+        yield denominator 
+        next_d = (denominator * 2) + prev_d
+        prev_d = denominator
+        denominator = next_d
+
+def euler_57():
+    numr, denom = numr_gen(), denom_gen()
+    num_digits = lambda n: len(str(n))
+    return sum([1 for _ in xrange(1001) if num_digits(numr.next()) > num_digits(denom.next())])
+        
 print "Answer: %s" % euler_57()
 stop = timeit.default_timer()
-print "Time: %s" % str(stop - start)
+print "Time: %f" % (stop - start)
