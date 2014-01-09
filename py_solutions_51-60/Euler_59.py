@@ -31,7 +31,7 @@ def euler_59():
                 msg += alpha((''.join('0' if x[j] == y[j] else '1' for 
                               j in xrange(len(x))) + y[len(x):])[::-1])
             if len(frequent_wrds.intersection(msg.split())) > 5:                
-                return ''.join(msg) 
+                return msg 
 
 print "Answer: %s" % euler_59()
 stop = timeit.default_timer()
