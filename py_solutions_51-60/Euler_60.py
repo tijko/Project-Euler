@@ -29,7 +29,7 @@ def euler_60(primes=None, combos=None):
         for i in primes:
             combos = euler_60(primes[primes.index(i) + 1:], [str(i)])         
             if len(combos) == 5:
-                return sum([int(i) for i in combos])
+                return sum(map(int, combos))
     else:
         for j in primes:
             if prime_combos(combos + [str(j)]):
