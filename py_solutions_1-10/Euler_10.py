@@ -16,12 +16,16 @@ def is_prime(n):
             return False
     return True
 
-def euler_10(n):
-    for i in xrange(1, n, 2):
-        if is_prime(i):
-            yield i
+def prime_gen_under_two_mil():
+    n = 0
+    while n < 2000000:
+        if n % 2 != 0 and is_prime(n):
+            yield n
+        n += 1
 
-print sum([i for i in euler_10(2000001)]) + 2
+def euler_10():
+    return sum([i for i in prime_gen_under_two_mil()])
+
+print 'Answer: %s' % euler_10()
 stop = timeit.default_timer()
 print 'Time: %f' % (stop - start)
-
