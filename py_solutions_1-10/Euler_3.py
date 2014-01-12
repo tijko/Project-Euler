@@ -17,12 +17,9 @@ def is_prime(x):
     return True
 
 def euler_3():
-    high = 0
-    for i in xrange(1, 1000000, 2):
-        if is_prime(i) and 600851475143 % i == 0 and i > high:
-            high = i
-    return high
-
+    FACTOR_OF = 600851475143
+    return max([i for i in xrange(1, int(math.sqrt(FACTOR_OF)) + 1) 
+                if FACTOR_OF % i == 0 and is_prime(i)])
 
 print "Answer: %s" % euler_3()
 stop = timeit.default_timer()
