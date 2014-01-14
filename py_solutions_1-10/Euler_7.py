@@ -26,12 +26,7 @@ def prime_gen():
         n += 1
 
 def euler_7():
-    prime = prime_gen()
-    while True:
-        try:
-            answer = prime.next()
-        except StopIteration:
-            return answer
+    return [i for i in prime_gen()][-1]
 
 print "Answer: %s" % euler_7()
 stop = timeit.default_timer()
