@@ -18,10 +18,8 @@ start = timeit.default_timer()
 #            yield b2
 
 def euler_2(t=0, n=2, ln=1):
-    if n >= 4000000:
-        return t 
-    if n % 2 == 0:
-        return euler_2(t + n, n + ln, n)
+    if n >= 4000000: return t
+    elif n % 2 == 0: return euler_2(t + n, n + ln, n)
     return euler_2(t, n + ln, n)
 
 print "Answer: %s" % euler_2() 
