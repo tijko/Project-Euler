@@ -27,47 +27,41 @@ n = '''08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
        20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54
        01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48'''
 
-
-def prod_eval(seq):
-    total = 1
-    for i in seq:
-        total *= i
-    return total
+def array_position(col, row, shift, grid):
+    if shift + 4 < grid and col < grid:
+        shift += 1
+        col += 1
+    elif shift + 4 >= grid and col < grid:
+        col += 1
+    elif shift + 4 >= grid and col >= grid:
+        shift = 0
+        col = 0
+        if row + 4 <= grid:
+            row += 1
+    return col, row, shift 
 
 def euler_11(x):
     grid = [map(int, row.split()) for row in x.splitlines()]
     grid = numpy.array(grid, numpy.int32)
-    high = 0
+    mul = lambda x, y: x * y
+    high = list()
     shift = 0
     row = 0
     col = 0
     while row + 4 <= len(grid):
         chk = grid[row, shift:shift + 4:]
-        if prod_eval(chk) > high: 
-            high = prod_eval(chk)
+        high.append(reduce(mul, chk))
         if col < 20:
-            chk = grid[0:4,col]
-            if prod_eval(chk) > high:
-                high = prod_eval(chk)
+            chk = grid[0:4, col]
+            high.append(reduce(mul, chk))
         if col < 17 and row + 4 <= len(grid):
             chk = [grid[i + row][i + col] for i in range(4)]
-            if prod_eval(chk) > high: 
-                high = prod_eval(chk)
+            high.append(reduce(mul, chk))
         if col > 3 and row + 4 <= len(grid):
             chk = [grid[i + row][col - i - 1] for i in range(4)]
-            if prod_eval(chk) > high:
-                high = prod_eval(chk)
-        if shift + 4 < len(grid) and col < len(grid):
-            shift += 1
-            col += 1
-        elif shift + 4 >= len(grid) and col < len(grid):
-            col += 1
-        elif shift + 4 >= len(grid) and col >= len(grid):
-            shift = 0
-            col = 0
-            if row + 4 <= len(grid):
-                row += 1
-    return high
+            high.append(reduce(mul, chk))
+        col, row, shift = array_position(col, row, shift, len(grid))
+    return max(high)
 
 print "Answer: %s" % euler_11(n)    
 stop = timeit.default_timer()
