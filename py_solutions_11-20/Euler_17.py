@@ -15,38 +15,15 @@ import timeit
 start = timeit.default_timer()
 
 def euler_17():
-    new = ''
-    new += 'one' * 191 
-    new += 'two' * 190
-    new += 'three' * 190
-    new += 'four'  * 190
-    new += 'five'  * 190
-    new += 'six'  * 190
-    new += 'seven'  * 190
-    new += 'eight'  * 190
-    new += 'nine' * 190
-    new += 'ten' * 10
-    new += 'eleven' * 10
-    new += 'twelve' * 10
-    new += 'thirteen' * 10
-    new += 'fourteen' * 10
-    new += 'fifteen' * 10
-    new += 'sixteen' * 10
-    new += 'seventeen' * 10
-    new += 'eighteen' * 10
-    new += 'nineteen' * 10
-    new += 'twenty' * 100
-    new += 'thirty' * 100
-    new += 'forty' * 100
-    new += 'fifty' * 100
-    new += 'sixty' * 100
-    new += 'seventy' * 100
-    new += 'eighty' * 100
-    new += 'ninety' * 100
-    new += 'hundredand' * 891
-    new += 'hundred' * 9
-    new += 'thousand' * 1
-    return len(new)
+    return len(''.join(['one' * 191, 'two' * 190, 'three' * 190, 'four' * 190,
+                        'five' * 190, 'six' * 190, 'seven' * 190, 'eight' * 190,
+                        'nine' * 190, 'ten' * 10, 'eleven' * 10, 'twelve' * 10,
+                        'thirteen' * 10, 'fourteen' * 10, 'fifteen' * 10, 
+                        'sixteen' * 10, 'seventeen' * 10, 'eighteen' * 10, 
+                        'nineteen' * 10, 'twenty' * 100, 'thirty' * 100, 
+                        'forty' * 100, 'fifty' * 100, 'sixty' * 100, 
+                        'seventy' * 100, 'eighty' * 100, 'ninety' * 100, 
+                        'hundredand' * 891, 'hundred' * 9, 'thousand' * 1]))
 
 print "Answer: %s" % euler_17()
 stop = timeit.default_timer()
