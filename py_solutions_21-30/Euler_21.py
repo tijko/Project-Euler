@@ -11,10 +11,8 @@ def mod_zero(dividend, divisor):
 def euler_21():
     amicable = set()
     for i in xrange(1, 10000):
-        p1 = sum(filter(functools.partial(mod_zero, i), 
-                   xrange(1, int(i / 2) + 1)))  
-        p2 = sum(filter(functools.partial(mod_zero, p1), 
-                        xrange(1, int(p1 / 2) + 1)))
+        p1 = sum(filter(functools.partial(mod_zero, i), xrange(1, i / 2 + 1)))  
+        p2 = sum(filter(functools.partial(mod_zero, p1), xrange(1, p1 / 2 + 1)))
         if p2 == i and i != p1: 
             amicable.add(i)
     return sum(amicable)
