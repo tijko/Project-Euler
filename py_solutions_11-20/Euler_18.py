@@ -15,9 +15,9 @@ def euler_18():
     for row in xrange(1, len(tri)):
         if tri[row][col] > tri[row][col + 1]:
             total += tri[row][col]
-        else:
-            total += tri[row][col + 1]
-            col += 1
+            continue
+        total += tri[row][col + 1]
+        col += 1
     return total
 
 print "Answer: %s" % euler_18()
