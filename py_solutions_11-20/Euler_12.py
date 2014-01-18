@@ -8,16 +8,16 @@ import sys
 sys.setrecursionlimit(15000)
 start = timeit.default_timer()
 
-def euler_12(num):
-    divisors = 2 
-    tri = sum(xrange(1, num + 1))
+def factor_gen(tri):
     for i in xrange(2, int(math.sqrt(tri)) + 1):
         if tri % i == 0:
-            divisors += 2
-            if divisors > 500:
-                return tri
-    return euler_12(num + 1)
+            yield i
 
-print "Answer: %s" % euler_12(1001)
+def euler_12(n, tri):
+    if sum([2 for i in factor_gen(tri)]) + 2 > 500:
+        return tri
+    return euler_12(n + 1, sum([tri, n, 1]))
+
+print "Answer: %s" % euler_12(1001, sum(xrange(1002)))
 stop = timeit.default_timer()
 print ("Time: %f" % (stop - start))
