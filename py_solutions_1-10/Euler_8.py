@@ -29,13 +29,8 @@ big_num = """73167176531330624919225119674426574742355349194934
 
 def euler_8(n):
     n = ''.join(n.split())    
-    high = 0
     mul = lambda x, y: x * y
-    for v in xrange(len(n) - 5):
-        total = reduce(mul, map(int, n[v:v + 5]))        
-        if total > high:
-            high = total
-    return high
+    return max([reduce(mul, map(int, n[v:v + 5])) for v in xrange(len(n) - 5)])
 
 print "Answer: %s" % euler_8(big_num)
 stop = timeit.default_timer()
