@@ -1,26 +1,25 @@
-## calculate the sum of all amicable pairs below 10000 ##
+# Calculate the sum of all amicable pairs below 10000 
 
 import timeit
+import functools
 
 start = timeit.default_timer()
 
+def mod_zero(dividend, divisor):
+    return True if dividend % divisor == 0 else False
 
 def euler_21():
     amicable = set()
-    first_sum = second_sum = 0
     for i in xrange(1, 10000):
-        for k in xrange(1, int(i/2) + 1): 
-            if i % k == 0: 
-                first_sum += k 
-        for v in xrange(1, int(first_sum/2) + 1): 
-            if first_sum % v == 0: 
-                second_sum += v 
-        if second_sum == i and i != first_sum: 
+        p1 = sum(filter(functools.partial(mod_zero, i), 
+                   xrange(1, int(i / 2) + 1)))  
+        p2 = sum(filter(functools.partial(mod_zero, p1), 
+                        xrange(1, int(p1 / 2) + 1)))
+        if p2 == i and i != p1: 
             amicable.add(i)
-        first_sum = second_sum = 0 
     return sum(amicable)
 
 
 print "Answer: %s" % euler_21()     
 stop = timeit.default_timer()
-print "Time: %s" % str(stop - start)
+print "Time: %f" % (stop - start)
