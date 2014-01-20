@@ -18,11 +18,9 @@ import timeit
 start = timeit.default_timer()
 
 def euler_24():
-    answer = 1 
     pandigital = permutations('0123456789')
-    while answer < 1000000:
+    for i in xrange(999999):
         pandigital.next()
-        answer += 1
     return ''.join(pandigital.next())
 
 print "Answer: %s" % euler_24()
