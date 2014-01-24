@@ -17,7 +17,7 @@ def grid(step, axis):
  
 def euler_28():
     diag = 3
-    total = sum([i**2 for i in xrange(1, 1002) if i % 2 == 1])
+    total = sum(map(lambda x: x**2, xrange(1, 1002, 2)))
     for i in range(10, 15, 2):
         total += grid(diag, xrange(i, 1002002, 8))
         diag += 2
@@ -26,5 +26,4 @@ def euler_28():
 
 print "Answer: %s" % euler_28()
 stop = timeit.default_timer()
-print "Time: %s" % str(stop - start)
-
+print "Time: %f" % (stop - start)
