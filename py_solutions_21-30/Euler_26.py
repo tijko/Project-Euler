@@ -1,4 +1,4 @@
-### Largest sequence of repeating numbers of n < 1000 of 1/d
+# Largest sequence of repeating numbers of n < 1000 of 1/d
 
 import timeit
 import math
@@ -18,10 +18,10 @@ def is_prime(x):
 
 
 def euler_26():
-    primes_to_onethousand = [i for i in xrange(1, 1000) if is_prime(i)]
+    primes_to_onethousand = filter(is_prime, xrange(1, 1000))
     return primes_to_onethousand[len(primes_to_onethousand) - 3]
 
 
 print "Answer: %s" % euler_26()
 stop = timeit.default_timer()
-print "Time: %s" % str(stop - start)
+print "Time: %f" % (stop - start)
