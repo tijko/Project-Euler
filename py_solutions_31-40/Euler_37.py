@@ -1,5 +1,5 @@
 # Truncatable primes from left to right ---> 
-#Ex: 3797 ~ 797 ~ 97 ~ 7 and 3797 ~ 379 ~ 37 ~ 3 ##
+# Ex: 3797 ~ 797 ~ 97 ~ 7 and 3797 ~ 379 ~ 37 ~ 3 
 
 import math
 import timeit
@@ -18,7 +18,7 @@ def is_prime(x):
     return True
 
 def euler_37():
-    return sum([p for p in [i for i in xrange(11, 1000000) if is_prime(i) and not set(str(i)).intersection(['0', '4', '6', '8'])] if all([is_prime(int(str(p)[:-v])) for v in xrange(1, len(str(p)))]) and all([is_prime(int(str(p)[v:])) for v in xrange(1, len(str(p)))])])
+    return sum([p for p in (i for i in xrange(11, 1000000) if is_prime(i) and not set(str(i)).intersection(['0', '4', '6', '8'])) if all(is_prime(int(str(p)[:-v])) for v in xrange(1, len(str(p)))) and all(is_prime(int(str(p)[v:])) for v in xrange(1, len(str(p))))])
 
 print "Answer: %s" % euler_37()
 stop = timeit.default_timer()
