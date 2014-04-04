@@ -21,7 +21,6 @@ sub pythag_trip
             {
                 last;
             }
-            $b++;
         }
     }
 }
