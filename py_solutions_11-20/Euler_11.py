@@ -45,9 +45,7 @@ def euler_11(x):
     grid = numpy.array(grid, numpy.int32)
     mul = lambda x, y: x * y
     high = list()
-    shift = 0
-    row = 0
-    col = 0
+    row = col = shift = 0
     while row + 4 <= len(grid):
         chk = grid[row, shift:shift + 4:]
         high.append(reduce(mul, chk))
