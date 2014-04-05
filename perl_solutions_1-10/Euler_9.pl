@@ -1,29 +1,28 @@
 use strict;
 use warnings;
 use Math::Complex;
+use Time::HiRes qw( clock );
 
 
 sub pythag_trip
 {
-    my ($low, $high);
-    ($low, $high) = @_;
+    my ($low, $high) = @_;
     my ($b, $c);
-    for my $a ($low..$high)
-    {
+    foreach my $a ($low..$high) {
         $b = $a + 1;
-        while ($b < $high)
-        {
-            if ($a + $b + sqrt($a**2 + $b**2) == 1000)
-            {
-                return $a * $b * int(sqrt($a * $b * sqrt($a**2 + $b**2)));
+        for (my $b1 = $b; $b1 < $high; $b1++) {
+            if (($a + $b1 + sqrt($a**2 + $b1**2)) == 1000) {
+                return $a * $b1 * int(sqrt($a**2 + $b1**2));
             }
-            elsif ($a + $b + sqrt($a**2 + $b**2) > 1000)
-            {
+            elsif (($a + $b1 + sqrt($a**2 + $b1**2)) > 1000) {
                 last;
             }
         }
     }
 }
 
-my $answer = pythag_trip(1, 2999);
+my $start = clock();
+my $answer = pythag_trip(1, 3000);
+my $stop = clock();
 print "Answer: ", $answer, "\n";
+printf "Time: %.5f\n", $stop - $start;
