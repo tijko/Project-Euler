@@ -1,5 +1,6 @@
 use strict;
 use warnings;
+use Time::HiRes qw( clock );
 
 
 sub greatest_product
@@ -9,24 +10,23 @@ sub greatest_product
     my $current = 1;
     my $currentstr;
     my $pos = 0;
-    for (my $i = 0; $i < length($big_num) - 4; $i++)
-    {
+    for (my $i = 0; $i < length($big_num) - 4; $i++) {
         $currentstr = substr($big_num, $i, 5);
         $current = 1;
-        for (my $j = 0; $j <= 5; $j++)
-        {            
-            if (substr($currentstr, $j, 1))
-            {
+        for (my $j = 0; $j <= 5; $j++) {
+            if (substr($currentstr, $j, 1)) {
                 $current *= substr($currentstr, $j, 1);
             }
         }
-        if ($current > $high)
-        {   
+        if ($current > $high) {
             $high = $current;
         }
     }
     return $high;
 }
 
+my $start = clock();
 my $answer = greatest_product();
+my $stop = clock();
 print "Answer: ", $answer, "\n";
+printf "Time: %.5f\n", $stop - $start;
