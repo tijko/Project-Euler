@@ -7,8 +7,7 @@ import timeit
 start = timeit.default_timer()
 
 def euler_9():
-    triplet_range = xrange(1, 3000)
-    for a in triplet_range:
+    for a in xrange(1, 3000):
         b = a + 1
         for b in xrange(b, 3000):
             if sum([a, b, (math.sqrt(a**2 + b**2))]) == 1000:
