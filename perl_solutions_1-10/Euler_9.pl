@@ -7,14 +7,12 @@ use Time::HiRes qw( clock );
 sub pythag_trip
 {
     my ($low, $high) = @_;
-    my ($b, $c);
-    foreach my $a ($low..$high) {
-        $b = $a + 1;
-        for (my $b1 = $b; $b1 < $high; $b1++) {
-            if (($a + $b1 + sqrt($a**2 + $b1**2)) == 1000) {
-                return $a * $b1 * int(sqrt($a**2 + $b1**2));
+    for my $a ($low..$high) {
+        for my $b ($a + 1..$high) {
+            if (($a + $b + sqrt($a**2 + $b**2)) == 1000) {
+                return $a * $b * int(sqrt($a**2 + $b**2));
             }
-            elsif (($a + $b1 + sqrt($a**2 + $b1**2)) > 1000) {
+            elsif (($a + $b + sqrt($a**2 + $b**2)) > 1000) {
                 last;
             }
         }
