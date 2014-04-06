@@ -6,10 +6,9 @@ use Time::HiRes qw( clock );
 sub palindrome
 {
     my $high = 0;
-    my $product;
-    foreach my $i (100..999) {
-        foreach my $j (100..999) {
-            $product = $i * $j;
+    for my $i (100..999) {
+        for my $j (100..999) {
+            my $product = $i * $j;
             if ($product eq reverse($product) && $product > $high) {
                 $high = $product;
             }
