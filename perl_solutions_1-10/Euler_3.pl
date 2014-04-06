@@ -13,7 +13,7 @@ sub is_prime
     if ($n % 2 == 0 || $n == 1) {
         return 0;
     }
-    for (my $i = 3; $i < int(sqrt($n)) + 1; $i++) {
+    for my $i (3..int(sqrt($n)) + 1) {
         if ($n % $i == 0) {
             return 0;
         }
@@ -25,7 +25,7 @@ sub largest_factor
 {
     my ($factor) = @_;
     my $high = 0;
-    foreach my $i (1..int(sqrt($factor))) {
+    for my $i (1..int(sqrt($factor)) + 1) {
         if ($factor % $i == 0 && (is_prime($i))) {
             $high = $i;
         }
