@@ -9,7 +9,7 @@ sub diff_sum_sq
 
     my $sum_sq;
     my $sq_sum;
-    foreach my $i ($low..$high) {
+    for my $i ($low..$high) {
         $sum_sq += $i**2;
         $sq_sum += $i;
     }
