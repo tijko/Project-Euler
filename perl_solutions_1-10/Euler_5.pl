@@ -8,7 +8,7 @@ sub range_divisor
     my ($low, $high) = @_;
     my $start = $high;
     while (1) {
-        foreach my $i ($low..$high) {
+        for my $i ($low..$high) {
             if ($start % $i != 0) {
                 $start += $high;
                 last;
