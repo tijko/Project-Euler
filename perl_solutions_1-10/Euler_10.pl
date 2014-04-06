@@ -13,7 +13,7 @@ sub is_prime
     if ($n % 2 == 0 || $n == 1) {
         return 0;
     }
-    for (my $i=3; $i < int(sqrt($n)) + 1; $i++) {
+    for my $i (3..int(sqrt($n)) + 1) {
         if ($n % $i == 0) {
             return 0;
         }
@@ -25,8 +25,8 @@ sub all_primes
 {
     my ($limit) = @_;
     my $total = 0;
-    for (my $i=2; $i < $limit; $i++) {
-        if ((is_prime($i))) {
+    for my $i (2..$limit) {
+        if (is_prime($i)) {
             $total += $i
         }
     }
