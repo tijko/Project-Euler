@@ -13,7 +13,7 @@ sub is_prime
     if ($n % 2 == 0 || $n == 1) {
         return 0;
     }
-    foreach my $i (3..int(sqrt($n)) + 1) {
+    for my $i (3..int(sqrt($n)) + 1) {
         if ($n % $i == 0) {
             return 0;
         }
