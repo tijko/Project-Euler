@@ -1,6 +1,7 @@
-# What is the greatest product of four adjacent numbers in any direction (up, down, left, right, or diagonally) in the 20X20 grid? 
+# What is the greatest product of four adjacent numbers in any direction 
+# (up, down, left, right, or diagonally) in the 20x20 grid? 
 
-import numpy
+import numpy as np
 import timeit
 
 
@@ -29,20 +30,18 @@ n = '''08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 
 def array_position(col, row, shift, grid):
     if shift + 4 < grid and col < grid:
-        shift += 1
-        col += 1
+        shift, col = (shift + 1, col + 1)
     elif shift + 4 >= grid and col < grid:
         col += 1
     elif shift + 4 >= grid and col >= grid:
-        shift = 0
-        col = 0
+        shift = col = 0
         if row + 4 <= grid:
             row += 1
     return col, row, shift 
 
 def euler_11(x):
     grid = [map(int, row.split()) for row in x.splitlines()]
-    grid = numpy.array(grid, numpy.int32)
+    grid = np.array(grid, np.int)
     mul = lambda x, y: x * y
     high = list()
     row = col = shift = 0
