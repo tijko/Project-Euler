@@ -18,5 +18,5 @@ sub fibonacci
 my $start = clock();
 my $answer = fibonacci(0, 2, 1, 4000000);
 my $stop = clock();
-print "Answer: ", $answer, "\n";
+print "Answer: $answer\n";
 printf "Time: %.5f\n", $stop - $start;

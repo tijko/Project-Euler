@@ -36,5 +36,5 @@ sub all_primes
 my $start = clock();
 my $answer = all_primes(2000000);
 my $stop = clock();
-print "Answer: ", $answer, "\n";
+print "Answer: $answer\n";
 printf "Time: %.5f\n", $stop - $start;

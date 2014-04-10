@@ -20,5 +20,5 @@ sub diff_sum_sq
 my $start = clock();
 my $answer = diff_sum_sq(1, 100);
 my $stop = clock();
-print "Answer: ", $answer, "\n";
+print "Answer: $answer\n";
 printf "Time: %.5f\n", $stop - $start;

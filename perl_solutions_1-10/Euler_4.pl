@@ -20,5 +20,5 @@ sub palindrome
 my $start = clock();
 my $answer = palindrome();
 my $stop = clock();
-print "Answer: ", $answer, "\n";
+print "Answer: $answer\n";
 printf "Time: %.5f\n", $stop - $start;

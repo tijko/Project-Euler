@@ -25,5 +25,5 @@ sub greatest_product
 my $start = clock();
 my $answer = greatest_product();
 my $stop = clock();
-print "Answer: ", $answer, "\n";
+print "Answer: $answer\n";
 printf "Time: %.5f\n", $stop - $start;

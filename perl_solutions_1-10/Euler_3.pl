@@ -36,5 +36,5 @@ sub largest_factor
 my $start = clock();
 my $answer = largest_factor(600851475143);
 my $stop = clock();
-print "Answer: ", $answer, "\n";
+print "Answer: $answer\n";
 printf "Time: %.5f\n", $stop - $start;

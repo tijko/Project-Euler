@@ -38,5 +38,5 @@ sub find_prime
 my $start = clock();
 my $answer = find_prime(10001);
 my $stop = clock();
-print "Answer: ", $answer, "\n";
+print "Answer: $answer\n";
 printf "Time: %.5f\n", $stop - $start;

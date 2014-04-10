@@ -18,5 +18,5 @@ sub three_five_factors
 my $start = clock();
 my $answer = three_five_factors(0, 999);
 my $stop = clock();
-print "Answer: ", $answer, "\n";
+print "Answer: $answer\n";
 printf "Time: %.5f\n", $stop - $start;

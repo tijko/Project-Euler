@@ -23,5 +23,5 @@ sub range_divisor
 my $start = clock();
 my $answer = range_divisor(1, 20);
 my $stop = clock();
-print "Answer: ", $answer, "\n";
+print "Answer: $answer\n";
 printf "Time: %.5f\n", $stop - $start;

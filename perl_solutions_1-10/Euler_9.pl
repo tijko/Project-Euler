@@ -22,5 +22,5 @@ sub pythag_trip
 my $start = clock();
 my $answer = pythag_trip(1, 3000);
 my $stop = clock();
-print "Answer: ", $answer, "\n";
+print "Answer: $answer\n";
 printf "Time: %.5f\n", $stop - $start;
