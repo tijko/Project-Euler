@@ -20,4 +20,4 @@ def euler_12(n, tri):
 
 print "Answer: %s" % euler_12(1001, sum(xrange(1002)))
 stop = timeit.default_timer()
-print ("Time: %f" % (stop - start))
+print "Time: %f" % (stop - start)
