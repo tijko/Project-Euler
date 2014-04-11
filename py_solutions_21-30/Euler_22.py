@@ -14,6 +14,7 @@ def euler_22():
     name_list = sorted(name_list.split(','))
     return sum([v * sum(map(lambda x: ord(x) - 64, k)) 
                 for v, k in enumerate(name_list, 1)])
+
 print "Answer: %s" % euler_22()
 stop = timeit.default_timer()
 print "Time: %f" % (stop - start)
