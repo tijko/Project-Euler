@@ -1,21 +1,20 @@
 # magic 5-gon ring 
 
-import itertools
+#import itertools
+from itertools import combinations, permutations, chain
 import timeit
 
 
 start = timeit.default_timer()
 
 def euler_68():
-    rings = [i for i in itertools.combinations(xrange(1, 11), 3)]
-    rings = [i for j in [n for n in [itertools.permutations(v) for v in rings]] for i in j]
-    pos = 1
-    h = list()
+    rings = combinations(xrange(1, 11), 3)
+    rings = [i for j in map(permutations, rings) for i in j]
     magic_gon = list()
-    cycle = [[i] * 10 for i in range(720)]
-    cycle = [i for j in cycle for i in j]
-    for c in cycle:
+    for c in chain.from_iterable(([i] * 10 for i in xrange(720))):
+        pos = 1
         for i in rings:
+            h = list()
             if (sum(i) == sum(rings[c]) and 
                 rings[c][0] < i[0] and 
                 rings[c][2] == i[1] and 
@@ -24,7 +23,6 @@ def euler_68():
                 h.append(i)
                 for j in rings:
                     if pos > len(h) - 1:
-                        pos = 1
                         break
                     if (sum(h[pos]) == sum(j) and 
                         h[0][0] < j[0] and 
@@ -32,18 +30,19 @@ def euler_68():
                         j[0] not in h[pos] and 
                         h[pos][0] not in j and 
                         h[0][0] not in j):
-                        canidate = ''.join([str(e) for d in h for e in d])
+                        canidate = ''.join(map(str, chain.from_iterable(h)))
                         if (j[0] not in [n[0] for n in h] and 
                             str(j[0]) not in canidate):
                             h.append(j)
                             pos += 1
             if len(h) >= 4:
                 if (h not in magic_gon and 
-                    set(range(1, 11)) == set([t for r in h for t in r])):
+                    not {t for r in h for t in r} ^ set(xrange(1, 11))):
                     magic_gon.append(h)
-            h = list()
-    magic_gon = [''.join([str(i) for v in k for i in v]) for k in magic_gon]
-    return max([int(i) for i in magic_gon if len(i) == 16]) 
+    magic_gon = filter(lambda s: len(s) == 16, 
+                       map(''.join, [map(str, chain.from_iterable(k)) 
+                                                for k in magic_gon]))
+    return max(map(int, magic_gon)) 
 
 print "Answer: %s" % euler_68()
 stop = timeit.default_timer()
