@@ -17,8 +17,6 @@ def euler_19():
         Jan = Mar = May = Jul = Aug = Oct = Dec = xrange(1, 32)    
         Apr = Jun = Sep = Nov = xrange(1, 31) 
         year = [Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec] 
-        week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 
-                'Friday', 'Saturday', 'Sunday'] 
         sundays += sum([1 for mos in xrange(12) if 
                         zip(year[mos], weekday)[0] == (1, 6)]) 
     return sundays 
