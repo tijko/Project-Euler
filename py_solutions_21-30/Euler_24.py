@@ -19,7 +19,7 @@ start = timeit.default_timer()
 
 def euler_24():
     pandigital = permutations('0123456789')
-    for i in xrange(999999):
+    for _ in xrange(999999):
         pandigital.next()
     return ''.join(pandigital.next())
 
