@@ -9,8 +9,8 @@ sub permute
     for my $perm (1..999999) {
         my $len = scalar(@arr);
         my $i = $len - 2;
-        my $f = "";
         my ($l1, $l2);
+        my $f = "";
         for (; $i >= 0; $i--) {
             if ($arr[$i] lt $arr[$i + 1]) {
                 $l1 = $i;
@@ -18,9 +18,6 @@ sub permute
                 last;
             }
         }   
-        if ($f eq "") {
-            last
-        }
         my $low = "";      
         for (; $i <= $len - 1; $i++) {
             if ($arr[$i] gt $f) {
