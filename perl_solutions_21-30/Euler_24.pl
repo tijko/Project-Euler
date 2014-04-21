@@ -6,11 +6,11 @@ use Time::HiRes qw( clock );
 sub permute
 {
     my @arr = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
+    my $len = scalar(@arr);
+    my ($l1, $l2);
+    my $f = "";
     for my $perm (1..999999) {
-        my $len = scalar(@arr);
         my $i = $len - 2;
-        my ($l1, $l2);
-        my $f = "";
         for (; $i >= 0; $i--) {
             if ($arr[$i] lt $arr[$i + 1]) {
                 $l1 = $i;
