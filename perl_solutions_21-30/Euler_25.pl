@@ -13,8 +13,7 @@ sub milli_fib
     my $x1 = $x->copy();
     my $z = 0;
     while (length($x) < 1000) {
-        my $x0 = $x1->bmul(2);
-        $x0->badd($y);
+        my $x0 = $x1->bmuladd(2, $y);
         my $y0 = $y->badd($x);
         $x = $x0->copy();
         $y = $y0->copy();
