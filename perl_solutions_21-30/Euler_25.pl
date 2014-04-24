@@ -12,14 +12,14 @@ sub milli_fib
     my $y0 = $y->copy();
     my $x1 = $x->copy();
     my $z = 0;
-    while (length($x) < 1000) {
+    do {
         my $x0 = $x1->bmuladd(2, $y);
         my $y0 = $y->badd($x);
         $x = $x0->copy();
         $y = $y0->copy();
         $x1 = $x->copy();
         $z +=2; 
-    }
+    } until (length($x) >= 1000); 
     return $z;
 }
 
