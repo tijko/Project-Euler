@@ -7,9 +7,8 @@ import math
 start = timeit.default_timer()
 
 def euler_66():
-    canidates = [i for i in xrange(1, 1001) if i**0.5 % 1 != 0]
-    high_x = 0
-    high_D = 0
+    canidates = filter(lambda i: i**0.5 % 1 != 0, xrange(1001))
+    high_x = high_D = 0
     for canidate in canidates:
         const_a = math.floor(math.sqrt(canidate))
         m0 = const_a
@@ -30,16 +29,13 @@ def euler_66():
         x2 = x1 * a0 + x0
         y2 = y1 * a0 + y0
         while k != 1:
-            x0 = x1
-            y0 = y1
-            x1 = x2
-            y1 = y2
+            x0, y0 = x1, y1
+            x1, y1 = x2, y2
             m1 = (d0 * a0) - m0
             d1 = (canidate - (m1**2)) / d0
             a1 = (const_a + m1) / d1
             a0 = long(a1)
-            d0 = d1
-            m0 = m1
+            d0, m0 = d1, m1
             x2 = long(x1) * a0 + long(x0)
             y2 = long(y1) * a0 + long(y0)
             k = x2**2 - canidate * y2**2
@@ -53,4 +49,3 @@ def euler_66():
 print "Answer: %s" % euler_66()
 stop = timeit.default_timer()
 print "Time: %f" % (stop - start)
-
