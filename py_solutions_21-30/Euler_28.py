@@ -1,17 +1,15 @@
 # What is the sum of the numbers on the diagonals in a 1001 by 1001 spiral formed in the same way?
 
 import timeit
-
+from itertools import takewhile
 
 start = timeit.default_timer()
 
 def grid(step, axis):
     total = step
-    for i, _ in enumerate(axis):
-        step += axis[i]
-        if step > axis[-1]:
-            break
-        total += step
+    for i in takewhile(lambda x: x + step < axis[-1], axis):
+        step += i
+        total += step                        
     return total
 
  
