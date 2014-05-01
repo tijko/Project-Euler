@@ -7,9 +7,9 @@ start = timeit.default_timer()
 
 def grid(step, axis):
     total = step
-    for i in xrange(len(axis)):
+    for i, _ in enumerate(axis):
         step += axis[i]
-        if step > axis[len(axis) - 1]:
+        if step > axis[-1]:
             break
         total += step
     return total
