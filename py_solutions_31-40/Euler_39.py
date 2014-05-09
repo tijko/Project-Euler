@@ -16,9 +16,10 @@ start = timeit.default_timer()
 def euler_39():
     answer = collections.defaultdict(int)
     for x, i in itertools.product(xrange(999), xrange(3, 1001)):
-        if (math.sqrt(x**2 + i**2) % 1 == 0 and 
-            sum([x, i, math.sqrt(x**2 + i**2)]) <= 1000):                                        
-            answer[sum([x, i, math.sqrt(x**2 + i**2)])] += 1
+        triangle = math.sqrt(x**2 + i**2)
+        if (triangle % 1 == 0 and 
+            sum([x, i, triangle]) <= 1000):                                        
+            answer[sum([x, i, triangle])] += 1
     return max(answer.items(), key=lambda x: x[1])[0]
 
 print "Answer: %s" % euler_39()
