@@ -3,37 +3,41 @@
 #include <math.h>
 
 
-int prime(unsigned long num) {
+int is_prime(unsigned long num) {
+
+    if (num == 2)
+        return 1;
+    
+    if (num < 2 || num % 2 == 0)
+        return 0;
 
     unsigned long j;
-    unsigned long new = sqrt(num) + 1;
+    unsigned long n_root = sqrt(num) + 1;
 
-    for (j=3; j < new; j++) {
-        if (num % j == 0) {
+    for (j=3; j < n_root; j++) {
+        if (num % j == 0) 
             return 0;
-        }
     }
-    return num;
+
+    return 1;
 }
 
 int main(void) {
 
     clock_t start, stop;
-
     start = clock();
+
     unsigned long long limit = 600851475143;
-    unsigned long high, i, can;
-    for (i=7; i < 1000000; i++) {
-        if (i % 2 != 0) {
-            can = prime(i);
-            if (can > 0 && limit % can == 0) {
-                high = can;
-            }
-        }
-    }  
+
+    unsigned long high, i;
+    high = 0; i = 0;
+
+    while (i++ < sqrt(limit) + 1) 
+        high = limit % i == 0 && is_prime(i) ? i : high;
 
     printf ("Answer: %ld\n", high);
     stop = clock();
     printf ("Time: %f\n", ((float)stop - (float)start) / CLOCKS_PER_SEC);
+
     return 0;
 }
