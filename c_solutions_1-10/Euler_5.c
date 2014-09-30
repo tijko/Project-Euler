@@ -16,18 +16,14 @@ int divide_evenly(long dividend) {
 int main(void) {
 
     clock_t start, stop;
-
     start = clock();
 
     long count = 20;
-    long ans = 0;
-    while (ans == 0) {
-        ans = divide_evenly(count);
+    while (!divide_evenly(count)) 
         count += 20;
-    }
 
     stop = clock();    
-    printf ("Answer: %ld\n", ans);
+    printf ("Answer: %ld\n", count);
     printf ("Time: %f\n", ((float)stop - (float)start) / CLOCKS_PER_SEC);
     return 0;
 }
