@@ -2,8 +2,8 @@
 #include <time.h>
 
 
-int fib_sum(long limit) {
-
+int fib_sum(long limit) 
+{
     int a1, b1;
     long b2, total;
 
@@ -20,8 +20,8 @@ int fib_sum(long limit) {
     return total;
 }
 
-int main(void) {
-
+int main(void) 
+{
     clock_t start, stop;
     start = clock();
 
