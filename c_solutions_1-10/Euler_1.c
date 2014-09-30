@@ -7,11 +7,8 @@ int multiples_three_five(int limit) {
     long total = 0;
 
     int i;
-    for (i=1; i < limit; i++) {
-        if (i % 3 == 0 || i % 5 == 0) {
-            total += i;
-        }
-    }
+    for (i=1; i < limit; i++)
+        total += i % 3 == 0 || i % 5 == 0 ? i : 0;
     return total;
 }
 
