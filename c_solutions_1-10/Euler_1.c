@@ -2,8 +2,8 @@
 #include <time.h>
 
 
-int multiples_three_five(int limit) {
-
+int multiples_three_five(int limit) 
+{
     long total = 0;
 
     int i;
@@ -12,8 +12,8 @@ int multiples_three_five(int limit) {
     return total;
 }
 
-int main(void) {
-
+int main(void) 
+{
     clock_t start, stop;
 
     start = clock();
