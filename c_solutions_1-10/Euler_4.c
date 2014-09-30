@@ -1,44 +1,46 @@
 #include <stdio.h>
+#include <time.h>
+#include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
+
+#define MAX 7 
 
 
-int main(void) {
-
+int main(void) 
+{
     clock_t start, stop;
-
     start = clock();
 
-    unsigned long high = 0;    
-    unsigned long canidate;
+    char *forward = malloc(sizeof(char) * MAX);
+    char *backward = malloc(sizeof(char) * MAX);
 
-    int x,y;
+    size_t int_len;
+    size_t str_len;
+
+    int x, y, i, high;
+    high = 0;
+
     for (x=100; x < 1000; x++) {
         for (y=100; y < 1000; y++) {
 
-            canidate = x * y;
-            char int_str[BUFSIZ];
-            sprintf (int_str, "%d", canidate);
+            int_len = snprintf(forward, MAX, "%d", x * y);
 
-            size_t int_len = strlen (int_str);
-            int str_len = int_len - 1;
-            char *palindrome = malloc (sizeof(int_str));
+            for (i=0, str_len=int_len-1; i < int_len; i++, str_len--) 
+                backward[i] = forward[str_len];
 
-            int i;
-            for (i=0; i < int_len; i++, str_len--) {
-                palindrome[i] = int_str[str_len];
-            }        
-            if (strcmp (int_str, palindrome) == 0 && atoi (palindrome) > high) {
-                high = atoi (palindrome);
-            }
-            free (palindrome);
+            if (strcmp(forward, backward) == 0 && atoi(backward) > high) 
+                high = atoi(backward);
         }
     }
 
+    free(forward);
+    free(backward);
+
     stop = clock();
-    printf ("Answer: %ld\n", high);
+    printf ("Answer: %d\n", high);
     printf ("Time: %f\n", ((float)stop - (float)start) / CLOCKS_PER_SEC);
+
     return 0;
 }
 
