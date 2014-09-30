@@ -3,8 +3,8 @@
 #include <math.h>
 
 
-int is_prime(unsigned long num) {
-
+int is_prime(unsigned long num) 
+{
     if (num == 2)
         return 1;
     
@@ -22,8 +22,8 @@ int is_prime(unsigned long num) {
     return 1;
 }
 
-int main(void) {
-
+int main(void) 
+{
     clock_t start, stop;
     start = clock();
 
