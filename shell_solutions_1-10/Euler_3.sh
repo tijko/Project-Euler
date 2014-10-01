@@ -1,10 +1,10 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 # what is the largest prime factor of 600851475143
 
 
-function is_prime() {
-
+function is_prime() 
+{
     n=$1
     if [[ "$n" -eq 2 || "$n" -eq 3 ]]; then
         echo 1; return
@@ -12,7 +12,7 @@ function is_prime() {
         echo 0; return
     else
         nroot=$(echo "sqrt($n)" | bc)
-        let "nroot++"
+        ((nroot++))
         for (( i=3; i<=nroot; i+=2 )); do
             if [[ "$n % $i" -eq 0 ]]; then
                 echo 0; return
@@ -22,8 +22,8 @@ function is_prime() {
     echo 1
 }
 
-function large_prime_factor() {
-
+function large_prime_factor() 
+{
     high=0
     factor_of=$(echo 'sqrt(600851475143)' | bc)
     for (( i=$factor_of; i>0; i-- )); do
@@ -37,4 +37,3 @@ function large_prime_factor() {
 }
 
 echo Answer: $(large_prime_factor)
-time

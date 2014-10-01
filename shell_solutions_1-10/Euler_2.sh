@@ -1,9 +1,9 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 # sum of even fibonacci numbers below 4 million
 
-function fibonacci() {
-    
+function fibonacci() 
+{    
     a1=1
     b1=1
     b2=0
@@ -12,17 +12,15 @@ function fibonacci() {
 
     while [[ "$b2" -le "$limit" ]]
         do
-            let "b2 = $a1 + $b1"
-            let "a1 = $b1"
-            let "b1 = $b2"
+            ((b2 = $a1 + $b1))
+            ((a1 = $b1))
+            ((b1 = $b2))
             if [[ "$b2 % 2" -eq 0 ]]
             then
-                let "total += $b2"
+                ((total += $b2))
             fi
         done
     echo Answer: $total
 }
 
 fibonacci
-time
-                        
