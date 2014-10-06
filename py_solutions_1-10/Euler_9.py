@@ -10,9 +10,10 @@ def euler_9():
     for a in xrange(1, 3000):
         b = a + 1
         for b in xrange(b, 3000):
-            if sum([a, b, (math.sqrt(a**2 + b**2))]) == 1000:
-                return int((a * b * (math.sqrt(a**2 + b**2))))
-            elif sum([a, b, (math.sqrt(a**2 + b**2))]) > 1000:
+            c = sum([a, b, (math.sqrt(a**2 + b**2))])
+            if c == 1000:
+                return int(a * b * (math.sqrt(a**2 + b**2)))
+            elif c > 1000:
                 break
 
 print 'Answer: %s' % euler_9()
