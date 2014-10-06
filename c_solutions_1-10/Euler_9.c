@@ -6,28 +6,26 @@
 int main(void) {
 
     clock_t start, stop;
-
     start = clock();
 
-    int ans;
-    double a;
-    double b = 0;
-    for (a=0; a <= 3000; a++) {
-        b = a + 1;
-        while (b < 3000) {
+    double a, b;
+    long c;
+    
+    for (a=1, b=2; a <= 3000; a++, b=(a+1)) {
+        for (; b < 3000; b++) {
             if (a + b + (sqrt (pow (a, 2) + pow (b, 2))) == 1000) {
-                ans = a * b * (sqrt (pow (a, 2) + pow (b, 2)));
-                break;
+                c = a * b * (sqrt (pow (a, 2) + pow (b, 2)));
+                goto found_triplet;
             }
-            if (a + b + (sqrt (pow (a, 2) + pow (b, 2))) > 1000) {
+            if (a + b + (sqrt (pow (a, 2) + pow (b, 2))) > 1000) 
                 break;
-            }
-            b++;
         }
     }
 
+    found_triplet:
+
     stop = clock();
-    printf ("Answer: %d\n", ans);
+    printf ("Answer: %ld\n", c);
     printf ("Time: %f\n", ((float)stop - (float)start) / CLOCKS_PER_SEC);
 
     return 0;
