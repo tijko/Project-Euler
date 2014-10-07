@@ -19,7 +19,7 @@ def is_prime(n):
 def prime_gen_under_two_mil():
     n = 0
     while n < 2000000:
-        if n % 2 != 0 and is_prime(n):
+        if is_prime(n):
             yield n
         n += 1
 
