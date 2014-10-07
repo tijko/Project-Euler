@@ -21,6 +21,7 @@ def euler_3():
     return max([i for i in xrange(1, int(math.sqrt(FACTOR_OF)) + 1, 2) 
                 if FACTOR_OF % i == 0 and is_prime(i)])
 
+
 print "Answer: %s" % euler_3()
 stop = timeit.default_timer()
 print "Time: %f" % (stop - start)
