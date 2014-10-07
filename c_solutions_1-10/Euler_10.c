@@ -28,8 +28,8 @@ int main(void)
     unsigned long long total;
     unsigned long i;
 
-    for (i=0, total=0; i < 2000000; i++, total+=is_prime(i)?i:0)
-        ;
+    for (i=0, total=0; i < 2000000; i++)
+        total += is_prime(i) ? i : 0;
 
     printf ("Answer: %lld\n", total);
     stop = clock();
