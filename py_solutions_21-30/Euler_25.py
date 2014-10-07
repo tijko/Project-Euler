@@ -8,7 +8,7 @@ sys.setrecursionlimit(10000)
 start = timeit.default_timer()
 
 def euler_25(x, y):
-    if len(str(x)) >= 1000: return 0
+    if len(str(x)) >= 1000: return 0 
     return euler_25(x + x + y, x + y) + 2
 
 
