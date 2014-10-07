@@ -7,9 +7,9 @@ function is_prime()
 {
     n=$1
     if [[ "$n" -eq 2 || "$n" -eq 3 ]]; then
-        echo 1; return
+        echo 1 
     elif [[ "$n" -lt 2 || "$n % 2" -eq 0 ]]; then
-        echo 0; return
+        echo 0
     else
         nroot=$(echo "sqrt($n)" | bc)
         ((nroot++))
@@ -17,18 +17,19 @@ function is_prime()
             if [[ "$n % $i" -eq 0 ]]; then
                 echo 0; return
             fi
-        done
+        done; echo 1
     fi
-    echo 1
+    return
 }
 
 function large_prime_factor() 
 {
     high=0
     factor_of=$(echo 'sqrt(600851475143)' | bc)
+
     for (( i=$factor_of; i>0; i-- )); do
-        if [[ "600851475143 % $i" -eq 0 &&
-              $(is_prime $i) -eq 1 && 
+        if [[ "600851475143 % $i" -eq 0 && 
+              $(is_prime $i) -eq 1 &&
               "$i" -gt "$high" ]]; then
             high=$i
         fi
