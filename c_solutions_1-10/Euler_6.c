@@ -11,12 +11,13 @@ int main(void)
     unsigned long total = 0;
 
     int i, j;
-    for (i=0; i <= 99; i++) 
-        total += i;
+    for (i=0; i <= 100; i++) 
+        total += (i*i);
 
-    total = pow(total, 2);
-    for (j=0; j <= 99; j++) 
-        total -= pow(j, 2);
+    for (j=0, i=0; j <= 100; j++) 
+        i += j;
+
+    total = pow(i, 2) - total;
 
     stop = clock();
     printf ("Answer: %ld\n", total);
