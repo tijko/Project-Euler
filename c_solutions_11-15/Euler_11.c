@@ -51,53 +51,37 @@ void parse_grid(int grid[20][20])
 
 }
 
-int up_prod(int num_grid[20][20], int x, int y) 
+// up=1, across=2, down=3, d-down=4, d-up=5
+int prod(int num_grid[20][20], int x, int y, int dir) 
 {    
     int i, total;
 
-    for (i=0, total=1; i < 4; i++, y--) 
+    for (i=0, total=1; i < 4; i++) {
         total *= num_grid[x][y];
 
-    return total;
-}
+        switch(dir) {
 
-int across_prod(int num_grid[20][20], int x, int y) 
-{    
-    int i, total;
+            case (1):
+                y--;
+                break;
 
-    for (i=0, total=1; i < 4; i++, x++) 
-        total *= num_grid[x][y];
+            case (2):
+                x++;
+                break;
 
-    return total;
-}
+            case (3):
+                y++;
+                break;
 
-int down_prod(int num_grid[20][20], int x, int y) 
-{
-    int i, total;
-
-    for (i=0, total=1; i < 4; i++, y++) 
-        total *= num_grid[x][y];
-
-    return total;
-}
-
-int diag_down_prod(int num_grid[20][20], int x, int y) 
-{
-    int i, total;
-
-    for (i=0, total=1; i < 4; i++, x++, y++) 
-        total *= num_grid[x][y];
-
-    return total;
-}
-
-int diag_up_prod(int num_grid[20][20], int x, int y) 
-{
-    int i, total;
-
-    for (i=0, total=1; i < 4; i++, y--, x++) 
-        total *= num_grid[x][y];
-
+            case (4):
+                x++, y++;
+                break;
+    
+            case (5):
+                x++, y--;
+                break;
+        }
+    }                
     return total;
 }
 
@@ -114,31 +98,31 @@ int main(void) {
     for (y=0, high=0, total=0; y < 20; y++) {
         for (x=0; x < 20; x++) {
             if (y - 4 >= 0) {
-                total = up_prod(grid, x, y);
+                total = prod(grid, x, y, 1);
                 if (total > high) 
                     high = total;                           
             }
 
             if (x + 4 < 20) {
-                total = across_prod(grid, x, y);
+                total = prod(grid, x, y, 2);
                 if (total > high) 
                     high = total;
             }
 
             if (y + 4 < 20) {
-                total = down_prod(grid, x, y);
+                total = prod(grid, x, y, 3);
                 if (total > high) 
                     high = total;
             }
 
             if (y + 4 < 20 && x + 4 < 20) {
-                total = diag_down_prod(grid, x, y);
+                total = prod(grid, x, y, 4);
                 if (total > high) 
                     high = total;
             }
 
             if (y - 4 >= 0 && x + 4 < 20) {
-                total = diag_up_prod(grid, x, y);
+                total = prod(grid, x, y, 5);
                 if (total > high) 
                     high = total;
             }
