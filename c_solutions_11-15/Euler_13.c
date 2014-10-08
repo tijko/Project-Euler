@@ -147,7 +147,8 @@ int main(void)
 
     for (i=sizeof(ans) - 1; ans[i] == '0'; i--)
         ;
-    
+
+    printf("Answer: ");    
     for (j=0; j < DIGITS_TO_FIND; j++, i--)
         printf("%c", ans[i]);
  
