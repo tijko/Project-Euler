@@ -26,60 +26,53 @@ const char NUM_GRID[] =   "08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77
                           "01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48 ";
 
 
-int up_prod(int num_grid[20][20], int x, int y) {
-    
-    int total = 1;
-    int i;
-    for (i=0; i < 4; i++) {
+int up_prod(int num_grid[20][20], int x, int y) 
+{    
+    int i, total;
+
+    for (i=0, total=1; i < 4; i++, y--) 
         total *= num_grid[x][y];
-        y--;
-    }
+
     return total;
 }
 
-int across_prod(int num_grid[20][20], int x, int y) {
-    
-    int total = 1;
-    int i;
-    for (i=0; i < 4; i++) {
+int across_prod(int num_grid[20][20], int x, int y) 
+{    
+    int i, total;
+
+    for (i=0, total=1; i < 4; i++, x++) 
         total *= num_grid[x][y];
-        x++;
-    }
+
     return total;
 }
 
-int down_prod(int num_grid[20][20], int x, int y) {
+int down_prod(int num_grid[20][20], int x, int y) 
+{
+    int i, total;
 
-    int total = 1;
-    int i;
-    for (i=0; i < 4; i++) {
+    for (i=0, total=1; i < 4; i++, y++) 
         total *= num_grid[x][y];
-        y++;
-    }
+
     return total;
 }
 
-int diag_down_prod(int num_grid[20][20], int x, int y) {
+int diag_down_prod(int num_grid[20][20], int x, int y) 
+{
+    int i, total;
 
-    int total = 1;
-    int i;
-    for (i=0; i < 4; i++) {
+    for (i=0, total=1; i < 4; i++, x++, y++) 
         total *= num_grid[x][y];
-        x++;
-        y++;
-    }
+
     return total;
 }
 
-int diag_up_prod(int num_grid[20][20], int x, int y) {
+int diag_up_prod(int num_grid[20][20], int x, int y) 
+{
+    int i, total;
 
-    int total = 1;
-    int i;
-    for (i=0; i < 4; i++) {
+    for (i=0, total=1; i < 4; i++, y--, x++) 
         total *= num_grid[x][y];
-        y--;
-        x++;
-    }
+
     return total;
 }
 
