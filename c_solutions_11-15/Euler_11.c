@@ -31,9 +31,8 @@ void parse_grid(int grid[20][20])
     size_t grid_len = strlen(NUM_GRID);
     char num[3];
 
-    int i;
-    int x=0, y=0, pos=0;
-    for (i=0; i < grid_len; i++) {
+    int i, x, y, pos;
+    for (i=0, x=0, y=0, pos=0; i < grid_len; i++) {
         if (NUM_GRID[i] != ' ') {
             num[pos] = NUM_GRID[i];
             pos++;
@@ -51,7 +50,6 @@ void parse_grid(int grid[20][20])
 
 }
 
-// up=1, across=2, down=3, d-down=4, d-up=5
 int prod(int num_grid[20][20], int x, int y, int dir) 
 {    
     int i, total;
@@ -97,6 +95,7 @@ int main(void) {
     int high, total, x, y;
     for (y=0, high=0, total=0; y < 20; y++) {
         for (x=0; x < 20; x++) {
+
             if (y - 4 >= 0) {
                 total = prod(grid, x, y, 1);
                 if (total > high) 
