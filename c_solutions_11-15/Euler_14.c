@@ -2,32 +2,17 @@
 #include <time.h>
 
 
-int main(void) {
-
+int main(void) 
+{
     clock_t start, stop;
-
     start = clock();
 
-    int high = 0;
-    int count;
-
+    int high, count;
     long long high_num, canidate, collatz;
 
-    for (canidate=3; canidate < 1000000; canidate += 2) {
-        collatz = canidate;
-        count = 0;
-
-        while (collatz != 1) {
-            if (collatz % 2 == 0) {
-                collatz /= 2;
-                count++;
-            }
-            else {
-                collatz *= 3;
-                collatz += 1;   
-                count++;
-            }
-        }
+    for (canidate=3, high=0; canidate < 1000000; canidate += 2, count=0) {
+        for (collatz=canidate; collatz != 1; count++) 
+            collatz = collatz % 2 == 0 ? collatz / 2 : (collatz * 3) + 1; 
         if (count > high) {
             high = count;
             high_num = canidate;
