@@ -1,6 +1,7 @@
 #include <time.h>
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
 #include <stdlib.h>
 
 #define GRID_LENGTH 20
@@ -13,9 +14,12 @@
 
 #define ALIGN_FACTOR(size) ((size + ALIGNTO - 1) & ~(ALIGNTO - 1))
 
+
 void overflow(char *factorial, int idx, int carry)
 {
-
+    if (((*(factorial + idx) - '0') + carry) > 9)
+        overflow(factorial, idx + 1, 1);
+    *(factorial + idx) = ((*(factorial + idx) - '0') + carry) % 10;
 }
 
 void mul(char *factorial, char *carry_over, int multiplier)
@@ -29,22 +33,28 @@ void mul(char *factorial, char *carry_over, int multiplier)
     }
 }
 
-void add;
+void add(char *carry_over[])
+{
+    int i, sum;
+    for (i=0; i < strlen(carry_over[1]); i++) {
+        sum = (*(carry_over[1] + i) - '0') + (*(carry_over[0] + i) - '0');
+        if (sum > 9)
+            overflow(carry_over[1], i + 1, 1);
+        *(carry_over[1] + i) = sum + '0';
+    }
+}
 
-void div;
+//void div_factor;
 
 void factorial_calc(char *factorial, int factorial_deg)
 {
-    int factorial_length, factor_len, carry_len;
+    int factor_len, carry_len;
     char *factor_n;
     char *carry1;
     char *carry2;
 
     factor_len = ALIGN_FACTOR(MAX_FACTOR_LEN);
     factor_n = malloc(sizeof(char) * factor_len); 
-
-    factorial_length = 0;
-    factorial_length += ALIGNTO;
 
     carry_len = ALIGN_FACTOR(MAX_CARRY);
     carry1 = malloc(sizeof(char) * carry_len);
@@ -54,11 +64,15 @@ void factorial_calc(char *factorial, int factorial_deg)
     char *carry_over[2] = {carry1, carry2};
 
     int i, j;
-    for (i=0; i < factorial_deg; i++) {
+    for (i=1; i < factorial_deg; i++) {
         snprintf(factor_n, factor_len, "%d", i);
-        for (j=strlen(factor_n) - 1; j >= 0; j--)
+        for (j=strlen(factor_n) - 1; j >= 0; j--) { 
             mul(factorial, carry_over[j], *(factor_n + j) - '0');
-    }
+        }
+        add(carry_over); 
+        memcpy(factorial, carry_over[1], ALIGN_FACTOR(MAX_CARRY));
+        memset(carry_over[1], '0', ALIGN_FACTOR(MAX_CARRY));
+   }
 
 }
 
@@ -68,8 +82,8 @@ int main(void)
     start = clock();
 
     char *factorial; 
-    factorial = malloc(sizeof(char) * ALIGNTO);
-    memset(factorial, '0', ALIGNTO);
+    factorial = malloc(sizeof(char) * ALIGN_FACTOR(MAX_CARRY));
+    memset(factorial, '0', ALIGN_FACTOR(MAX_CARRY));
     *factorial = '1';
     factorial_calc(factorial, GRID_HG_LG);
 
