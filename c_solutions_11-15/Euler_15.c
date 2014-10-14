@@ -1,4 +1,5 @@
 #include <time.h>
+#include <unistd.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -20,6 +21,22 @@ void overflow(char *factorial, int idx, int carry)
     if ((addend + carry) > 9) 
         overflow(factorial, idx + 1, 1);
     *(factorial + idx) = ((addend + carry) % 10) + '0';
+}
+
+void reverse_digits(char *number)
+{
+    int i, j;
+    char *reversed;
+    
+    reversed = malloc(sizeof(char) * strlen(number));
+
+    for (j=strlen(number) - 1; *(number + j) == '0'; j--)
+        ;
+
+    for (i=0; i < strlen(number); i++, j--)
+        *(reversed + i) = *(number + j);
+
+    memcpy(number, reversed, MAX_CARRY);
 }
 
 void mul(char *factorial, int idx, char *carry_over, int multiplier)
@@ -52,7 +69,59 @@ void add(char *carry_over[], int term)
     }
 }
 
-//void div_factor;
+int subtract(char *factorial, int minus, int idx)
+{
+    int i;
+    int curr_value = *(factorial + idx) - '0';
+
+    if (curr_value - minus < 0) {
+
+        for (i=idx - 1; i >= 0 && *(factorial + i) - '0' < 1; i--) 
+            ;
+
+        curr_value = *(factorial + i) - '0';
+        *(factorial + i) = (curr_value - 1) + '0';
+
+        for (++i; i < idx; i++) 
+            *(factorial + i) = '9';
+
+        curr_value = *(factorial + idx) - '0';
+        curr_value += 10;                    
+    } 
+
+    *(factorial + idx) = (curr_value - minus) + '0';
+
+    return 1;
+}
+
+int div_factor(char *dividend, char *divisor)
+{
+    int i, j;
+    int total;
+    int d1_len, d2_len;
+    int answer[MAX_CARRY] = {[0 ... MAX_CARRY - 1] = 0};
+
+    d1_len = strlen(dividend) - 1;
+    d2_len = strlen(divisor) - 1;
+
+    j = 0;
+    total = 0;
+    while (j < (d1_len - d2_len)) { 
+
+        for (i=d2_len; i >= 0; i--) 
+            subtract(dividend, *(divisor + i) - '0', i + j);
+
+        if (*(dividend + j) - '0' < *(divisor) - '0') { 
+            answer[j] = total;
+            total = 0;
+            j++;
+        } else {
+            total++;
+        }
+    }
+
+    return total;
+}
 
 void factorial_calc(char *factorial, int factorial_deg)
 {
@@ -108,6 +177,7 @@ int main(void)
     clock_t start, stop;
     start = clock();
 
+    int answer;
     char *factorial_forty; 
     char *factorial_twenty;
     char *factorial_product;
@@ -127,6 +197,12 @@ int main(void)
     factorial_calc(factorial_forty, GRID_HG_LG);
     factorial_mul(factorial_twenty, factorial_product);
 
+    reverse_digits(factorial_forty);
+    reverse_digits(factorial_product);
+
+    answer = div_factor(factorial_forty, factorial_product);
+    printf("%s\n", factorial_forty);
+    printf("Answer: %d\n", answer);
     stop = clock();
     printf ("Time: %f\n", ((float)stop - (float)start) / CLOCKS_PER_SEC);
 
