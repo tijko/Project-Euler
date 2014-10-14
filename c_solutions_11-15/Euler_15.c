@@ -69,15 +69,18 @@ void add(char *carry_over[], int term)
     }
 }
 
-int subtract(char *factorial, int minus, int idx)
+int subtract(char *factorial, int minus, int end, int idx)
 {
     int i;
     int curr_value = *(factorial + idx) - '0';
 
     if (curr_value - minus < 0) {
 
-        for (i=idx - 1; i >= 0 && *(factorial + i) - '0' < 1; i--) 
+        for (i=idx - 1; i >= end && *(factorial + i) - '0' < 1; i--) 
             ;
+
+        if (i == end && *(factorial + i) == '0')
+            return 0;
 
         curr_value = *(factorial + i) - '0';
         *(factorial + i) = (curr_value - 1) + '0';
@@ -94,33 +97,48 @@ int subtract(char *factorial, int minus, int idx)
     return 1;
 }
 
-int div_factor(char *dividend, char *divisor)
+void div_factor(char *dividend, char *divisor, char *answer)
 {
     int i, j;
     int total;
     int d1_len, d2_len;
-    int answer[MAX_CARRY] = {[0 ... MAX_CARRY - 1] = 0};
-
+    int d1_head, d2_head, head;
+    
     d1_len = strlen(dividend) - 1;
     d2_len = strlen(divisor) - 1;
+    d2_head = *(divisor) - '0';
 
     j = 0;
+    head = 0;
     total = 0;
     while (j < (d1_len - d2_len)) { 
 
         for (i=d2_len; i >= 0; i--) 
-            subtract(dividend, *(divisor + i) - '0', i + j);
+            subtract(dividend, *(divisor + i) - '0', head, i + j);
 
-        if (*(dividend + j) - '0' < *(divisor) - '0') { 
-            answer[j] = total;
-            total = 0;
-            j++;
-        } else {
-            total++;
+        d1_head = *(dividend + head) - '0';
+        total++;
+
+        if (d1_head < d2_head) {
+            if (head == j) {
+                *(answer + j) = total + '0';
+                total = 0;
+                j++;
+            } else if (d1_head == 0) {
+                head++;
+                for (i=head; *(dividend + i) - '0' == d2_head; i++)
+                    ;
+                if (*(dividend + i) - '0' < d2_head) { 
+                    *(answer + j) = total + '0';
+                    total = 0;
+                    j++;
+                }
+            }
         }
     }
 
-    return total;
+    *(answer + j) = total + '0';
+    *(answer + j + 1) = '\0';
 }
 
 void factorial_calc(char *factorial, int factorial_deg)
@@ -177,11 +195,12 @@ int main(void)
     clock_t start, stop;
     start = clock();
 
-    int answer;
+    char *answer;
     char *factorial_forty; 
     char *factorial_twenty;
     char *factorial_product;
 
+    answer = malloc(sizeof(char) * MAX_CARRY);
     factorial_twenty = malloc(sizeof(char) * MAX_CARRY);
     factorial_forty = malloc(sizeof(char) * MAX_CARRY);
     factorial_product = malloc(sizeof(char) * MAX_CARRY);
@@ -200,9 +219,8 @@ int main(void)
     reverse_digits(factorial_forty);
     reverse_digits(factorial_product);
 
-    answer = div_factor(factorial_forty, factorial_product);
-    printf("%s\n", factorial_forty);
-    printf("Answer: %d\n", answer);
+    div_factor(factorial_forty, factorial_product, answer);
+    printf("Answer: %s\n", answer);
     stop = clock();
     printf ("Time: %f\n", ((float)stop - (float)start) / CLOCKS_PER_SEC);
 
