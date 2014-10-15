@@ -107,10 +107,10 @@ n = """37107287533902102798797998220837590246510135740250
        53503534226472524250874054075591789781264330331690"""
 
 
-
 def euler_13(data):
     total = sum(map(int, data.split()))
     return str(total)[:10]
+
 
 print "Answer: %s" % euler_13(n)
 stop = timeit.default_timer()

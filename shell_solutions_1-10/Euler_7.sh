@@ -7,7 +7,7 @@ function is_prime()
 {
     nroot=$(echo "sqrt($1)" | bc)
     ((nroot++))
-    for (( i=3; i<nroot; i++ )); do
+    for (( i=3; i<nroot; i+=2 )); do
         if [[ "$1 % $i" -eq 0 ]]; then
             echo 0; return
         fi
