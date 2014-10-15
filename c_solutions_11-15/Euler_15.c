@@ -1,3 +1,5 @@
+// Total number of paths through a 20 x 20 grid.
+
 #include <time.h>
 #include <stdio.h>
 #include <string.h>
