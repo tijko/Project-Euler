@@ -29,6 +29,7 @@ int main(int argc, char *argv[])
     int i, tmp;
     for (i=1; i <= count_to; i++) {
         if (i / 1000) {
+            letter_count += strlen(number_words[0][(i / 1000) - 1]);
             letter_count += strlen(number_words[3][0]);
         } else if (i / 100) {
             letter_count += strlen(number_words[0][(i / 100) - 1]);
