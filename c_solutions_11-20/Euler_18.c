@@ -6,7 +6,11 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define MAX 3
+#define MAX_NUM 3
+#define MAX_ROW 15
+#define MAX_COL 16
+
+#define MAX(x, y) ((x) > (y) ? (x) : (y))
 
 
 FILE *tri_file(void)
@@ -28,31 +32,24 @@ FILE *tri_file(void)
     return fopen(fullpath, "r"); 
 }
 
-int main(int argc, char *argv[])
+void load_array(FILE *triangle_file, int triangle[MAX_ROW][MAX_COL])
 {
-    clock_t start, stop;
-    start = clock();
-
     size_t n;
-    int tri_pos;
-    int answer, i;
-    int digit, pos, high;
     ssize_t line_size;
     char *number, *ln;
 
-    FILE *triangle = tri_file();
-    number = malloc(sizeof(char) * MAX);
-    memset(number, '0', MAX);
+    number = malloc(sizeof(char) * MAX_NUM);
+    memset(number, '0', MAX_NUM);
 
-    n = 0;
-    digit = 0;    
-    answer = 0;
-    tri_pos = 1;
+    int i, row, col, digit;
+    row = 0;
 
-    while ((line_size = getline(&ln, &n, triangle)) > 0) {
+    for (i=0; i < MAX_ROW; i++)
+        memset(triangle[i], -1, sizeof(int) * MAX_COL);
 
-        for (i=0, pos=0, high=0; i < line_size; i++) {
-
+    digit = 0;
+    while ((line_size = getline(&ln, &n, triangle_file)) > 0) {
+        for (i=0, col=0; i < line_size; i++) {
             if (isspace(*(ln + i))) {
                 digit = 0;
                 continue;
@@ -62,22 +59,43 @@ int main(int argc, char *argv[])
 
             if (digit == 2) {
                 *(number + digit) = '\0';
-                pos++;
+                triangle[row][col++] = atoi(number);
             } else {
                 continue;
             }
-
-            if (pos == tri_pos) { 
-                high = atoi(number);
-            } else if (pos == (tri_pos + 1) && high < atoi(number)) {
-                high = atoi(number);
-                tri_pos++;
-                break;
-            }    
         }
-
-        answer += high;
+        ++row;
     }
+}
+
+int main(int argc, char *argv[])
+{
+    clock_t start, stop;
+    start = clock();
+
+    int answer, row, col;
+    int triangle[MAX_ROW][MAX_COL];
+
+    FILE *triangle_file = tri_file();
+    load_array(triangle_file, triangle);
+
+    answer = 0; 
+    row = 0;
+    col = 0;
+    while (row < MAX_ROW - 2) {
+        answer += triangle[row][col];
+
+        col += triangle[row + 1][col] + MAX(triangle[row + 2][col], 
+                                            triangle[row + 2][col + 1]) > 
+               triangle[row + 1][col + 1] + MAX(triangle[row + 2][col + 1], 
+                                                triangle[row + 2][col + 2]) ? 
+                                                                       0 : 1;
+
+        ++row;
+
+    }
+    answer += triangle[row][col];
+    answer += MAX(triangle[row + 1][col], triangle[row + 1][col + 1]);
 
     stop = clock();
     printf("Answer: %d\n", answer);
