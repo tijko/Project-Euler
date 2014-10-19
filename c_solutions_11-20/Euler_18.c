@@ -90,7 +90,6 @@ int main(int argc, char *argv[])
                triangle[row + 1][col + 1] + MAX(triangle[row + 2][col + 1], 
                                                 triangle[row + 2][col + 2]) ? 
                                                                        0 : 1;
-
         ++row;
 
     }
