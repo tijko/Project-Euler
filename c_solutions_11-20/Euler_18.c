@@ -47,9 +47,8 @@ void load_array(FILE *triangle_file, int triangle[MAX_ROW][MAX_COL])
     for (i=0; i < MAX_ROW; i++)
         memset(triangle[i], -1, sizeof(int) * MAX_COL);
 
-    digit = 0;
     while ((line_size = getline(&ln, &n, triangle_file)) > 0) {
-        for (i=0, col=0; i < line_size; i++) {
+        for (i=0, col=0, digit=0; i < line_size; i++) {
             if (isspace(*(ln + i))) {
                 digit = 0;
                 continue;
