@@ -60,8 +60,6 @@ void load_array(FILE *triangle_file, int triangle[MAX_ROW][MAX_COL])
             if (digit == 2) {
                 *(number + digit) = '\0';
                 triangle[row][col++] = atoi(number);
-            } else {
-                continue;
             }
         }
         ++row;
