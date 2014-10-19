@@ -93,8 +93,8 @@ int main(int argc, char *argv[])
         ++row;
 
     }
-    answer += triangle[row][col];
-    answer += MAX(triangle[row + 1][col], triangle[row + 1][col + 1]);
+    answer += triangle[row][col] + MAX(triangle[row + 1][col], 
+                                       triangle[row + 1][col + 1]);
 
     stop = clock();
     printf("Answer: %d\n", answer);
