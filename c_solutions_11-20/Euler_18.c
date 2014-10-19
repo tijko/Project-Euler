@@ -76,10 +76,7 @@ int main(int argc, char *argv[])
     FILE *triangle_file = tri_file();
     load_array(triangle_file, triangle);
 
-    answer = 0; 
-    row = 0;
-    col = 0;
-    while (row < MAX_ROW - 2) {
+    for (row=0, col=0, answer=0; row < MAX_ROW - 2; row++) {
         answer += triangle[row][col];
 
         col += triangle[row + 1][col] + MAX(triangle[row + 2][col], 
@@ -87,9 +84,8 @@ int main(int argc, char *argv[])
                triangle[row + 1][col + 1] + MAX(triangle[row + 2][col + 1], 
                                                 triangle[row + 2][col + 2]) ? 
                                                                        0 : 1;
-        ++row;
-
     }
+
     answer += triangle[row][col] + MAX(triangle[row + 1][col], 
                                        triangle[row + 1][col + 1]);
 
