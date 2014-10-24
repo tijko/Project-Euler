@@ -10,11 +10,12 @@
 #define MAX_ROW 15
 #define MAX_COL 16
 
-#define MAX(x, y) ((x) > (y) ? (x) : (y))
+#define MAX(x, y) ((x) >= (y) ? (x) : (y))
 
 
 FILE *tri_file(void)
 {
+    FILE *open_tri_file;
     char *fullpath, *home_path, *triangle_path;
     size_t home_path_len, triangle_path_len, fullpath_len;
     
@@ -28,8 +29,9 @@ FILE *tri_file(void)
     fullpath = malloc(sizeof(char) * fullpath_len);
 
     snprintf(fullpath, fullpath_len, "%s%s", home_path, triangle_path);
-
-    return fopen(fullpath, "r"); 
+    open_tri_file = fopen(fullpath, "r");
+    free(fullpath);
+    return open_tri_file;
 }
 
 void load_array(FILE *triangle_file, int triangle[MAX_ROW][MAX_COL])
@@ -63,6 +65,7 @@ void load_array(FILE *triangle_file, int triangle[MAX_ROW][MAX_COL])
         }
         ++row;
     }
+    free(number);
 }
 
 int main(int argc, char *argv[])
