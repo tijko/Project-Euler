@@ -46,22 +46,17 @@ int main(int argc, char *argv[])
     clock_t start, stop;
     start = clock();
 
-    char *factorial;
-    char *current;
+    char *factorial, *current;
     int total[FACTORIAL_BUFFER];
-    int answer;
+    int answer, head, pos;
     int i, j;
-
-    answer = 0;
 
     factorial = malloc(sizeof(char) * FACTORIAL_BUFFER); 
     memset(factorial, '0', FACTORIAL_BUFFER);
-    *factorial = '1';
 
     current = malloc(sizeof(char) * DIGIT_MAX);
-    int head = 1;
-    int pos;
-    for (i=1; i <= FACTORIAL_TO; i++) {
+
+    for (i=1, head=1, *factorial='1'; i <= FACTORIAL_TO; i++) {
 
         memset(current, '0', DIGIT_MAX);
         snprintf(current, DIGIT_MAX, "%d", i);
@@ -79,11 +74,13 @@ int main(int argc, char *argv[])
         *(factorial + j) = '\0';
     }
 
-    int s;
-    for (i=0; i < FACTORIAL_BUFFER; i++) {
-        s = *(factorial + i) - '0';      
-        answer += s;
+    for (i=0, answer=0; i < FACTORIAL_BUFFER; i++) {
+        j = *(factorial + i) - '0';      
+        answer += j;
     }
+
+    free(factorial);
+    free(current);
 
     stop = clock();    
     printf("Answer: %d\n", answer);
