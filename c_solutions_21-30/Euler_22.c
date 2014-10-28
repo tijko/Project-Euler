@@ -100,7 +100,8 @@ int main(int argc, char *argv[])
 {
 
     clock_t start, stop;
-    int total, answer, i;
+    int total, i;
+    long answer;
     struct Name_Info *name_list[MAX_NAMES];
 
     start = clock();
@@ -109,6 +110,7 @@ int main(int argc, char *argv[])
     sort_name_list(name_list, total);
 
     i = 0;
+    answer = 0;
     while (i < total) {
         answer += (name_list[i]->score * (i + 1));
         i++;
@@ -116,7 +118,7 @@ int main(int argc, char *argv[])
 
     stop = clock();
 
-    printf("Answer: %d\n", answer);
+    printf("Answer: %ld\n", answer);
     printf("Time: %f\n", ((float) stop - (float) start) / CLOCKS_PER_SEC);
 
     return 0;
