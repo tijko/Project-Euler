@@ -125,6 +125,7 @@ int main(int argc, char *argv[])
         i++;
     }
 
+    free_list(name_list, total);
     stop = clock();
 
     printf("Answer: %ld\n", answer);
