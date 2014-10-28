@@ -96,6 +96,15 @@ void sort_name_list(struct Name_Info *name_list[], int length)
     }
 }
 
+void free_list(struct Name_Info *name_list[], int length)
+{
+    int i;
+    for (i=0; i < length; i++) {
+        free(name_list[i]->name);
+        free(name_list[i]);
+    }
+}
+
 int main(int argc, char *argv[])
 {
 
