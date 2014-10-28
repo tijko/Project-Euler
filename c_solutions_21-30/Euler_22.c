@@ -83,8 +83,7 @@ int min_alpha(char *name1, char *name2)
             return 2;
     }
 
-    i = MIN_NAME_LEN(name1, name2) == strlen(name1) ? 1 : 2;
-    return i;
+    return 0;
 }
 
 void sort_name_list(struct Name_Info *name_list[], int length)
