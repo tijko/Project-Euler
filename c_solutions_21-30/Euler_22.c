@@ -19,7 +19,6 @@
 struct Name_Info {
     char *name;
     int score;
-    int position;
 };
 
 int load_names(struct Name_Info *name_list[])
@@ -58,6 +57,14 @@ int load_names(struct Name_Info *name_list[])
             }
         }
     }
+
+    *(name + name_letter) = '\0';
+    name_list[name_count] = malloc(sizeof(struct Name_Info));
+    for (j=0; j < strlen(name); j++)
+        name_list[name_count]->score += ((*(name + j) - '0') - 16);
+    name_list[name_count]->name = malloc(sizeof(char) * strlen(name) + 1);
+    memcpy(name_list[name_count]->name, name, strlen(name) + 1);
+    name_count++;
 
     free(path);
     free(name);
@@ -118,12 +125,8 @@ int main(int argc, char *argv[])
     total = load_names(name_list);
     sort_name_list(name_list, total);
 
-    i = 0;
-    answer = 0;
-    while (i < total) {
+    for (i=0, answer=0; i < total; i++)
         answer += (name_list[i]->score * (i + 1));
-        i++;
-    }
 
     free_list(name_list, total);
     stop = clock();
