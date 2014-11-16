@@ -3,41 +3,58 @@ use warnings;
 use Time::HiRes qw( clock );
 
 
-sub permute
+sub swap
 {
-    my @arr = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
-    my $len = scalar(@arr);
-    my ($l1, $l2);
-    my $f = "";
-    for my $perm (1..999999) {
-        my $i = $len - 2;
-        for (; $i >= 0; $i--) {
-            if ($arr[$i] lt $arr[$i + 1]) {
-                $l1 = $i;
-                $f = $arr[$i];
-                last;
-            }
-        }   
-        my $low = "";      
-        for (; $i <= $len - 1; $i++) {
-            if ($arr[$i] gt $f) {
-                if ($low eq "") {
-                    $l2 = $i;
-                    $low = $arr[$i];
-                } elsif ($low gt $arr[$i]) {
-                    $l2 = $i;
-                    $low = $arr[$i];
-                }
-            }
+    my ($perm_ref, $idx1, $idx2) = @_;
+    my $tmp;
+
+    $tmp = $perm_ref->[$idx1];
+    $perm_ref->[$idx1] = $perm_ref->[$idx2];
+    $perm_ref->[$idx2] = $tmp;
+}
+
+sub first_index
+{
+    my (@permutation) = @_;
+    my $idx;
+
+    for ($idx=$#permutation; $idx > 0; $idx--) {
+        if ($permutation[$idx] gt $permutation[$idx - 1]) {
+            return $idx - 1;
         }
-        my $temp = $arr[$l2];
-        $arr[$l2] = $arr[$l1];
-        $arr[$l1] = $temp;
-        if (!($l1 >= $len - 1)) {
-            @arr = (@arr[0..$l1], sort(@arr[$l1 + 1..$len - 1]));
+    }   
+
+    return $idx
+}
+
+sub second_index
+{
+    my ($idx1, @permutation) = @_;
+    my $idx2;
+
+    for ($idx2=$#permutation; $idx2 > $idx1; $idx2--) {
+        if ($permutation[$idx1] lt $permutation[$idx2]) {
+            return $idx2;
         }
     }
-    return join("", @arr);
+
+    return $idx2;
+}
+
+sub permute
+{
+    my @one_to_ten = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
+    my ($permutation, $idx1, $idx2);
+
+    for ($permutation=1; $permutation < 1000000; $permutation++) {
+
+        $idx1 = first_index(@one_to_ten);
+        $idx2 = second_index($idx1, @one_to_ten);
+        swap(\@one_to_ten, $idx1, $idx2);
+        @one_to_ten = (@one_to_ten[0..$idx1], 
+                       sort(@one_to_ten[$idx1 + 1..$#one_to_ten]));
+    }
+    return join("", @one_to_ten);
 }
 
 my $start = clock();
