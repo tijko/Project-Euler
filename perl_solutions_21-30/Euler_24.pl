@@ -62,10 +62,10 @@ sub permute
 
     for ($permutation=1; $permutation < 1000000; $permutation++) {
 
-        $idx1 = first_index(@one_to_ten);
-        $idx2 = second_index($idx1, @one_to_ten);
-        swap(\@one_to_ten, $idx1, $idx2);
-        @one_to_ten = (@one_to_ten[0..$idx1], 
+        $idx1 = first_index(@one_to_ten); # Find the first index from array
+        $idx2 = second_index($idx1, @one_to_ten); # Second index
+        swap(\@one_to_ten, $idx1, $idx2); # Swap the two values from indices
+        @one_to_ten = (@one_to_ten[0..$idx1], # Sort from idx1 out and combine
                        sort(@one_to_ten[$idx1 + 1..$#one_to_ten]));
     }
     return join("", @one_to_ten);
