@@ -2,6 +2,20 @@ use strict;
 use warnings;
 use Time::HiRes qw( clock );
 
+=for comment
+    Lexicographic permutations:
+
+        1.) Find the right most index thats value is smaller than the index one
+            higher than itself.
+
+        2.) Find the right most index thats value is greater than the value 
+            found at the index from step 1.
+
+        3.) Swap the values from these two indices.
+
+        4.) Starting at the index one greater than the first found index, sort
+            the remaining values.
+=cut
 
 sub swap
 {
