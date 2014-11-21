@@ -51,9 +51,8 @@ int main(int argc, char *argv[])
     find_abundants(abun_array);
     find_abundant_sums(abun_array, abun_sum_array);
 
-    for (i=0, answer=0; i < ABUN_MAX; i++) {
+    for (i=0, answer=0; i < ABUN_MAX; i++) 
         answer += abun_sum_array[i] == 0 ? i : 0;
-    }
 
     stop = clock();
     printf("Answer: %d\n", answer);
