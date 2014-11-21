@@ -49,8 +49,10 @@ int load_names(struct Name_Info *name_list[])
                 *(name + name_letter) = '\0'; 
                 name_letter = 0;
                 name_list[name_count] = malloc(sizeof(struct Name_Info));
+
                 for (j=0; j < strlen(name); j++)
                     name_list[name_count]->score += ((*(name + j) - '0') - 16);
+
                 name_list[name_count]->name = malloc(sizeof(char) * strlen(name) + 1);
                 memcpy(name_list[name_count]->name, name, strlen(name) + 1);
                 name_count++;
@@ -60,8 +62,10 @@ int load_names(struct Name_Info *name_list[])
 
     *(name + name_letter) = '\0';
     name_list[name_count] = malloc(sizeof(struct Name_Info));
+
     for (j=0; j < strlen(name); j++)
         name_list[name_count]->score += ((*(name + j) - '0') - 16);
+
     name_list[name_count]->name = malloc(sizeof(char) * strlen(name) + 1);
     memcpy(name_list[name_count]->name, name, strlen(name) + 1);
     name_count++;
