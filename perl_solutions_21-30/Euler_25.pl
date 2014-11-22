@@ -6,19 +6,15 @@ use Time::HiRes qw( clock );
 
 sub milli_fib
 {
-    my $x = Math::BigInt->new("1");
-    my $y = Math::BigInt->new("0");
-    my $x0 = $x->copy();
-    my $y0 = $y->copy();
-    my $x1 = $x->copy();
-    my $z = 0;
+    my($x, $y, $x0, $z);
+    $x = Math::BigInt->new("1");
+    $y = Math::BigInt->new("0");
+    $z = 1;
     do {
-        my $x0 = $x1->bmuladd(2, $y);
-        my $y0 = $y->badd($x);
+        $x0 = $x->copy()->badd($y);
+        $y = $x->copy();
         $x = $x0->copy();
-        $y = $y0->copy();
-        $x1 = $x->copy();
-        $z +=2; 
+        $z +=1; 
     } until (length($x) >= 1000); 
     return $z;
 }
