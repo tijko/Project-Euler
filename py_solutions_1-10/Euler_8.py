@@ -1,7 +1,18 @@
 # find the greatest product of 5 consecutive digits in this 1000 digit number 
 
+from __future__ import print_function
+
 import timeit
 
+try:
+    range = xrange
+except NameError:
+    pass
+
+try:
+    reduce = reduce
+except NameError:
+    from functools import reduce
 
 start = timeit.default_timer()
 
@@ -30,8 +41,8 @@ big_num = """73167176531330624919225119674426574742355349194934
 def euler_8(n):
     n = ''.join(n.split())    
     mul = lambda x, y: x * y
-    return max([reduce(mul, map(int, n[v:v + 5])) for v in xrange(len(n) - 5)])
+    return max([reduce(mul, map(int, n[v:v + 5])) for v in range(len(n) - 5)])
 
-print "Answer: %s" % euler_8(big_num)
+print("Answer: {}".format(euler_8(big_num)))
 stop = timeit.default_timer()
-print "Time: %f" % (stop - start)
+print("Time: {0:9.5f}".format(stop - start))
