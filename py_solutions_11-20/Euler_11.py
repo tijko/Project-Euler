@@ -1,9 +1,21 @@
 # What is the greatest product of four adjacent numbers in any direction 
 # (up, down, left, right, or diagonally) in the 20x20 grid? 
 
+from __future__ import print_function
+
 import numpy as np
 import timeit
 
+
+try:
+    range = xrange
+except NameError:
+    pass
+
+try:
+    reduce = reduce
+except NameError:
+    from functools import reduce
 
 start = timeit.default_timer()
 
@@ -40,7 +52,7 @@ def array_position(col, row, shift, grid):
     return col, row, shift 
 
 def euler_11(x):
-    grid = [map(int, row.split()) for row in x.splitlines()]
+    grid = [list(map(int, row.split())) for row in x.splitlines()]
     grid = np.array(grid, np.int)
     mul = lambda x, y: x * y
     high = list()
@@ -60,6 +72,6 @@ def euler_11(x):
         col, row, shift = array_position(col, row, shift, len(grid))
     return max(high)
 
-print "Answer: %s" % euler_11(n)    
+print("Answer: {}".format(euler_11(n)))
 stop = timeit.default_timer()
-print "Time: %f" % (stop - start)
+print("Time: {0:9.5f}".format(stop - start))
