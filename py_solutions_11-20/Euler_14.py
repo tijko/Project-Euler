@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import print_function
+
 '''
 The following iterative sequence is defined for the set of positive integers:
 
@@ -20,17 +22,22 @@ NOTE: Once the chain starts the terms are allowed to go above one million.
 import timeit
 
 
+try:
+    xrange = range
+except NameError:
+    pass
+
 start = timeit.default_timer()
 
 def collatz(n):
     count = 0
     while n != 1:
-        if n % 2 != 0:
+        if n & 1:
             n *= 3 
             n += 1
             count += 1
-        if n % 2 == 0:
-            n /= 2 
+        if not n & 1:
+            n >>= 1 
             count += 1
     return count 
 
@@ -39,6 +46,6 @@ def euler_14():
     number_sequences = {collatz(i):i for i in canidates}
     return number_sequences[max(number_sequences)]
 
-print "Answer: %s" % euler_14()
+print("Answer: {}".format(euler_14()))
 stop = timeit.default_timer()
-print "Time: %f" % (stop - start)
+print("Time: {0:9.5f}".format((stop - start)))
