@@ -1,7 +1,14 @@
 # What is the sum of the numbers on the diagonals in a 1001 by 1001 spiral formed in the same way?
 
+from __future__ import print_function
+
 import timeit
 from itertools import takewhile
+
+try:
+    range = xrange
+except NameError:
+    pass
 
 start = timeit.default_timer()
 
@@ -15,13 +22,13 @@ def grid(step, axis):
  
 def euler_28():
     diag = 3
-    total = sum(map(lambda x: x**2, xrange(1, 1002, 2)))
+    total = sum(map(lambda x: x**2, range(1, 1002, 2)))
     for i in range(10, 15, 2):
-        total += grid(diag, xrange(i, 1002002, 8))
+        total += grid(diag, range(i, 1002002, 8))
         diag += 2
     return total
 
 
-print "Answer: %s" % euler_28()
+print("Answer: {}".format(euler_28()))
 stop = timeit.default_timer()
-print "Time: %f" % (stop - start)
+print("Time: {0:9.5f}".format(stop - start))
