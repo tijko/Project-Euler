@@ -29,9 +29,8 @@ def euler_17():
                      'sixty', 'seventy', 'eighty', 'ninety'],
                     ['hundred', 'hundredand'],
                     ['thousand']]
-    letter_count = number = 0
-    while number < 1000:
-        number += 1
+    letter_count =  0
+    for number in range(1, 1001):
         curr = number
         if curr // 1000:
             letter_count += (len(number_words[0][curr // 1000]) +
