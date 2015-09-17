@@ -1,5 +1,5 @@
 /*
-/   Project euler #17 Number letter counts
+/   Project Euler #17 Number letter counts
 /
 /   If all the numbers from 1 to 1000 (one thousand) inclusive were written out
 /   in words, how many letters would be used?
@@ -21,11 +21,9 @@ public class Euler_17
                                {"thousand"}};
 
         int letterCount = 0;
-        int number = 0;
         int curNumber = 0;
 
-        while (number < 1000) {
-            number++;
+        for (int number = 1; number <= 1000; number++) {
 
             curNumber = number;
 
