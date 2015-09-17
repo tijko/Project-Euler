@@ -1,8 +1,14 @@
 # Find the sum of all the primes below two million. 
 
+from __future__ import print_function
+
 from math import sqrt
 import timeit
 
+try:
+    range = xrange
+except NameError:
+    pass
 
 start = timeit.default_timer()
 
@@ -19,13 +25,12 @@ def is_prime(n):
 def prime_gen_under_two_mil():
     n = 0
     while n < 2000000:
-        if is_prime(n):
-            yield n
+        if is_prime(n): yield n
         n += 1
 
 def euler_10():
     return sum([i for i in prime_gen_under_two_mil()])
 
-print 'Answer: %s' % euler_10()
+print('Answer: {}'.format(euler_10()))
 stop = timeit.default_timer()
-print 'Time: %f' % (stop - start)
+print('Time: {0:9.5f}'.format(stop - start))
