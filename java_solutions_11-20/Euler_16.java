@@ -1,6 +1,7 @@
 /*
-/   Project Euler problem #16
+/   Project Euler problem #16 Power digit sum
 /
+/   What is the sum of the digits in 2 to the power of 1000?
 /
 */
 
