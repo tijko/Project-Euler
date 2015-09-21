@@ -34,7 +34,8 @@ public class Euler_19
  
                 while (mosDay < mosLength)
                 {
-                    for (; curDay < weekLength && mosDay < mosLength; curDay++, mosDay++);
+                    for (; curDay < weekLength && mosDay < mosLength; 
+                           curDay++, mosDay++);
                     if (curDay == weekLength)
                         curDay = 0;
                 }
