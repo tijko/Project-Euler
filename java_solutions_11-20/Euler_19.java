@@ -19,7 +19,7 @@ public class Euler_19
         int yearLength = 12;
         int mosLength = 0;
 
-        for (int yr = 1901; yr < 2001; yr++) 
+        for (int yr = 1901; yr < 2000; yr++) 
         {
             for (int mos = 0; mos < yearLength; mos++)
             { 
