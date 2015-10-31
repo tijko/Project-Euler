@@ -5,19 +5,23 @@
 /
 */
 
-public class 
-Euler_1
+
+public class Euler_1
 {
-    public static void
-    main (String[] args)
+    public static int factors(int limit, int ... factorsOf)
     {
-        int sum_of_multiples = 0;
-        for (int i = 0; i < 1000; i++) {
-            if (i % 3 == 0 || i % 5 == 0) {
-                sum_of_multiples += i;
-            }
+        int sum = 0;
+        int numFactors = factorsOf.length;
+
+        for (int j, i = 0; i < limit; i++) {
+            for (j = 0; j < numFactors; j++)
+                if (i % factorsOf[j] == 0) break;
+            sum += j == numFactors ? 0 : i;
         }
 
-        System.out.printf("Answer: %d\n", sum_of_multiples);
-    }
+        return sum;
+    }           
+
+    public static void main(String[] args)
+    { System.out.println("Answer: " + factors(1000, 3, 5)); }
 }    
