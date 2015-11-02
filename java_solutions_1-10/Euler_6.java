@@ -6,8 +6,6 @@
 /
 */
 
-import static java.lang.Math.pow;
-
 
 public class Euler_6
 {
@@ -18,11 +16,11 @@ public class Euler_6
 
         for (int i = 0; i <= 100; i++) {
             square_of_sum += i;
-            sum_of_square += pow(i, 2);
+            sum_of_square += i * i;
         }
 
-        double float_answer = pow(square_of_sum, 2) - sum_of_square;
-        int answer = (int) float_answer;
-        System.out.printf("Answer: %d\n", answer);
+        long answer = (square_of_sum * square_of_sum) - sum_of_square;
+
+        System.out.println("Answer: " + answer);
     }
 } 

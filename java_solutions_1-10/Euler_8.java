@@ -37,15 +37,13 @@ public class Euler_8
 
         for (int i = 0; i < large_digit_str.length() - 12; i++) {
             long current_product = 1;
-            for (int j = 0; j < 13; j++) {
+            for (int j = 0; j < 13; j++) 
                 current_product *= ((int) large_digit_str.charAt(i+j) - 48);
-            }
 
-            if (current_product > greatest_product) {
+            if (current_product > greatest_product) 
                 greatest_product = current_product;
-            }
         }
 
-        System.out.printf("Answer: %d\n", greatest_product);
+        System.out.println("Answer: " + greatest_product);
     }
 }

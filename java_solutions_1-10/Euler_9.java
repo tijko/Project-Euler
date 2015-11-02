@@ -9,18 +9,22 @@ import static java.lang.Math.sqrt;
 
 public class Euler_9
 {
+    static int triplet = 0;
+
+    public static void check_triplet(int a, int b)
+    {
+        int c = (a * a) + (b * b);
+        if (sqrt(c) + a + b == 1000) 
+            triplet = (int) sqrt(c) * a * b;
+    }
+
+
     public static void main(String[] args)
     {
-        int product_abc = 0;
-        for (int a = 1; a < 1000; a++) {
-            for (int b = 1; b < 1000; b++) {
-                int c = (a * a) + (b * b);
-                if (sqrt(c) + a + b == 1000) {
-                    product_abc = (int) sqrt(c) * a * b;
-                }
-            }
-        }    
+        for (int a = 1; a < 1000; a++) 
+            for (int b = 1; b < 1000; b++) 
+                check_triplet(a, b);
 
-        System.out.printf("Answer: %d\n", product_abc);
+        System.out.println("Answer: " + triplet);
     }
 }   
