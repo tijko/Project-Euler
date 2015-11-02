@@ -5,39 +5,38 @@
 /
 */
 
-class Euler_4
+public class Euler_4
 {
-    public static boolean is_palindrome(String product_str)
+    static int largest_palindrome = 0;
+
+    public static void largest_palindrome(int m1, int m2)
     {
+        Integer three_digit_product = m1 * m2;
+        if (three_digit_product < largest_palindrome) return;
+
+        String product_str = three_digit_product.toString();
+
         int product_str_len = product_str.length();
         int j = product_str_len - 1;
+
         for (int i = 0; i < product_str_len; i++) {
-            if (product_str.charAt(i) != product_str.charAt(j)) {
-                return false;
-            }
+            if (product_str.charAt(i) != product_str.charAt(j)) 
+                return;
             j--;
         }
 
-        return true;
+        largest_palindrome = three_digit_product;
     }
 
     public static void main(String[] args)
     {
-        int largest_palindrome = 0;
         Integer three_digit_product;
         String product_str;
-        for (int i = 100; i < 1000; i++) {
-            for (int j = 100; j < 1000; j++) {
-                if (i * j > largest_palindrome) {
-                    three_digit_product = new Integer(i * j);
-                    product_str = three_digit_product.toString();
-                    if (is_palindrome(product_str)) {
-                        largest_palindrome = three_digit_product;
-                    }
-                }
-            }
-        }
 
-        System.out.printf("Answer: %d\n", largest_palindrome);
+        for (int i = 100; i < 1000; i++) 
+            for (int j = 100; j < 1000; j++) 
+                largest_palindrome(i, j);
+
+        System.out.println("Answer: " + largest_palindrome);
     }
 }
