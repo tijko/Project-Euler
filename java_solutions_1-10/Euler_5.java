@@ -8,21 +8,17 @@
 
 public class Euler_5
 {
+    public static boolean all_divisible(int dividend)
+    {
+        for (int i = 20; i > 1; i--)
+            if (dividend % i != 0) return false;
+        return true;
+    }
+
     public static void main(String[] args)
     {
         int dividend = 20;
-        boolean solution_found = false;
-        while (!solution_found) {
-            for (int i = 20; i > 1; i--) {
-                if (dividend % i != 0) {
-                    dividend += 20;
-                    break;
-                } else if (i == 2) {
-                    solution_found = true;
-                }
-            }
-        }
-
-        System.out.printf("Answer: %d\n", dividend);
+        while (!all_divisible(dividend)) dividend += 20;
+        System.out.println("Answer: " + dividend);
     }
 }
