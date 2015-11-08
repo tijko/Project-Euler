@@ -8,7 +8,9 @@
 
 public class Euler_11
 {
-    public static String grid_string = 
+    public static int[][] grid = new int[20][20];
+
+    public static String gridString = 
     "08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08 "+
     "49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00 "+
     "81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65 "+
@@ -30,64 +32,67 @@ public class Euler_11
     "20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54 "+
     "01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48 ";
 
-    public static void main(String[] args)
+    public static void createGrid()
     {
-
-        int[][] grid = new int[20][20];
-
         for (int i = 0; i < 20; i++) {
 
-            String row = grid_string.substring(i * 60, (i * 60) + 60);
+            String row = gridString.substring(i * 60, (i * 60) + 60);
             String[] row_split = row.split(" ");
 
             int row_length = row_split.length;
             int[] row_int = new int[row_length];
-            for (int j = 0; j < row_length; j++) {
+
+            for (int j = 0; j < row_length; j++) 
                 row_int[j] = Integer.parseInt(row_split[j]);
-            }
 
             grid[i] = row_int;
         }
+    }
 
-        long greatest_adjacent_product = 0;
+    public static int moves[][]       = { {0, 3}, {3, 0}, {3, 3}, {3, -3} };
+    public static int adjacents[][][] = {
+                                          {{0, 0}, {0, 1}, {0, 2}, {0, 3}}, 
+                                          {{0, 0}, {1, 0}, {2, 0}, {3, 0}}, 
+                                          {{0, 0}, {1, 1}, {2, 2}, {3, 3}}, 
+                                          {{0, 0}, {1, -1}, {2, -2}, {3, -3}}
+                                        };
 
-        for (int row = 0; row < grid.length; row++) {
-            for (int col = 0; col < grid[row].length; col++) {
+    public static int gridLength = grid.length;
 
-                if (col + 3 < grid[row].length) {
-                    long right_product = grid[row][col] * grid[row][col + 1] *
-                                        grid[row][col + 2] * grid[row][col + 3];
-                    if (greatest_adjacent_product < right_product) {
-                        greatest_adjacent_product = right_product;
-                    }
-                }
+    public static long calculateNodeTotal(int[][] nodes, int row, int col)
+    {
+        long nodeTotal = 1;
+        for (int i = 0; i < nodes.length; i++)
+            nodeTotal *= grid[row + nodes[i][0]][col + nodes[i][1]];
 
-                if (row + 3 < grid.length) {
-                    long down_product = grid[row][col] * grid[row + 1][col] *
-                                       grid[row + 2][col] * grid[row + 3][col];
-                    if (greatest_adjacent_product < down_product) {
-                        greatest_adjacent_product = down_product;
-                    }
-                }
+        return nodeTotal;
+    }
 
-                if (row + 3 < grid.length && col + 3 < grid[row].length) {
-                    long diagonal_rt_product = grid[row][col] * grid[row + 1][col + 1] *
-                                               grid[row + 2][col + 2] * grid[row + 3][col + 3];
-                    if (greatest_adjacent_product < diagonal_rt_product) {
-                        greatest_adjacent_product = diagonal_rt_product;
-                    }
-                } 
-
-                if (row + 3 < grid.length && col - 3 >= 0) {
-                    long diagonal_lf_product = grid[row][col] * grid[row + 1][col - 1] * 
-                                               grid[row + 2][col - 2] * grid[row + 3][col - 3];
-                    if (greatest_adjacent_product < diagonal_lf_product) {
-                        greatest_adjacent_product = diagonal_lf_product;
-                    }
-                }
+    public static long checkAdjacentNodes(int row, int col, long greatestProduct)
+    {
+        for (int i = 0; i < moves.length; i++) {
+            if (row + moves[i][0] < gridLength && 
+                col + moves[i][1] < grid[row].length &&
+                col + moves[i][1] >= 0) {
+                long nodeProduct = calculateNodeTotal(adjacents[i], row, col);
+                greatestProduct = greatestProduct > nodeProduct ? 
+                                   greatestProduct : nodeProduct; 
             }
         }
 
-        System.out.printf("Answer: %d\n", greatest_adjacent_product);
+        return greatestProduct;
+    }
+
+    public static void main(String[] args)
+    {
+        createGrid();
+
+        long greatestProduct = 0;
+
+        for (int row = 0; row < grid.length; row++) 
+            for (int col = 0; col < grid[row].length; col++) 
+                greatestProduct = checkAdjacentNodes(row, col, greatestProduct);
+
+        System.out.println("Answer: " + greatestProduct);
     }
 }
