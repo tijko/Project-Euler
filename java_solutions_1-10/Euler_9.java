@@ -11,7 +11,7 @@ public class Euler_9
 {
     static int triplet = 0;
 
-    public static void check_triplet(int a, int b)
+    public static void checkTriplet(int a, int b)
     {
         int c = (a * a) + (b * b);
         if (sqrt(c) + a + b == 1000) 
@@ -23,7 +23,7 @@ public class Euler_9
     {
         for (int a = 1; a < 1000; a++) 
             for (int b = 1; b < 1000; b++) 
-                check_triplet(a, b);
+                checkTriplet(a, b);
 
         System.out.println("Answer: " + triplet);
     }

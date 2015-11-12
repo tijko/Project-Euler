@@ -9,7 +9,7 @@
 
 public class Euler_8
 {
-    private static String large_digit_str = 
+    private static String largeDigitStr = 
 "73167176531330624919225119674426574742355349194934"+
 "96983520312774506326239578318016984801869478851843"+
 "85861560789112949495459501737958331952853208805511"+
@@ -33,17 +33,17 @@ public class Euler_8
 
     public static void main(String[] args)
     {
-        long greatest_product = 0;
+        long greatestProduct = 0;
 
-        for (int i = 0; i < large_digit_str.length() - 12; i++) {
-            long current_product = 1;
+        for (int i = 0; i < largeDigitStr.length() - 12; i++) {
+            long currentProduct = 1;
             for (int j = 0; j < 13; j++) 
-                current_product *= ((int) large_digit_str.charAt(i+j) - 48);
+                currentProduct *= ((int) largeDigitStr.charAt(i+j) - 48);
 
-            if (current_product > greatest_product) 
-                greatest_product = current_product;
+            if (currentProduct > greatestProduct) 
+                greatestProduct = currentProduct;
         }
 
-        System.out.println("Answer: " + greatest_product);
+        System.out.println("Answer: " + greatestProduct);
     }
 }

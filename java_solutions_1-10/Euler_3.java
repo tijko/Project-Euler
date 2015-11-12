@@ -10,21 +10,21 @@ import static java.lang.Math.sqrt;
 
 public class Euler_3
 {
-    static long large_number = 600851475143L;
+    static long largeNumber = 600851475143L;
 
     public static void main (String[] args)
     {
-        long largest_prime_factor = 0;
+        long largestPrimeFactor = 0;
 
-        for (int i = 1; i < sqrt(large_number) + 1; i += 2)
-            if (large_number % i == 0 && is_prime(i) && 
-                i > largest_prime_factor)  
-                largest_prime_factor = i;
+        for (int i = 1; i < sqrt(largeNumber) + 1; i += 2)
+            if (largeNumber % i == 0 && isPrime(i) && 
+                i > largestPrimeFactor)  
+                largestPrimeFactor = i;
 
-        System.out.println("Answer: " + largest_prime_factor);
+        System.out.println("Answer: " + largestPrimeFactor);
     }
 
-    private static boolean is_prime(int n)
+    private static boolean isPrime(int n)
     {
         if (n < 2) return false;
         else if (n == 2) return true;

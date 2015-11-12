@@ -11,15 +11,15 @@ public class Euler_6
 {
     public static void main(String[] args)
     {
-        long sum_of_square = 0;
-        long square_of_sum = 0;
+        long sumOfSq = 0;
+        long sqOfSum = 0;
 
         for (int i = 0; i <= 100; i++) {
-            square_of_sum += i;
-            sum_of_square += i * i;
+            sqOfSum += i;
+            sumOfSq += i * i;
         }
 
-        long answer = (square_of_sum * square_of_sum) - sum_of_square;
+        long answer = (sqOfSum * sqOfSum) - sumOfSq;
 
         System.out.println("Answer: " + answer);
     }

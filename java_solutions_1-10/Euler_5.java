@@ -8,7 +8,7 @@
 
 public class Euler_5
 {
-    public static boolean all_divisible(int dividend)
+    public static boolean allDivisible(int dividend)
     {
         for (int i = 20; i > 1; i--)
             if (dividend % i != 0) return false;
@@ -18,7 +18,7 @@ public class Euler_5
     public static void main(String[] args)
     {
         int dividend = 20;
-        while (!all_divisible(dividend)) dividend += 20;
+        while (!allDivisible(dividend)) dividend += 20;
         System.out.println("Answer: " + dividend);
     }
 }

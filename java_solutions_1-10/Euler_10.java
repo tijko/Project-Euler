@@ -10,7 +10,7 @@ import static java.lang.Math.sqrt;
 
 public class Euler_10
 {
-    public static boolean is_prime(int n)
+    public static boolean isPrime(int n)
     {
         if (n < 2) return false;
         else if (n == 2) return true;
@@ -23,12 +23,12 @@ public class Euler_10
 
     public static void main(String[] args)
     {
-        long prime_sum = 0;
+        long primeSum = 0;
         for (int i = 1; i < 2000000; i++) {
-            if (!is_prime(i)) continue;
-            prime_sum += i;
+            if (!isPrime(i)) continue;
+            primeSum += i;
         }
 
-        System.out.println("Answer: " + prime_sum);
+        System.out.println("Answer: " + primeSum);
     }
 }
