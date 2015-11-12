@@ -37,15 +37,15 @@ public class Euler_11
         for (int i = 0; i < 20; i++) {
 
             String row = gridString.substring(i * 60, (i * 60) + 60);
-            String[] row_split = row.split(" ");
+            String[] rowSplit = row.split(" ");
 
-            int row_length = row_split.length;
-            int[] row_int = new int[row_length];
+            int rowLen = rowSplit.length;
+            int[] rowInt = new int[rowLen];
 
-            for (int j = 0; j < row_length; j++) 
-                row_int[j] = Integer.parseInt(row_split[j]);
+            for (int j = 0; j < rowLen; j++) 
+                rowInt[j] = Integer.parseInt(rowSplit[j]);
 
-            grid[i] = row_int;
+            grid[i] = rowInt;
         }
     }
 
