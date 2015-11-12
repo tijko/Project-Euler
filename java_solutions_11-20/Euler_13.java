@@ -12,7 +12,7 @@ import java.math.BigInteger;
 public class Euler_13
 {
 
-    private static String fifty_digit_string = 
+    private static String fiftyDigitStr = 
         "37107287533902102798797998220837590246510135740250 "+
         "46376937677490009712648124896970078050417018260538 "+
         "74324986199524741059474233309513058123726617309629 "+
@@ -116,13 +116,13 @@ public class Euler_13
 
     public static void main(String[] args)
     {
-        String[] fifty_digit_array = fifty_digit_string.split(" ");
-        BigInteger sum_of_fifty = new BigInteger("0");
-        for (int i = 0; i < fifty_digit_array.length; i++) {
-            sum_of_fifty = sum_of_fifty.add(new BigInteger(fifty_digit_array[i]));
+        String[] fiftyArray = fiftyDigitStr.split(" ");
+        BigInteger sumOfFifty = new BigInteger("0");
+        for (int i = 0; i < fiftyArray.length; i++) {
+            sumOfFifty = sumOfFifty.add(new BigInteger(fiftyArray[i]));
         }
 
-        String fifty_sum_string = sum_of_fifty.toString();
-        System.out.printf("%s\n", fifty_sum_string.substring(0, 10));
+        String fiftySumStr = sumOfFifty.toString();
+        System.out.println("Answer: " + fiftySumStr.substring(0, 10));
     }
 }

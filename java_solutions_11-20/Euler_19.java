@@ -42,6 +42,6 @@ public class Euler_19
             }
         }
 
-        System.out.printf("Answer: %d\n", sundayCount);
+        System.out.println("Answer: " + sundayCount);
     }
 }   

@@ -61,6 +61,6 @@ public class Euler_17
             letterCount += numWords[0][curNumber % 10].length();
         }
 
-        System.out.printf("Answer: %d\n", letterCount);
+        System.out.println("Answer: " + letterCount);
     }
 }

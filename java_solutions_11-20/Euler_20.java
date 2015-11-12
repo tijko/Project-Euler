@@ -29,7 +29,7 @@ public class Euler_20
             if (!factorialStringSplit[i].equals("")) 
                 sumOfDigits += Integer.parseInt(factorialStringSplit[i]);
 
-        System.out.printf("Answer: %d\n", sumOfDigits);
+        System.out.println("Answer: " + sumOfDigits);
     }
 
 }

@@ -17,9 +17,8 @@ public class Euler_18
         String basePath = "/";
         String[] pathComponents = curDir.split("/");
 
-        for (int i = 1; i < pathComponents.length - 1; i++) {
+        for (int i = 1; i < pathComponents.length - 1; i++) 
             basePath += pathComponents[i] + "/";
-        }
 
         return basePath + triFile;
     }
@@ -53,9 +52,8 @@ public class Euler_18
                 pyramidRow = new int[triLineBuffer.length];
 
                 for (int i = 0; i < triLineBuffer.length; i++) {
-                    if (!triLineBuffer[i].equals("")) {
+                    if (!triLineBuffer[i].equals("")) 
                         pyramidRow[col++] = Integer.parseInt(triLineBuffer[i]);
-                    }
                 }
 
                 pyramid[row++] = pyramidRow;
@@ -97,12 +95,11 @@ public class Euler_18
             row++;
         }
 
-        if (pyramid[row + 1][col] > pyramid[row + 1][col + 1]) {
+        if (pyramid[row + 1][col] > pyramid[row + 1][col + 1]) 
             maxPath += pyramid[row + 1][col];
-        } else {
+        else 
             maxPath += pyramid[row + 1][col + 1];
-        }
 
-        System.out.printf("Answer: %d\n", maxPath);
+        System.out.println("Answer: " + maxPath);
     }
 }

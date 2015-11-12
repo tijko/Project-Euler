@@ -8,33 +8,37 @@
 
 public class Euler_14
 {
+    public static int collatzSequence(long chain)
+    {
+        int sequenceCount = 0;
+
+        while (chain > 1) {
+            if (chain % 2 == 0)
+                chain /= 2;
+            else
+                chain = (chain * 3) + 1;
+
+            sequenceCount++;
+        }
+
+        return sequenceCount;
+    }
+
     public static void main(String[] args)
     {
-        int longest_chain = 0;
-        int high = 0;
+        int longestChain = 0;
+        long high = 0;
 
-        for (int current_number = 0; current_number < 1000000; current_number++) {
+        for (long curr = 0; curr < 1000000; curr++) {
 
-            int chain = 1;
-            long chain_number = current_number;
+            int chain = collatzSequence(curr);
 
-            while (chain_number > 1) {
-
-                if (chain_number % 2 == 0) {
-                    chain_number = chain_number / 2;
-                } else {
-                    chain_number = (chain_number * 3) + 1;
-                }
-
-                chain = chain + 1;
-            }
-
-            if (chain > longest_chain) {
-                longest_chain = chain;
-                high = current_number;
+            if (chain > longestChain) {
+                longestChain = chain;
+                high = curr;
             }
         }
             
-        System.out.printf("Answer: %d\n", high);   
+        System.out.println("Answer: " + high);   
     }
 }

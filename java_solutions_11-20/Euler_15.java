@@ -13,19 +13,18 @@ public class Euler_15
     public static void main(String[] args)
     {
         BigInteger factor;
-        BigInteger twenty_side = new BigInteger("1");
-        BigInteger forty_side = new BigInteger("1");
+        BigInteger twentySide = new BigInteger("1");
+        BigInteger fortySide = new BigInteger("1");
         for (int i = 1; i <= 40; i++) {
             factor = new BigInteger(String.valueOf(i));
-            forty_side = forty_side.multiply(factor);
-            if (i == 20) {
-                twenty_side = forty_side;
-            }
+            fortySide = fortySide.multiply(factor);
+            if (i == 20) 
+                twentySide = fortySide;
         }
 
-        twenty_side = twenty_side.multiply(twenty_side);
-        forty_side = forty_side.divide(twenty_side);
+        twentySide = twentySide.multiply(twentySide);
+        fortySide = fortySide.divide(twentySide);
 
-        System.out.printf("Answer: %s\n", forty_side.toString());
+        System.out.println("Answer: " + fortySide.toString());
     }
 }

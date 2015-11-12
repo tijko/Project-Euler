@@ -13,25 +13,19 @@ public class Euler_12
 {
     public static void main(String[] args)
     {
-        int tri_idx = 1;
-        long tri = 0;
-        int divisors = 0;
+        long triangleNum = 0;
+        int triangleCount = 1;
+        int divisors = 0; 
+        while (divisors < 500) {
+            divisors = 0; 
+            triangleNum += triangleCount;
+            triangleCount++;
 
-        while (divisors <= 500) {
-
-            divisors = 0;
-            tri += tri_idx;
-            tri_idx++;
-
-            for (int i = 1; i < sqrt(tri) + 1; i++) {
-                if (tri % i == 0) {
-                    divisors += 1;
-                }
-            }
-
-            divisors += divisors;
+            for (int i = 1; i < sqrt(triangleNum) + 1; i++) 
+                if (triangleNum % i == 0) divisors += 2;
         }
 
-        System.out.printf("Answer: %d\n", tri); 
+
+        System.out.println("Answer: " + triangleNum); 
     }
 }
