@@ -38,6 +38,6 @@ public class Euler_21
             }
         }
 
-        System.out.printf("Answer: %d\n", amicablePairSum);
+        System.out.println("Answer: " + amicablePairSum);
     }
 }

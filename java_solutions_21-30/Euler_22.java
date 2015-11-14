@@ -79,6 +79,6 @@ public class Euler_22
             nameScores += nameScore;
         }
 
-        System.out.printf("Answer: %d\n", nameScores);
+        System.out.println("Answer: " + nameScores);
     }
 }

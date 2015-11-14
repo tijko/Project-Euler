@@ -58,6 +58,6 @@ public class Euler_25<T> implements Iterable<T>
         for (idxFibonacci = 1; fibonacciIter.hasNext(); 
              fibonacciIter.next(), idxFibonacci++);
 
-        System.out.printf("Answer: %d\n", ++idxFibonacci);
+        System.out.println("Answer: " + ++idxFibonacci);
     }
 }

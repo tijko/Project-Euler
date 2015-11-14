@@ -15,10 +15,8 @@ public class Euler_24
             char cur = permutationArray[i];
             int j = i - 1;
 
-            while (j >= idx && cur < permutationArray[j]) {
-                permutationArray[j + 1] = permutationArray[j];
-                j--;
-            }
+            while (j >= idx && cur < permutationArray[j]) 
+                permutationArray[j + 1] = permutationArray[j--];
 
             permutationArray[j + 1] = cur;
         }
@@ -60,6 +58,6 @@ public class Euler_24
         for (int i = 1; i < 1000000; i++)
             permutationString = permute(permutationString);
 
-        System.out.printf("Answer: %s\n", permutationString);
+        System.out.println("Answer: " + permutationString);
     }
 }

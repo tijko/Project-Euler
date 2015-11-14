@@ -51,6 +51,6 @@ public class Euler_23
                 nonAbundantable += i;
         }
 
-        System.out.printf("Answer: %d\n", nonAbundantable);
+        System.out.println("Answer: " + nonAbundantable);
     }
 }
