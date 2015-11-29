@@ -2,7 +2,6 @@
 
 import math
 import timeit
-import collections
 
 
 start = timeit.default_timer()
@@ -17,22 +16,27 @@ def is_prime(x):
             return False
     return True
 
+def build_primes_list(limit):
+    return [float(i) for i in xrange(2, limit) if is_prime(i)]
+
+def calculate_phi(phi, primes):
+    base = phi
+    for v in primes:
+        if base % v == 0:
+            phi *= (1 - (1 / v))
+    return phi
+
 def euler_69():
-    high = 0
-    high_N = 0
-    whole = collections.defaultdict(list)
-    for n in xrange(2, 1000001):
-        for i in xrange(2, int(math.sqrt(n)) + 2):
-            if n % i == 0 and is_prime(i):
-                whole[n].append(i)
-    for k in whole.keys():
-        phi = k
-        for v in whole[k]:
-            phi *= ((float(v) - 1) / v)
-        if float(k) / phi > high:
-            high = float(k) / phi 
-            high_N = k
-    return high_N
+    high, high_phi = 0, 0
+    limit = 1000001
+    primes_list = build_primes_list(int(math.sqrt(limit)) + 1)
+    for i in xrange(2, limit):
+        prime_factor = int(math.sqrt(i)) 
+        phi = calculate_phi(i, primes_list[:prime_factor])
+        current = i / phi
+        if current > high_phi:
+            high_phi, high = (current, i)
+    return high
 
 print "Answer: %s" % euler_69()
 stop = timeit.default_timer()
