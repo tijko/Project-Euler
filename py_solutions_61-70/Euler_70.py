@@ -2,8 +2,9 @@
 
 import math
 import timeit
-import collections
+import operator
 import itertools
+import collections
 
 
 start = timeit.default_timer()
@@ -18,27 +19,36 @@ def is_prime(x):
             return False
     return True
 
+def build_primes(limit):
+    return [i for i in xrange(2, limit + 1) if is_prime(i)]
+
+def build_canidates(start, end, primes):
+    divisors = filter(lambda x: {x} & primes, range(start, end))
+    canidates = []
+    for i in itertools.combinations(divisors, 2):
+        product = reduce(operator.imul, i)
+        if product < 10**7:
+            canidates.append(product)
+    return canidates
+
+def calculate_phi(n, primes):
+    base = n
+    for i in primes:
+        if base % i == 0:
+            n *= (1 - (1 / float(i)))
+    return n
+
 def euler_70():
-    divisors = [i for i in xrange(1000, 10000) if is_prime(i)]
-    canidates = [i[0] * i[1] for i in itertools.combinations(divisors, 2) if i[0] * i[1] < 10000000]
-    whole = collections.defaultdict(list)
+    primes = build_primes(10000)
+    canidates = build_canidates(1000, 10000, set(primes))
+    low_phi, low = 10**7, 0
     for n in canidates:
-        for i in xrange(3, int(math.sqrt(n)) + 1, 2):
-            if n % i == 0 and is_prime(i):
-                whole[n].append(i)
-        if len(whole[n]) == 1:
-            whole[n].append(n / whole[n][0])
-    low = 10000000
-    low_N = 0
-    for k in whole.keys():
-        total = k
-        for v in whole[k]:
-            total *= ((float(v) - 1) / v)
-        if sorted([i for i in str(k)]) == sorted([i for i in str(int(total))]):
-            if float(k) / total < low:
-                low = float(k) / total
-                low_N = k
-    return low_N
+        factor = int(math.sqrt(n))
+        phi = calculate_phi(n, primes[:factor])        
+        if sorted(str(n)) == sorted(str(int(phi))):
+            if n / phi < low_phi:
+                low_phi, low = n / phi, n
+    return low
 
 print "Answer: %s" % euler_70()
 stop = timeit.default_timer()
