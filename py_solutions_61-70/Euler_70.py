@@ -4,7 +4,6 @@ import math
 import timeit
 import operator
 import itertools
-import collections
 
 
 start = timeit.default_timer()
