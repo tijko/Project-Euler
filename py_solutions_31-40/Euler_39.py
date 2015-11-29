@@ -14,13 +14,15 @@ import itertools
 start = timeit.default_timer()
 
 def euler_39():
-    answer = collections.defaultdict(int)
+    triangle_sums = []
     for x, i in itertools.product(xrange(999), xrange(3, 1001)):
         triangle = math.sqrt(x**2 + i**2)
-        if (triangle % 1 == 0 and 
-            sum([x, i, triangle]) <= 1000):                                        
-            answer[sum([x, i, triangle])] += 1
-    return max(answer.items(), key=lambda x: x[1])[0]
+        if not triangle.is_integer(): continue 
+        triangle_sum = sum([x, i, triangle])
+        if triangle_sum <= 1000:
+            triangle_sums.append(triangle_sum)
+    max_triangle_set = collections.Counter(triangle_sums)
+    return max_triangle_set.most_common()[0][0]
 
 print "Answer: %s" % euler_39()
 stop = timeit.default_timer()
