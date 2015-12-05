@@ -3,12 +3,8 @@
 import math
 import timeit
 
-from operator import imul
-from functools import partial
-
 
 start = timeit.default_timer()
-
 
 def is_prime(x):
     if x == 2:
