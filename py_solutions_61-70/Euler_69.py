@@ -3,8 +3,12 @@
 import math
 import timeit
 
+from operator import imul
+from functools import partial
+
 
 start = timeit.default_timer()
+
 
 def is_prime(x):
     if x == 2:
@@ -17,7 +21,7 @@ def is_prime(x):
     return True
 
 def build_primes_list(limit):
-    return [float(i) for i in xrange(2, limit) if is_prime(i)]
+    return map(float, filter(is_prime, xrange(2, limit)))
 
 def calculate_phi(phi, primes):
     base = phi
