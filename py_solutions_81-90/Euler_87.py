@@ -35,18 +35,20 @@ def is_prime(n):
 
 def euler_87():
     limit = 10**7 * 5
-    count = 0
+    sum_set = set()
     primes = list(filter(is_prime, range(2, int(sqrt(limit) + 1))))
     for x in primes:
         for y in primes:
-            if x**2 + y**3 > limit:
+            x_y = x**2 + y**3
+            if x_y >= limit:
                 break
             for z in primes:
-                if x**2 + y**3 + z**4 < limit:
-                    count += 1
+                x_y_z = x_y + z**4
+                if x_y_z < limit:
+                    sum_set.add(x_y_z)
                 else:
                     break
-    return count
+    return len(sum_set)
 
 if __name__ == '__main__':
     start = timeit.default_timer()
