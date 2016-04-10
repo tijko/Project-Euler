@@ -47,16 +47,17 @@ def is_prime(n):
 
 def euler_88(limit):
     n = 2
-    min_prod_range = set(range(2, 12001))
-    while min_prod_range.difference(min_prod_sum.keys()):
+    while len(min_prod_sum) < 11999:
         if not is_prime(n):
             find_factors(n)
         n += 1
-    return sum({min_prod_sum[i] for i in min_prod_sum if i >= 2 and i <= limit})
+    return sum({min_prod_sum[i] for i in min_prod_sum})
 
 def check_current_min(n, lst):
     lst_sum = sum(lst)
     canidate = (n - lst_sum) + len(lst)
+    if canidate > 12000 or canidate < 2:
+        return
     current = min_prod_sum.get(canidate)
     if current is None or n < current:
         min_prod_sum[canidate] = n
