@@ -62,32 +62,28 @@ def check_current_min(n, lst):
     if current is None or n < current:
         min_prod_sum[canidate] = n
 
+def int_to_list_combo(n, n_list, f, flst):
+    for factor in flst:
+        lst = sorted([f] + factor)
+        if lst not in n_list:
+            n_list.append(lst)
+            check_current_min(n, lst)
+
 def create_factor_combos(n, f1, f2):
     # once formed check each list for sum and length
-    f1_factors = factor_dict.get(f1)
-    f2_factors = factor_dict.get(f2)
+    f1_factors = factor_dict.get(f1) or []
+    f2_factors = factor_dict.get(f2) or []
     n_list = factor_dict[n]
     n_list.append([f1, f2])
     check_current_min(n, [f1, f2])
-    if f1_factors is not None:
-        for factor in f1_factors:
-            lst = sorted([f2] + factor)
+    int_to_list_combo(n, n_list, f1, f2_factors)
+    int_to_list_combo(n, n_list, f2, f1_factors)
+    for factor1 in f1_factors:
+        for factor2 in f2_factors:
+            lst = sorted(factor1 + factor2)
             if lst not in n_list:
                 n_list.append(lst)
                 check_current_min(n, lst)
-    if f2_factors is not None:
-        for factor in f2_factors:
-            lst = sorted([f1] + factor)
-            if lst not in n_list:
-                n_list.append(lst)
-                check_current_min(n, lst)
-    if f1_factors is not None and f2_factors is not None:
-        for factor1 in f1_factors:
-            for factor2 in f2_factors:
-                lst = sorted(factor1 + factor2)
-                if lst not in n_list:
-                    n_list.append(lst)
-                    check_current_min(n, lst)
 
 def find_factors(n):
     for i in range(2, int(sqrt(n)) + 1):
