@@ -41,17 +41,17 @@ def find_sq_pair(n):
                 sq_dict[xy].append(z)
     return sq_dict
 
-
-if __name__ == "__main__":
-    start = timeit.default_timer()
-    limit = 1800
+def euler_86():
+    limit = 1
     total = 0
+    sq_dict = find_sq_pair(2000)
     while total < 10**6:
         total = 0
         limit += 1
-        sq_dict = find_sq_pair(limit)
         for xy in sq_dict:
+            if xy > limit * 2: continue
             for z in sq_dict[xy]:
+                if not z <= limit: continue
                 if z > xy:
                     occ = int(xy / 2)
                 else:
@@ -60,6 +60,10 @@ if __name__ == "__main__":
                     else:
                         occ = (z - int(xy / 2)) 
                 total += occ
-    print('Answer: {}'.format(limit))
+    return limit
+
+if __name__ == "__main__":
+    start = timeit.default_timer()
+    print('Answer: {}'.format(euler_86()))
     stop = timeit.default_timer()
     print('Time: {0:9.5}'.format(stop - start))
