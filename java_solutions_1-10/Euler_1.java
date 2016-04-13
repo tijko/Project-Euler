@@ -23,5 +23,14 @@ public class Euler_1
     }           
 
     public static void main(String[] args)
-    { System.out.println("Answer: " + factors(1000, 3, 5)); }
+    {
+        long start = System.nanoTime();
+
+        int factor_sum = factors(1000, 3, 5);
+
+        long stop = System.nanoTime();
+        System.out.println("Answer: " + factor_sum); 
+        System.out.printf("Time: %.7f\n", ((float) stop - (float) start) / 10000000);
+
+    }
 }    
