@@ -26,6 +26,11 @@ from math import fmod
 
 import timeit
 
+try:
+    range = xrange
+except NameError:
+    pass
+
 
 def sq(limit):
     return {i:i**2 for i in range(2, limit + 1)}
