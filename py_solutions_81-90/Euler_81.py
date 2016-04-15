@@ -6,22 +6,33 @@ Minimal path in a 80x80 matrix, going from top left node to bottom right node.
 Moving only in the right and down direction.
 '''
 
+from __future__ import print_function
+
 import timeit
 import os
 
-start = timeit.default_timer()
+
+try:
+    range = xrange
+except NameError:
+    pass
+
 
 path = os.getcwd().strip('py_solutions_81-90')
+
 with open(path + 'euler_txt/matrix.txt') as f:
-    grid = f.read()
+    edges = [list(map(int, v.split(','))) for v in f.readlines()] 
+    traveled = [['inf'] * 80 for _ in range(80)]
 
-edges = [[int(i) for i in v.split(',')] for v in grid.split('\r\n') if v]      
-traveled = [['inf'] * 80 for i in xrange(80)]
+def euler_81():
+    x = y = 0
+    heap = [[y, x]]
+    while heap:
+        y, x = heap.pop(0)
+        traverse(y, x, heap)         
+    return traveled[79][79]
 
-x = y = 0
-heap = [[y, x]]
-
-def euler_81(y, x):
+def traverse(y, x, heap):
     bounds = 80
     r_vertex = d_vertex = False
     if traveled[y][x] == 'inf':
@@ -36,17 +47,15 @@ def euler_81(y, x):
         r_vertex = x_edge(y, x, curr)
     if d_vertex and r_vertex:
         if d_vertex < r_vertex:
-            heap.append([y, x+1])
-            euler_81(y+1, x) 
+            heap.append([y, x + 1])
+            traverse(y + 1, x, heap) 
         else:
-            heap.append([y+1, x])
-            euler_81(y, x+1)
+            heap.append([y + 1, x])
+            traverse(y, x + 1, heap)
     elif d_vertex:
-        euler_81(y+1, x)
+        traverse(y + 1, x, heap)
     elif r_vertex:
-        euler_81(y, x+1)
-    else:
-        return    
+        traverse(y, x + 1, heap)
 
 def y_edge(y, x, curr): 
     d_vertex = curr + edges[y+1][x]
@@ -68,10 +77,8 @@ def x_edge(y, x, curr):
         r_vertex = False
     return r_vertex
 
-while heap:
-    y, x = heap.pop(0)
-    euler_81(y, x)         
-
-stop = timeit.default_timer()
-print "Answer: %d" % traveled[79][79]
-print "Time: %f" % (stop - start)
+if __name__ == '__main__':
+    start = timeit.default_timer()
+    print('Answer: {}'.format(euler_81()))
+    stop = timeit.default_timer()
+    print('Time: {0:9.5f}'.format(stop - start))
