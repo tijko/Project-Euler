@@ -40,8 +40,7 @@ def is_prime(n):
     return True
 
 proper_divisors_cache = {}
-no_chain = set()
-chains = set()
+checked = set()
 
 def find_divisor_sum(n):
     divisors_sum = proper_divisors_cache.get(n)
@@ -53,28 +52,24 @@ def find_divisor_sum(n):
     return divisors_sum
     
 def euler_95():
-    longest_chain = 0
-    element_limit = 10**6
-    limit = element_limit * 2
-    smallest_element = 0
+    limit = 10**6
+    longest_chain_len = 0
     for canidate in range(2, limit):
-        if is_prime(canidate): continue
-        if no_chain & {canidate}: continue
-        if chains & {canidate}: continue
         chain = {canidate}
+        if is_prime(canidate) or checked & chain: continue
         divisors = find_divisor_sum(canidate)
-        while divisors < element_limit and divisors != canidate:
+        while divisors < limit and divisors != canidate:
             if {divisors} & chain:
-                no_chain.add(canidate)
+                checked.add(canidate)
                 break
             else: chain.add(divisors)
             divisors = find_divisor_sum(divisors)
             if divisors == canidate:
-                if len(chain) > longest_chain:
-                    chains.update(chain)
-                    longest_chain = len(chain)
-                    smallest_element = sorted(list(chain))[0] 
-    return smallest_element
+                if len(chain) > longest_chain_len:
+                    checked.update(chain)
+                    longest_chain_len = len(chain)
+                    longest_chain = chain
+    return sorted(list(longest_chain))[0]
 
 if __name__ == '__main__':
     start = timeit.default_timer()
