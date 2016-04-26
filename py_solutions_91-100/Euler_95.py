@@ -22,6 +22,7 @@ one million.
 '''
 
 from __future__ import print_function
+from collections import defaultdict
 from math import sqrt
 
 import timeit
@@ -39,31 +40,29 @@ def is_prime(n):
         if n % i == 0: return False
     return True
 
-proper_divisors_cache = {}
+proper_divisors_cache = defaultdict(set)
 checked = set()
 
-def find_divisor_sum(n):
-    divisors_sum = proper_divisors_cache.get(n)
-    if divisors_sum is None:
-        divisors_sum = sum([sum([i, n / i]) for i in 
-                            range(2, int(sqrt(n)) + 1) if n % i == 0]) + 1
-        proper_divisors_cache[n] = divisors_sum
-        return divisors_sum
-    return divisors_sum
-    
+def find_factors(limit):
+    n = limit
+    for i in range(2, n + 1):
+        for idx, f in enumerate(range(i + i, n, i), 2):
+            proper_divisors_cache[f].update({i, idx})
+
 def euler_95():
     limit = 10**6
     longest_chain_len = 0
+    find_factors(limit)
     for canidate in range(2, limit):
         chain = {canidate}
         if is_prime(canidate) or checked & chain: continue
-        divisors = find_divisor_sum(canidate)
+        divisors = sum(proper_divisors_cache[canidate]) + 1
         while divisors < limit and divisors != canidate:
             if {divisors} & chain:
                 checked.add(canidate)
                 break
             else: chain.add(divisors)
-            divisors = find_divisor_sum(divisors)
+            divisors = sum(proper_divisors_cache[divisors]) + 1
             if divisors == canidate:
                 if len(chain) > longest_chain_len:
                     checked.update(chain)
