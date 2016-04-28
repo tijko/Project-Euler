@@ -38,9 +38,9 @@ def find_anagram_pairs():
     return anagram_pairs
 
 def create_subs(sq_low, sq_high):
-    sqs_list = [i*i for i in range(sq_low, sq_high + 1)]
     possible_digit_subs = defaultdict(list)
-    for sq in sqs_list:
+    for sq in range(sq_low, sq_high + 1):
+        sq *= sq
         sq_str = str(sq)
         sq_len = len(sq_str)
         if len({i for i in sq_str}) != sq_len: continue
@@ -59,10 +59,9 @@ def euler_98():
         sqs_list = sqs_dict[anagram_length]
         for sq in sqs_list:
             pair_sq_dict = dict(zip(anagram1, str(sq)))
-            a1 = int(''.join([pair_sq_dict[i] for i in anagram1]))
             a2 = int(''.join([pair_sq_dict[i] for i in anagram2]))
             if a2 in sqs_list:
-                pair_high = max([a1, a2])
+                pair_high = max([sq, a2])
                 if pair_high > high:
                     high = pair_high
     return high
