@@ -68,10 +68,9 @@ def get_sq_neighbors(pos, board):
             neighbors.append(board[x_pos + x][y_pos + y])
     return neighbors
 
-# could be used as a check
-# e.g. if no positions available -> backtrack...
+all_options = {i for i in range(1, 10)}
+
 def find_options(pos, board):
-    all_options = {i for i in range(1, 10)}
     row_neighbors = get_row_neighbors(pos, board)
     col_neighbors = get_col_neighbors(pos, board)
     sq_neighbors = get_sq_neighbors(pos, board)
