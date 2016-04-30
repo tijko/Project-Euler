@@ -18,6 +18,7 @@ from __future__ import print_function
 
 import timeit
 
+
 limit = 10**9
 
 def integral_equilaterals(a, b, c, total, step, switch):
