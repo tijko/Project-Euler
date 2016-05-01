@@ -19,12 +19,6 @@ from __future__ import print_function
 import timeit
 
 
-try:
-    range = xrange
-except NameError:
-    pass
-
-
 limit = 10**12
 
 def arranged_probability(b1, b2, combined_discs):
