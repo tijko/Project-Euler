@@ -40,10 +40,10 @@ def euler_99(pairs):
         # that ratio of (large_exp / small_exp) * 2 and the base
         # of the small_exp gets raised to the second power.
         if high_exp > curr_exp:
-            x1, x2 = 2 * (high_exp / curr_exp), 2
+            exp1, exp2 = 2 * (high_exp / curr_exp), 2
         else:
-            x1, x2 = 2, (curr_exp / high_exp) * 2
-        if high_base**x1 < curr_base**x2:
+            exp1, exp2 = 2, (curr_exp / high_exp) * 2
+        if high_base**exp1 < curr_base**exp2:
             high_pair, high_idx = pair, idx
             high_base, high_exp = high_pair
     return high_idx
