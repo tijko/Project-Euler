@@ -40,7 +40,7 @@ def find_anagram_pairs():
 def create_subs(sq_low, sq_high):
     # a dictionary of sq's
     # the key's are the total number of digits in the sq
-    # the value's are the sq's themselves
+    # the value is a list of the sq's themselves
     #
     # when going over each anagram pair checking their length
     # against this dict brings up the only possible solutions.
