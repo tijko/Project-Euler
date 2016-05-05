@@ -27,17 +27,25 @@ path = os.getcwd().strip('py_solutions_91-100')
 with open(path + 'euler_txt/base_exp.txt') as f:
     pairs = [list(map(int, pair.split(','))) for pair in f.readlines()]
 
+
+
 def euler_99(pairs):
-    high, high_idx = pairs[0], 1
+    # mark first pair as highest to start
+    high_pair, high_idx = pairs[0], 1
+    high_base, high_exp = high_pair
     for idx, pair in enumerate(pairs[1:], 2):
-        b1, b2 = high[0], pair[0]
-        if high[1] > pair[1]:
-            x1, x2 = 2 * (high[1] / pair[1]), 2
+        curr_base, curr_exp = pair
+        # creates a workable exponent by determining which of 
+        # exponents being compared is larger, then taking
+        # that ratio of (large_exp / small_exp) * 2 and the base
+        # of the small_exp gets raised to the second power.
+        if high_exp > curr_exp:
+            x1, x2 = 2 * (high_exp / curr_exp), 2
         else:
-            x1, x2 = 2, (pair[1] / high[1]) * 2
-        if b1**x1 < b2**x2:
-            high = pair
-            high_idx = idx
+            x1, x2 = 2, (curr_exp / high_exp) * 2
+        if high_base**x1 < curr_base**x2:
+            high_pair, high_idx = pair, idx
+            high_base, high_exp = high_pair
     return high_idx
     
 if __name__ == '__main__':
