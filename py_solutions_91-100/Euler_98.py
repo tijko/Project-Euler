@@ -71,8 +71,8 @@ def euler_98():
             # create a dict of letters of the first anagram zip
             # against the digits of the sq
             pair_sq_dict = dict(zip(anagram1, str(sq)))
-            # join the letters in the second anagram
-            # check if this integer in is a sq
+            # use the letters from the second anagram to lookup the values
+            # from the first anagrams sq_dict, check if this integer in is a sq
             a2 = int(''.join([pair_sq_dict[i] for i in anagram2]))
             if a2 in sqs_list:
                 pair_high = max([sq, a2])
