@@ -103,10 +103,7 @@ def solver(board):
     while y < 9:
         opts = position_options.get((x, y))
         if opts is None and board[x][y]:
-            position_options[(x, y)] = 'given'
             x, y = mv_dir(x, y)
-        elif opts == 'given':
-            x, y = mv_dir(x, y)    
         else:
             # exhaust the options list first before backtracking
             if opts is None or board[x][y] == 0:
@@ -131,6 +128,9 @@ def euler_96():
     solved_total = 0
     for board in boards:
         solved_total += solver(board)
+        for row in board:
+            print(row)
+        print('')
     return solved_total
 
 if __name__ == '__main__':
