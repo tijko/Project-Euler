@@ -26,23 +26,28 @@ try:
 except NameError:
     pass
 
+digit_sqs = {str(i):i*i for i in range(10)}
 
-chain = lambda n: sum([int(i)**2 for i in str(n)])
+chain = lambda n: sum([digit_sqs[i] for i in str(n)])
 
 def euler_92():
     eighty_nine = 0
     chains = {}
     for start in range(1, 10000000):
         sq_sum = chain(start)
+        # keep a reference to allow assigning all numbers to the same
+        # end sq_sum series number
         sub_chain = []
-        while sq_sum != 89 and sq_sum != 1 and not chains.get(sq_sum):
-            sub_chain.append(sq_sum)
+        while (sq_sum != 89 and sq_sum != 1 and 
+               chains.get(sq_sum) is None):
+            chains[sq_sum] = sub_chain
             sq_sum = chain(sq_sum)
-        sub_chain.append(sq_sum)
         if sq_sum != 89 and sq_sum != 1:
-            sq_sum = chains.get(sq_sum)
-        for sub in sub_chain:
-            chains[sub] = sq_sum
+            sq_sum = chains.get(sq_sum)[0]
+        chains[sq_sum] = sub_chain
+        # set the reference to the sq_sum, all integers in that series
+        # will no be set
+        sub_chain.append(sq_sum)
         if sq_sum == 89:
             eighty_nine += 1
     return eighty_nine    
