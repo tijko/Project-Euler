@@ -25,7 +25,7 @@ a string: abcd.
 '''
 
 from __future__ import print_function
-from itertools import combinations, permutations, zip_longest, product 
+from itertools import combinations, permutations, zip_longest, product, chain 
 
 import timeit
 
@@ -34,35 +34,46 @@ try:
 except NameError:
     pass
 
+# all the possible bracket placements
+brackets = ['({} {} {} {} {} {} {})', '({} {} {} {} {}) {} {}', 
+            '(({} {} {}) {} {}) {} {}', '({} {} {}) {} ({} {} {})', 
+            '{} {} ({} {} {} {} {})', '{} {} (({} {} {}) {} {})',
+            '({} {} ({} {} {})) {} {}', '{} {} {} {} ({} {} {})', 
+            '{} {} ({} {} ({} {} {}))', '{} {} ({} {} {}) {} {}', 
+            '({} {} {}) {} {} {} {}']
+
+operators = ('+', '-', '/', '*')
+# set cartesian-product of operators (all possible equations).
+operator_sets = list(product(operators, repeat=3))
+
+def find_all_equation_solutions(digit_set_combination):
+    # create all possible permutations of the combination
+    digit_set_permutations = permutations(digit_set_combination)
+    tracked_integers = set()
+    for digit_set_permutation in digit_set_permutations:
+        for operator_set in operator_sets:
+            # zip_longest because of 4 digits and 3 operators
+            # filling with a empty str.  these will format into brackets 
+            eq_list = list(chain(*zip_longest(digit_set_permutation, 
+                                              operator_set, fillvalue='')))
+            for bracket in brackets:
+                try:
+                    # call eval on the bracket string to compute the equation
+                    value = eval(bracket.format(*eq_list))
+                except ZeroDivisionError:
+                    pass 
+                if value > 0 and value % 1 == 0:
+                    tracked_integers.add(int(value))
+    return tracked_integers
 
 def euler_93():
+    # all possible combinations of 4 digits
     digit_set_combinations = combinations(range(1, 10), 4)
-    operators = ('+', '-', '/', '*')
-    operator_sets = list(product(operators, repeat=3))
-    brackets = ['({} {} {} {} {} {} {})', '({} {} {} {} {}) {} {}', 
-                '(({} {} {}) {} {}) {} {}', '({} {} {}) {} ({} {} {})', 
-                '{} {} ({} {} {} {} {})', '{} {} (({} {} {}) {} {})',
-                '({} {} ({} {} {})) {} {}', '{} {} {} {} ({} {} {})', 
-                '{} {} ({} {} ({} {} {}))', '{} {} ({} {} {}) {} {}', 
-                '({} {} {}) {} {} {} {}']
     consecutive_high = 0
     high_set = ()
     for digit_set_combination in digit_set_combinations:
-        digit_set_permutations = permutations(digit_set_combination)
-        tracked_integers = set()
-        for digit_set_permutation in digit_set_permutations:
-            for operator_set in operator_sets:
-                eq_list = [d for o in zip_longest(digit_set_permutation, 
-                           operator_set) for d in o if d]
-                for bracket in brackets:
-                    try:
-                        value = eval(bracket.format(*eq_list))
-                    except ZeroDivisionError:
-                        pass 
-                    if value > 0 and value % 1 == 0:
-                        tracked_integers.add(int(value))
-        integers = sorted(list(tracked_integers))
-        idx = 0
+        integers = sorted(list(find_all_equation_solutions(digit_set_combination)))
+        if not integers: continue
         for idx, integer in enumerate(integers, 1):
             if idx != integer: break
         if idx > consecutive_high:
