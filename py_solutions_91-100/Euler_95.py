@@ -43,31 +43,49 @@ def is_prime(n):
 proper_divisors_cache = defaultdict(set)
 checked = set()
 
+limit = 10**6
+
 def find_factors(limit):
-    n = limit
-    for i in range(2, n + 1):
-        for idx, f in enumerate(range(i + i, n, i), 2):
+    for i in range(2, limit + 1):
+        # enumerate a range starting at the current integer x2
+        # stepping by the size of the integer to the limit
+        for idx, f in enumerate(range(i + i, limit, i), 2):
+            # using 'f' which is the current integer along the stepped range
+            # as the key, add to the factors value-list the step size
+            # and its index enumerated from base 2
             proper_divisors_cache[f].update({i, idx})
 
+def find_chain(canidate):
+    chain = {canidate}
+    divisors = sum(proper_divisors_cache[canidate]) + 1
+    while divisors < limit:
+        if {divisors} & chain:
+            # not a complete chain, add starting canidate to checked
+            checked.add(canidate)
+            return {} # return empty set, no use checking incomplete chains
+        else: 
+            chain.add(divisors)
+        divisors = sum(proper_divisors_cache[divisors]) + 1
+        # divisors equal starting canidate, is a complete chain
+        if divisors == canidate:
+            checked.update(chain)
+            return chain 
+    return {} # return empty set, no use checking incomplete chains
+
 def euler_95():
-    limit = 10**6
     longest_chain_len = 0
+    # build a factors dict having the number and list as
+    # a list of integers as the key, value respectively.
     find_factors(limit)
     for canidate in range(2, limit):
-        chain = {canidate}
-        if is_prime(canidate) or checked & chain: continue
-        divisors = sum(proper_divisors_cache[canidate]) + 1
-        while divisors < limit and divisors != canidate:
-            if {divisors} & chain:
-                checked.add(canidate)
-                break
-            else: chain.add(divisors)
-            divisors = sum(proper_divisors_cache[divisors]) + 1
-            if divisors == canidate:
-                if len(chain) > longest_chain_len:
-                    checked.update(chain)
-                    longest_chain_len = len(chain)
-                    longest_chain = chain
+        # if canidate is in checked, it was already in another 
+        # chain-series or if it is prime no use checking.
+        if is_prime(canidate) or checked & {canidate}: continue
+        chain = find_chain(canidate)
+        chain_len = len(chain)
+        if chain_len > longest_chain_len:
+            longest_chain_len = chain_len
+            longest_chain = chain
     return sorted(list(longest_chain))[0]
 
 if __name__ == '__main__':
