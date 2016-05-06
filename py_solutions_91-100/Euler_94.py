@@ -33,12 +33,18 @@ def integral_equilaterals(a, b, c, total, step, switch):
         b2, c2 = b, c
         c = step + a + b + c
         a = b = c + 1
+    # recurse, increasing the step by b, c
+    # even if b is +1 on c or c +1 on b you increase the step by
+    # the +1 side and the other.  then flip the switch to show
+    # which side will be +1
     return integral_equilaterals(a, b, c, total, step + b2 + c2, not switch)
 
 def euler_94():
     a, b, c = 5, 5, 6
     step = b + c
     perimeter_sum = sum([a, b, c])
+    # set the next a,b,c set. incrementing a, b to start
+    # then alternating as the sets progress ((a, b) + 1 then (c) + 1)
     a, b, c = perimeter_sum + 1, perimeter_sum + 1, perimeter_sum
     perimeter_sum += integral_equilaterals(a, b, c, 0, step, True)
     return perimeter_sum
