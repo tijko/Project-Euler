@@ -32,13 +32,19 @@ def euler_91(dimension):
     points = product(range(dimension + 1), range(dimension + 1))
     for triangle in combinations(points, 2):
         p1, p2 = triangle
+        # check if point origin is aligning the other two points to zero
         if triangle[0] == origin or p1[0] == p2[0] == 0 or p1[1] == p2[1] == 0:
             continue
         sides_shared = 0
+        # point is @ zero inc shared side
+        # if there are 2 or more shared sides it must be a right angle.
         if p1[0] == 0:
             sides_shared += 1
             side1 = p1[1]
         else:
+            # find the side length by creating a rectangle
+            # and using the distance between points to calculate
+            # the side as the hypotenuse.
             side1 = sqrt(p1[0]**2 + p1[1]**2)
         if p2[1] == 0:
             sides_shared += 1
