@@ -72,7 +72,7 @@ def euler_98():
             # against the digits of the sq
             pair_sq_dict = dict(zip(anagram1, str(sq)))
             # use the letters from the second anagram to lookup the values
-            # from the first anagrams sq_dict, check if this integer in is a sq
+            # from the first anagrams sq_dict, check if this integer is sqs_list
             a2 = int(''.join([pair_sq_dict[i] for i in anagram2]))
             if a2 in sqs_list:
                 pair_high = max([sq, a2])
