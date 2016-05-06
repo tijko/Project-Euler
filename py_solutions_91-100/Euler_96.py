@@ -128,9 +128,6 @@ def euler_96():
     solved_total = 0
     for board in boards:
         solved_total += solver(board)
-        for row in board:
-            print(row)
-        print('')
     return solved_total
 
 if __name__ == '__main__':
