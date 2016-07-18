@@ -27,9 +27,46 @@ except NameError:
 
 start = timeit.default_timer()
 
+'''
 def euler_29():
     return len({i**v for i in range(2, 101) for v in range(2, 101)})
+'''
 
+def euler_29():
+    min_exp = 2
+    max_exp = 100
+    values = [[0 for _ in range(min_exp, max_exp + 1)] 
+                 for _ in range(min_exp, max_exp + 1)]
+    N = int(max_exp**0.5)
+    tables = [[i**j for j in range(1, N + 1) if i**j <= max_exp] 
+                    for i in range(min_exp, N + 1)]
+    for table in tables:
+        # Loop through the values under sqrt(max).
+        for base_power1, base1 in enumerate(table, 1):
+            # Loop through the bases of those in the table
+            # starting at the root of all the power's listed
+            for base_power2, base2 in enumerate(table[base_power1:], 
+                                                      base_power1 + 1):
+                # Now loop through that same table but one index higher than 
+                # itself
+                #
+                # Set a limit for the number of checks.  This limit can't be
+                # exceeded by the base1 x the next exponent (meaning it would
+                # go over the constraint of exponent limits)
+                limit = max_exp 
+                for exp in range(base_power2 + 1, limit + 1):
+                    # From here, you're grabbing the exponents that could 
+                    # possibly be a canidate for a repeat from the previous 
+                    # exponent.
+                    #
+                    # Check the previous exponent * the current exponent is
+                    # divisible by the next power.  If that then those two
+                    # would not create overlap/repeat.
+                    if not (base_power1 * exp) % base_power2:
+                        values[base2 - 2][int(base_power1 * exp / 
+                                              base_power2) - 2] = 1
+    max_values = (max_exp - 1)**2
+    return max_values - (sum([sum(i) for i in values]))
 
 print("Answer: {}".format(euler_29()))
 stop = timeit.default_timer()
