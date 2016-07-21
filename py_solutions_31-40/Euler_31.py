@@ -13,29 +13,33 @@ How many different ways can £2 be made using any number of coins?
 
 import timeit
 
-
 start = timeit.default_timer()
 
+
+try:
+    range = xrange
+except NameError:
+    pass
+
+
 def euler_31():
-    ways = 0
-    for i in xrange(0, 201, 200):
-        for j in xrange(0, 201, 100):
-            for l in xrange(0, 201, 50):
-                for v in xrange(0, 201, 20):
-                    for k in xrange(0, 201, 10):
-                        for m in xrange(0, 201, 5):
-                            for e in xrange(0, 201, 2):
-                                for x in xrange(201):
-                                    chk = sum([i, j, l, v, k, m, e, x])
-                                    if chk > 200:
-                                        break
-                                    if chk == 200:
-                                        ways += 1
-                                        break
+    limit = 200
+    currency = [1, 2, 5, 10, 20, 50, 100, 200]
+    no_currency = len(currency)
+    amount = [0] * no_currency
+    idx = ways = 0
+    while idx < no_currency:
+        amount[idx] += currency[idx]
+        total = sum(amount)
+        if total < limit:
+            idx = 0
+        else:
+            amount[idx] = 0
+            if total == limit: ways += 1
+            idx += 1
     return ways
 
-
-print "Answer: %s" % euler_31()
+print('Answer: {}'.format(euler_31()))
 stop = timeit.default_timer()
-print "Time: %f" % (stop - start)
+print('Time: {0:9.5}'.format(stop - start))
 
