@@ -41,5 +41,4 @@ def euler_31():
 
 print('Answer: {}'.format(euler_31()))
 stop = timeit.default_timer()
-print('Time: {0:9.5}'.format(stop - start))
-
+print('Time: {0:9.5f}'.format(stop - start))
