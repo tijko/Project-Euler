@@ -28,12 +28,11 @@ int main(int argc, char *argv[])
         total[idx] += currency[idx];
         int sum = calculate_total();
 
-        if (sum == limit)
-            ways++;
-
-        if (total[idx] < limit)
+        if (sum < limit)
             idx = 0;
-        else if (total[idx] >= limit) {
+        else {
+            if (sum == limit)
+                ways++;
             total[idx] = 0;
             idx++;
         } 
