@@ -9,7 +9,7 @@ import timeit
 import itertools
 
 from functools import reduce
-from operator import mul, truediv
+from operator import truediv
 
 try:
     range = xrange
@@ -20,8 +20,7 @@ start = timeit.default_timer()
 
 
 def euler_33():
-    numerators = list()
-    denominators = list()
+    numerators = denominators = 1
     fractions = (f for f in itertools.combinations(range(10, 100), 2)
                  if not any(i % 10 == 0 or i % 11 == 0 for i in f))
     floordiv = lambda v: v // 10
@@ -39,13 +38,11 @@ def euler_33():
         else: continue
         numerator, denominator = ops[0](numerator), ops[1](denominator)
         if truediv(numerator, denominator) == reduce(truediv, fraction):
-            numerators.append(fraction[0])
-            denominators.append(fraction[1])
-    final_numerator = reduce(mul, numerators)
-    final_denominator = reduce(mul, denominators)
-    n_lcms = [i for i in range(2, final_numerator + 1) if 
-              final_denominator % i == 0 and final_numerator % i == 0]
-    return final_denominator / n_lcms[-1]    
+            numerators *= fraction[0]
+            denominators *= fraction[1]
+    lcms = list(filter(lambda x: numerators % x == 0 and denominators % x == 0,
+                       range(2, numerators + 1)))
+    return denominators / lcms[-1]    
 
 print('Answer: {}'.format(euler_33()))
 stop = timeit.default_timer()
