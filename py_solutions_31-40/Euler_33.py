@@ -40,9 +40,10 @@ def euler_33():
         if truediv(numerator, denominator) == reduce(truediv, fraction):
             numerators *= fraction[0]
             denominators *= fraction[1]
-    lcms = list(filter(lambda x: numerators % x == 0 and denominators % x == 0,
-                       range(2, numerators + 1)))
-    return denominators / lcms[-1]    
+    for factor in range(numerators, 1, -1):
+        if numerators % factor == 0 and denominators % factor == 0:
+            break
+    return denominators / factor 
 
 print('Answer: {}'.format(euler_33()))
 stop = timeit.default_timer()
