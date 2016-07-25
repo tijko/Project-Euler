@@ -1,6 +1,13 @@
 #include <stdio.h>
 
 
+int gcd(int a, int b)
+{
+    if (a % b == 0)
+        return b;
+    return gcd(b, a % b);
+}
+
 int main(int argc, char *argv[])
 {
     int numerator_prod_sum = 1;
@@ -40,14 +47,9 @@ int main(int argc, char *argv[])
         }
     }
 
-    for (int numerator=numerator_prod_sum+1; numerator > 1; numerator--) {
-        if (numerator_prod_sum % numerator == 0 &&
-            denominator_prod_sum % numerator == 0) {
-            printf("Answer: %d\n", denominator_prod_sum / numerator);
-            break;
-        }
-    }
-
+    printf("Answer: %d\n", denominator_prod_sum / 
+                           gcd(denominator_prod_sum, 
+                               numerator_prod_sum));
 
     return 0;
 }
