@@ -19,6 +19,11 @@ except NameError:
 start = timeit.default_timer()
 
 
+def gcd(a, b):
+    if a % b == 0:
+        return b
+    return gcd(b, a % b)
+
 def euler_33():
     numerators = denominators = 1
     fractions = (f for f in itertools.combinations(range(10, 100), 2)
@@ -40,10 +45,7 @@ def euler_33():
         if truediv(numerator, denominator) == reduce(truediv, fraction):
             numerators *= fraction[0]
             denominators *= fraction[1]
-    for factor in range(numerators, 1, -1):
-        if numerators % factor == 0 and denominators % factor == 0:
-            break
-    return denominators / factor 
+    return denominators / gcd(denominators, numerators)
 
 print('Answer: {}'.format(euler_33()))
 stop = timeit.default_timer()
