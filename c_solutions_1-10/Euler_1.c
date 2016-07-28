@@ -1,7 +1,4 @@
-#include <time.h>
-#include <stdio.h>
-
-#define NANO 10000000000
+#include "timer.h"
 
 
 int multiples_three_five(int limit) 
@@ -14,20 +11,14 @@ int multiples_three_five(int limit)
     return total;
 }
 
-int main(void) 
+int main(int argc, char *argv[]) 
 {
-    struct timespec start;
-    clock_gettime(CLOCK_REALTIME, &start);
-    double start_time = ((float) start.tv_sec) + ((float) start.tv_nsec) / NANO; 
-
+    float start = timeit();
     long ans = multiples_three_five(1000);
+    float stop = timeit();
+
     printf ("Answer: %ld\n", ans); 
-
-    struct timespec stop;
-    clock_gettime(CLOCK_REALTIME, &stop);
-    double stop_time = ((float) stop.tv_sec) + ((float) stop.tv_nsec) / NANO;
-
-    printf ("Time: %.8f\n", stop_time - start_time);
+    printf("Time: %.8f\n", stop - start);
 
     return 0;
 }

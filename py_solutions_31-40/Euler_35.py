@@ -18,7 +18,8 @@ def is_prime(x):
 
 def euler_35():
     return sum([1 for prime in (j for j in map(str, xrange(2, 1000000)) if is_prime(int(j)) and (int(j) == 2 or not any(int(v) % 2 == 0 for v in j))) if all(is_prime(int(''.join(prime[i:] + prime[:i]))) for i in xrange(1, len(prime)))]) 
-        
+
+                   
 print "Answer: %s" % euler_35()
 stop = timeit.default_timer()
 print "Time: %f" % (stop - start)    

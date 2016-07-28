@@ -1,27 +1,25 @@
-#include <stdio.h>
-#include <math.h>
-#include <time.h>
+#include "timer.h"
 
 
-int main(void) 
+int main(int argc, char *argv[])
 {
-    clock_t start, stop;
-    start = clock();
+    float start = timeit();
 
     unsigned long total = 0;
+    int sum = 0;
 
-    int i, j;
-    for (i=0; i <= 100; i++) 
-        total += (i*i);
+    for (int i=0; i <= 100; i++) 
+        total += i * i;
 
-    for (j=0, i=0; j <= 100; j++) 
-        i += j;
+    for (int i=0; i <= 100; i++) 
+        sum += i;
 
-    total = pow(i, 2) - total;
+    total = pow(sum, 2) - total;
 
-    stop = clock();
+    float stop = timeit();
+
     printf ("Answer: %ld\n", total);
-    printf ("Time: %f\n", ((float)stop - (float)start) / CLOCKS_PER_SEC);
+    printf ("Time: %.8f\n", stop - start);
 
     return 0;
 }

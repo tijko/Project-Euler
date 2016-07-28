@@ -1,15 +1,13 @@
-#include <stdio.h>
-#include <time.h>
-#include <math.h>
+#include "timer.h"
 
 
-int main(void) {
-
-    clock_t start, stop;
-    start = clock();
+int main(int argc, char *argv[])
+{
+    float start = timeit();
 
     float a, b, c;
-    
+    float stop;
+ 
     for (a=1, b=2; a <= 3000; a++, b=(a+1)) {
         for (; b < 3000; b++) {
             c = a + b + sqrt(pow(a, 2) + pow(b, 2));
@@ -22,11 +20,12 @@ int main(void) {
         }
     }
 
-    found_triplet:
+found_triplet:
 
-    stop = clock();
+    stop = timeit();
+
     printf ("Answer: %ld\n", (long) c);
-    printf ("Time: %f\n", ((float)stop - (float)start) / CLOCKS_PER_SEC);
+    printf ("Time: %.8f\n", stop - start);
 
     return 0;
 }

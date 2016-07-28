@@ -1,14 +1,10 @@
-#include <stdio.h>
-#include <time.h>
+#include "timer.h"
 
 
 int fib_sum(long limit) 
 {
-    int a1, b1;
-    long b2, total;
-
-    a1 = 1; b1 = 1;
-    b2 = 0; total = 0;
+    int a1 = 1, b1 = 1;
+    long b2 = 0, total = 0;
 
     while (b2 <= limit) {
         b2 = a1 + b1;
@@ -20,17 +16,17 @@ int fib_sum(long limit)
     return total;
 }
 
-int main(void) 
+int main(int argc, char *argv[]) 
 {
-    clock_t start, stop;
-    start = clock();
+    float start = timeit();
 
     const long limit = 4000000;
     long ans = fib_sum(limit);
 
+    float stop = timeit();
+
     printf ("Answer: %ld\n", ans);
-    stop = clock();
-    printf ("Time: %f\n", ((float)stop - (float)start) / CLOCKS_PER_SEC);
+    printf ("Time: %.8f\n", stop - start);
 
     return 0;
 }
