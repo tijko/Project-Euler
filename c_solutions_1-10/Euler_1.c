@@ -1,4 +1,4 @@
-#include "timer.h"
+#include "euler_util.h"
 
 
 int multiples_three_five(int limit) 

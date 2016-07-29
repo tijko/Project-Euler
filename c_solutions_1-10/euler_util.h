@@ -7,6 +7,8 @@
 #include <sched.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <linux/version.h>
+
 
 #define NANO pow(10, 9)
 
@@ -39,10 +41,20 @@ static inline void iso_proc_cpu(void)
 
 float timeit(void)
 {
+#ifdef _POSIX_CPUTIME
+    if (LINUX_VERSION_CODE < KERNEL_VERSION(2, 6, 12))
+        iso_proc_cpu();
+
     struct timespec tm_spec;
     if (clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &tm_spec) < 0)
         perror("clock_gettime");
 
     float time = (float) tm_spec.tv_sec + (float) tm_spec.tv_nsec / NANO;
+#else
+    clock_t init_clock = clock();
+
+    float time = (float) init_clock / CLOCKS_PER_SEC;            
+#endif
+
     return time;
 }
