@@ -1,10 +1,9 @@
 // Find the sum of the digits in !100.
 
-#include <time.h>
-#include <stdio.h>
+#include "euler_util.h"
+
 #include <unistd.h>
 #include <string.h>
-#include <stdlib.h>
 
 #define FACTORIAL_BUFFER 200
 #define FACTORIAL_TO 100
@@ -43,8 +42,7 @@ int find_head(int total[])
 
 int main(int argc, char *argv[])
 {
-    clock_t start, stop;
-    start = clock();
+    float start = timeit();
 
     char *factorial, *current;
     int total[FACTORIAL_BUFFER];
@@ -82,9 +80,9 @@ int main(int argc, char *argv[])
     free(factorial);
     free(current);
 
-    stop = clock();    
+    float stop = timeit();
     printf("Answer: %d\n", answer);
-    printf("Time: %f\n", ((float) stop - (float) start) / CLOCKS_PER_SEC);
+    printf("Time: %f\n", stop - start);
 
     return 0;
 }

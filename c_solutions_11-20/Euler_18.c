@@ -1,10 +1,8 @@
 // Find the maximum total from the top to bottom of the triangle
+#include "euler_util.h"
 
-#include <time.h>
 #include <ctype.h>
-#include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
 
 #define MAX_NUM 3
 #define MAX_ROW 15
@@ -22,7 +20,7 @@ FILE *tri_file(void)
     home_path = getenv("HOME");
     home_path_len = strlen(home_path);
 
-    triangle_path = "/Project_Euler/euler_txt/triangle1.txt";
+    triangle_path = "/Project-Euler/euler_txt/triangle1.txt";
     triangle_path_len = strlen(triangle_path);
 
     fullpath_len = triangle_path_len + home_path_len + 1;
@@ -70,8 +68,7 @@ void load_array(FILE *triangle_file, int triangle[MAX_ROW][MAX_COL])
 
 int main(int argc, char *argv[])
 {
-    clock_t start, stop;
-    start = clock();
+    float start = timeit();
 
     int answer, row, col;
     int triangle[MAX_ROW][MAX_COL];
@@ -92,8 +89,8 @@ int main(int argc, char *argv[])
     answer += triangle[row][col] + MAX(triangle[row + 1][col], 
                                        triangle[row + 1][col + 1]);
 
-    stop = clock();
+    float stop = timeit();
     printf("Answer: %d\n", answer);
-    printf("Time: %f\n", ((float) stop - (float) start) / CLOCKS_PER_SEC);
+    printf("Time: %f\n", stop - start);
     return 0;
 }

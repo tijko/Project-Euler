@@ -1,7 +1,6 @@
-#include <stdio.h>
-#include <time.h>
+#include "euler_util.h"
+
 #include <ctype.h>
-#include <stdlib.h>
 #include <string.h>
 
 #define LRG_NUM_ARR_SZ 100
@@ -127,33 +126,31 @@ void combine_char(char total[], char addy, int idx)
     total[idx] = ((add_to + add_in) % 10) + '0';
 }
 
-int main(void) 
+int main(int argc, char *argv[]) 
 {
-    clock_t start, stop;
-    start = clock();
+    float start = timeit();
 
     char ans[MAX_SUM_ARR_SZ];
     memset(ans, '0', sizeof(ans));
-    char *curr;
-    size_t curr_len;
  
-    int i, j, n;
-    for (i=0; i < LRG_NUM_ARR_SZ; i++) {
-        curr = big_nums[i];
-        curr_len = strlen(curr) - 1;
-        for (j=curr_len, n=0; j >= 0; j--, n++)
+    for (int i=0; i < LRG_NUM_ARR_SZ; i++) {
+        char *curr = big_nums[i];
+        size_t curr_len = strlen(curr) - 1;
+        for (int j=curr_len, n=0; j >= 0; j--, n++)
             combine_char(ans, *(curr + j), n);
     }
 
-    for (i=sizeof(ans) - 1; ans[i] == '0'; i--)
+    int idx = sizeof(ans) - 1;
+    for (; ans[idx] == '0'; idx--)
         ;
 
+    float stop = timeit();
+
     printf("Answer: ");    
-    for (j=0; j < DIGITS_TO_FIND; j++, i--)
-        printf("%c", ans[i]);
+    for (int j=0; j < DIGITS_TO_FIND; j++, idx--)
+        printf("%c", ans[idx]);
  
-    stop = clock();
-    printf ("\nTime: %f\n", ((float)stop - (float)start) / CLOCKS_PER_SEC);
+    printf ("\nTime: %f\n", stop - start);
 
     return 0;
 }

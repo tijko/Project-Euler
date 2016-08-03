@@ -1,7 +1,6 @@
-#include <stdio.h>
-#include <time.h>
+#include "euler_util.h"
+
 #include <string.h>
-#include <stdlib.h>
 
 
 const char NUM_GRID[] =   "08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08 "
@@ -83,18 +82,16 @@ int prod(int num_grid[20][20], int x, int y, int dir)
     return total;
 }
 
-int main(void) {
-
-    clock_t start, stop;
-    start = clock();
-
-
+int main(int argc, char *argv[])
+{
+    float start = timeit(); 
+    
     int grid[20][20];
     parse_grid(grid);
 
-    int high, total, x, y;
-    for (y=0, high=0, total=0; y < 20; y++) {
-        for (x=0; x < 20; x++) {
+    int high = 0;
+    for (int y=0, total=0; y < 20; y++) {
+        for (int x=0; x < 20; x++) {
 
             if (y - 4 >= 0) {
                 total = prod(grid, x, y, 1);
@@ -128,9 +125,11 @@ int main(void) {
         }
     }
 
+    float stop = timeit();
+
     printf ("Answer: %d\n", high);
-    stop = clock();
-    printf ("Time: %f\n", ((float)stop - (float)start) / CLOCKS_PER_SEC);
+    printf ("Time: %f\n", stop - start);
+
     return 0;
 }    
 

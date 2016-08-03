@@ -1,18 +1,11 @@
-// 
-//    Count all the letters that are needed to write out the words from one to 
-//    one thousand.
-//
+#include "euler_util.h"
 
-#include <time.h>
-#include <stdio.h>
 #include <string.h>
 
 
 int main(int argc, char *argv[])
 {
-    clock_t start, stop;
-
-    start = clock();
+    float start = timeit(); 
 
     int count_to = 1000;
     int letter_count = 0;
@@ -48,9 +41,9 @@ int main(int argc, char *argv[])
                                            strlen(number_words[0][current % 10]);
     }
    
-    stop = clock();
+    float stop = timeit();
     printf("Answer: %d\n", letter_count);
-    printf("Time: %f\n", ((float) stop - (float) start) / CLOCKS_PER_SEC);
+    printf("Time: %f\n", stop - start);
  
     return 0;
 }

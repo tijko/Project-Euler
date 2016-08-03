@@ -1,26 +1,22 @@
-#include <stdio.h>
-#include <time.h>
-#include <math.h>
+#include "euler_util.h"
 
 
-int main(void) {
+int main(int argc, char *argv[])
+{
+    float start = timeit();
 
-    clock_t start, stop;
-    start = clock();
-   
     int base = 1001;
     int divisors = 2;
 
     long long tri_num = 0;
     long double root;
 
-    int i;
-    for (i=1; i <= base; i++) 
+    for (int i=1; i <= base; i++) 
         tri_num += i;
 
     while (divisors <= 500) {
         root = sqrt(tri_num);
-        for (i=2; i <= root + 1; i++) {
+        for (int i=2; i <= root + 1; i++) {
             if (tri_num % i == 0) 
                 divisors += 2;    
         }
@@ -31,8 +27,10 @@ int main(void) {
         }
     } 
   
+    float stop = timeit();
+
     printf ("Answer: %lld\n", tri_num);
-    stop = clock();
-    printf ("Time: %f\n", ((float)stop - (float)start) / CLOCKS_PER_SEC);
+    printf ("Time: %f\n", stop - start);
+
     return 0;
 }

@@ -1,8 +1,7 @@
 // Find the number of sundays that fell on the first day of the month in 
 // between 1901 - 2000
 
-#include <time.h>
-#include <stdio.h>
+#include "euler_util.h"
 
 
 int Months[12] = {31, 00, 31, 30, 31, 30,
@@ -10,8 +9,7 @@ int Months[12] = {31, 00, 31, 30, 31, 30,
 
 int main(int argc, char *argv[])
 {
-    clock_t start, stop;
-    start = clock();
+    float start = timeit();
 
     int answer;
     int year, mos, day, day_num, duration;
@@ -29,9 +27,9 @@ int main(int argc, char *argv[])
         }
     }
 
-    stop = clock();
     printf("Answer: %d\n", answer);
-    printf("Time: %f\n", ((float) stop - (float) start) / CLOCKS_PER_SEC);
+    float stop = timeit();
+    printf("Time: %f\n", stop - start);
 
     return 0;
 }

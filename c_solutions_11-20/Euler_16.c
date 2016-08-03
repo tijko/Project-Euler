@@ -1,8 +1,5 @@
-// Find the sum of the digits in 2**1000
+#include "euler_util.h"
 
-#include <time.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
 #define MAX 400
@@ -33,8 +30,7 @@ void exponent(char *value, int limit)
 
 int main(int argc, char *argv[])
 {
-    clock_t start, stop;
-    start = clock();
+    float start = timeit();
 
     int answer, i;
     char *two_exp;
@@ -49,10 +45,10 @@ int main(int argc, char *argv[])
     for (i=0; i < strlen(two_exp); i++)
         answer += (*(two_exp + i) - '0');
 
-    stop = clock();
+    float stop = timeit();
 
     printf("Answer: %d\n", answer);
-    printf("Time: %f\n", ((float) stop - (float) start) / CLOCKS_PER_SEC);
+    printf("Time: %f\n", stop - start);
 
     free(two_exp);
     return 0;

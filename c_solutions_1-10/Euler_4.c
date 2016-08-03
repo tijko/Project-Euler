@@ -13,7 +13,6 @@ int main(int argc, char *argv[])
     char *backward = malloc(sizeof(char) * MAX);
 
     size_t int_len;
-    size_t str_len;
 
     int high = 0;
 
