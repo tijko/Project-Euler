@@ -9,8 +9,8 @@ int main(int argc, char *argv[])
 {
     float start = timeit();
 
-    char *forward = malloc(sizeof(char) * MAX);
-    char *backward = malloc(sizeof(char) * MAX);
+    char *forward = calloc(sizeof(char), sizeof(char) * MAX);
+    char *backward = calloc(sizeof(char), sizeof(char) * MAX);
 
     size_t int_len;
 
