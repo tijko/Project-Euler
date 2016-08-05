@@ -60,13 +60,19 @@ long total_pandigital_products(struct pandigital_entry **table)
             total += table[i]->product;
             if (table[i]->next) {
                 struct pandigital_entry *ent = table[i]->next;
+                free(table[i]->pandigital_str);
                 free(table[i]);
                 while (ent) {
                     total += ent->product;
+                    free(ent->pandigital_str);
+                    struct pandigital_entry *lst_ent = ent;
                     ent = ent->next;
+                    free(lst_ent);
                 }
-            } else
+            } else {
+                free(table[i]->pandigital_str);
                 free(table[i]);
+            }
         }
     }
 
