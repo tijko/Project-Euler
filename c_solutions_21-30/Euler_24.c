@@ -4,8 +4,7 @@
  *
  */
 
-#include <time.h>
-#include <stdio.h>
+#include "euler_util.h"
 
 #define PERMUTATION_SIZE 10 
 #define PERMUTATION_LIMIT 1000000
@@ -54,8 +53,7 @@ int last_largest_idx(int permutation[], int idx)
 
 int main(int argc, char *argv[])
 {
-    clock_t start, stop;
-    start = clock();
+    float start = timeit();
 
     int one_to_ten[PERMUTATION_SIZE] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     int first_idx, second_idx, count;
@@ -69,14 +67,14 @@ int main(int argc, char *argv[])
         sort(one_to_ten, first_idx);
     }
 
-    stop = clock();
+    float stop = timeit();
     
     printf("Answer: ");
 
     for (i=0; i < PERMUTATION_SIZE; i++)
         printf("%d", one_to_ten[i]);
 
-    printf("\nTime: %f\n", ((float) stop - (float) start) / CLOCKS_PER_SEC);
+    printf("\nTime: %f\n", stop - start);
 
     return 0;
 }
