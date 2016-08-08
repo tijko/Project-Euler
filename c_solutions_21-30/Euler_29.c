@@ -1,5 +1,5 @@
-#include <math.h>
-#include <stdio.h>
+#include "euler_util.h"
+
 #include <string.h>
 
 #define MIN_EXP 2
@@ -31,7 +31,7 @@ int total_repeats(void)
     return total;
 }
 
-inline void mark_factor(int base1_idx, int base2, int base2_idx)
+static inline void mark_factor(int base1_idx, int base2, int base2_idx)
 {
     for (int exp=base2_idx + 2; exp < MAX_EXP + 1; exp++) {
         if (!(((base1_idx + 1) * exp) % (base2_idx + 1))) 
@@ -39,7 +39,7 @@ inline void mark_factor(int base1_idx, int base2, int base2_idx)
     }
 }
 
-inline void exponent_factors(int table_size)
+static inline void exponent_factors(int table_size)
 {
     for (int base1_idx=0; base1_idx < table_size; base1_idx++) {
         for (int base2_idx=base1_idx + 1; base2_idx < table_size; base2_idx++) 
@@ -49,6 +49,8 @@ inline void exponent_factors(int table_size)
 
 int main(int argc, char *argv[])
 {
+    float start = timeit();
+
     int N = (int) sqrt(MAX_EXP) + 1;
     memset(terms, 0, sizeof(int) * MAX_EXP * MAX_EXP);
 
@@ -59,6 +61,9 @@ int main(int argc, char *argv[])
         exponent_factors(table_size);
     }
 
-    printf("%d\n", ((MAX_EXP - 1) * (MAX_EXP - 1)) - total_repeats());
+    float stop = timeit();
+    printf("Answer: %d\n", ((MAX_EXP - 1) * (MAX_EXP - 1)) - total_repeats());
+    printf("Time: %f\n", stop - start);
+
     return 0;
 }
