@@ -1,21 +1,10 @@
-#include <stdio.h>
-#include <math.h>
-#include <stdbool.h>
+#include "euler_util.h"
 
-
-bool is_prime(int n)
-{
-    if (n == 2) return true;
-    if (n < 2 || n % 2 == 0) return false;
-
-    for (int i=3; i < sqrt(n) + 1; i+=2)
-        if (n % i == 0) return false;
-
-    return true;
-}
 
 int main(int argc, char *argv[])
 {
+    float start = timeit();
+
     int high = 0;
     signed coefficient = 0;
 
@@ -34,7 +23,10 @@ int main(int argc, char *argv[])
         }
     }
     
-    printf("%d\n", coefficient);
+    float stop = timeit();
+
+    printf("Answer: %d\n", coefficient);
+    printf("Time: %f\n", stop - start);
  
     return 0;
 }
