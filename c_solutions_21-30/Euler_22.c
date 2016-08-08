@@ -1,141 +1,132 @@
 // Name Scores -> order the words listed in the word file alphabetically
 // then tally the score based on order rank word total.
 
-#include <time.h>
-#include <ctype.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+#include "euler_util.h"
 
+#include <ctype.h>
+#include <string.h>
+
+#define SIZE 0x10000
 #define MAX_NAMES 6000
 #define MAX_NAME 15
 #define BASE_PATH(name) ((getenv(name)))
-#define NAME_PATH "/Project_Euler/euler_txt/names1.txt"
-
+#define NAME_PATH "/Project-Euler/euler_txt/names1.txt"
+#define LETTER_SCORE(c) (c - '0') - 16
 #define MIN_NAME_LEN(name1, name2) (strlen(name1) >= strlen(name2)) ? \
                                         strlen(name2) : strlen(name1)
 
 
-struct Name_Info {
-    char *name;
-    int score;
-};
-
-int load_names(struct Name_Info *name_list[])
+FILE *get_file_handle(void)
 {
-    FILE *name_file;
-    char *path, *home, *ln, *name;
-    size_t path_length, ln_length, n;
-    int i, name_count, name_letter, j;
- 
-    home = BASE_PATH("HOME");
-    path_length = strlen(home) + 1 + strlen(NAME_PATH) + 1;
-    path = malloc(sizeof(char) * path_length + 1);
+    char *home = BASE_PATH("HOME");
+    size_t path_length = strlen(home) + strlen(NAME_PATH) + 1;
+    char *path = malloc(sizeof(char) * path_length);
     snprintf(path, path_length, "%s%s", home, NAME_PATH);
 
-    name_file = fopen(path, "r");
+    FILE *name_file = fopen(path, "r");
     if (name_file == NULL)
         perror("<fopen>");
 
-    n = 0;
-    name = malloc(sizeof(char) * MAX_NAME);
+    free(path);
 
-    while ((ln_length = getline(&ln, &n, name_file) > 0)) {
-        for (i=0, name_count=0, name_letter=0; i < strlen(ln); i++) {
-            if (isalpha(*(ln + i))) {
-                *(name + name_letter) = *(ln + i);
-                name_letter++;
-            } else if (*(ln + i) == ',') {
-                *(name + name_letter) = '\0'; 
-                name_letter = 0;
-                name_list[name_count] = malloc(sizeof(struct Name_Info));
+    return name_file;
+}
 
-                for (j=0; j < strlen(name); j++)
-                    name_list[name_count]->score += ((*(name + j) - '0') - 16);
+int load_names(FILE *fh, char **name_list)
+{
+    int name_count = 0;
+    char *delimiter = "\"";
 
-                name_list[name_count]->name = malloc(sizeof(char) * strlen(name) + 1);
-                memcpy(name_list[name_count]->name, name, strlen(name) + 1);
-                name_count++;
-            }
-        }
+    char name_entry_buffer[SIZE];
+    fread(name_entry_buffer, 1, SIZE, fh);
+
+    char *entry = strtok(name_entry_buffer, delimiter);
+
+    while (entry) {
+        if (!strchr(entry, ','))
+            name_list[name_count++] = strdup(entry);
+        entry = strtok(NULL, delimiter);
     }
 
-    *(name + name_letter) = '\0';
-    name_list[name_count] = malloc(sizeof(struct Name_Info));
-
-    for (j=0; j < strlen(name); j++)
-        name_list[name_count]->score += ((*(name + j) - '0') - 16);
-
-    name_list[name_count]->name = malloc(sizeof(char) * strlen(name) + 1);
-    memcpy(name_list[name_count]->name, name, strlen(name) + 1);
-    name_count++;
-
-    free(path);
-    free(name);
-    fclose(name_file);
+    fclose(fh);
     
     return name_count;
 }
 
 int min_alpha(char *name1, char *name2)
 {
-    int i;
-    for (i=0; i < MIN_NAME_LEN(name1, name2); i++) {
-        if ((*(name1 + i) - '0') < (*(name2 + i) - '0')) 
+    for (int i=0; i < MIN_NAME_LEN(name1, name2); i++) {
+        if ((name1[i] - '0') < (name2[i] - '0'))
             return 1;
-        else if ((*(name1 + i) - '0') > (*(name2 + i) - '0')) 
+        else if ((name1[i] - '0') > (name2[i] - '0'))
             return 2;
     }
 
     return 0;
 }
 
-void sort_name_list(struct Name_Info *name_list[], int length)
+void sort_name_list(char **name_list, int length)
 {
-    struct Name_Info *curr;
+    for (int i=0; i < length; i++) {
+        char *curr = name_list[i];
+        int j = i - 1;
 
-    int i, j;
-    for (i=0; i < length; i++) {
-        curr = name_list[i];
-        j = i - 1;
-        while (j >= 0 && min_alpha(curr->name, name_list[j]->name) == 1) {
+        while (j >= 0 && min_alpha(curr, name_list[j]) == 1) { 
             name_list[j + 1] = name_list[j];
             j--;
         }
+
         name_list[j + 1] = curr;
     }
 }
 
-void free_list(struct Name_Info *name_list[], int length)
+static inline void free_list(char **name_list, int length)
 {
-    int i;
-    for (i=0; i < length; i++) {
-        free(name_list[i]->name);
+    for (int i=0; i < length; i++) 
         free(name_list[i]);
+    free(name_list);
+}
+
+int name_score(char *name)
+{
+    int score = 0;
+
+    for (int i=0; i < strlen(name); i++)
+        score += LETTER_SCORE(name[i]);
+
+    return score;
+}
+
+long name_scores_total(char **name_list, int length)
+{
+    long total = 0;
+
+    for (int idx=0; idx < length; idx++) {
+        int score = name_score(name_list[idx]); 
+        total += (score * (idx + 1));
     }
+
+    return total;
 }
 
 int main(int argc, char *argv[])
 {
+    float start = timeit();
 
-    clock_t start, stop;
-    int total, i;
-    long answer;
-    struct Name_Info *name_list[MAX_NAMES];
+    char **name_list = calloc(MAX_NAMES, sizeof(char *));
 
-    start = clock();
+    FILE *fh = get_file_handle();
 
-    total = load_names(name_list);
+    int total = load_names(fh, name_list);
     sort_name_list(name_list, total);
-
-    for (i=0, answer=0; i < total; i++)
-        answer += (name_list[i]->score * (i + 1));
+    long answer = name_scores_total(name_list, total);
 
     free_list(name_list, total);
-    stop = clock();
+
+    float stop = timeit();
 
     printf("Answer: %ld\n", answer);
-    printf("Time: %f\n", ((float) stop - (float) start) / CLOCKS_PER_SEC);
+    printf("Time: %f\n", stop - start);
 
     return 0;
 }
