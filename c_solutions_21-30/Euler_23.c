@@ -1,8 +1,8 @@
 // Find the sum of all the positive integers which cannot be written as the
 // sum of two abundant numbers.
 
-#include <time.h>
-#include <stdio.h>
+#include "euler_util.h"
+
 #include <string.h>
 
 #define ABUN_MAX 28124
@@ -38,8 +38,7 @@ void find_abundant_sums(int abun[], int sums[])
 
 int main(int argc, char *argv[])
 {
-    clock_t start, stop;
-    start = clock();
+    float start = timeit();
 
     int answer, i;
     int abun_array[ABUN_MAX];
@@ -54,9 +53,9 @@ int main(int argc, char *argv[])
     for (i=0, answer=0; i < ABUN_MAX; i++) 
         answer += abun_sum_array[i] == 0 ? i : 0;
 
-    stop = clock();
+    float stop = timeit();
     printf("Answer: %d\n", answer);
-    printf("Time: %f\n", ((float) stop - (float) start) / CLOCKS_PER_SEC);
+    printf("Time: %f\n", stop - start);
 
     return 0;
 }
