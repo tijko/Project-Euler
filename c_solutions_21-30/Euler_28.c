@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include "euler_util.h"
 
 
 long spiral_total(int spiral_len)
@@ -25,6 +25,8 @@ long grid(int step, int start_axis, int end_axis)
 
 int main(int argc, char *argv[])
 {
+    float start = timeit();
+
     int diagonal_pos = 3;
 
     long total = spiral_total(1001);
@@ -36,7 +38,10 @@ int main(int argc, char *argv[])
         end_axis += 2;
     }
 
+    float stop = timeit();
+
     printf("Answer: %ld\n", total);
+    printf("Time: %f\n", stop - start);
 
     return 0;
 }
