@@ -1,7 +1,7 @@
 // What is the first fibonacci number to have 1000 digits in it?
 
-#include <time.h>
-#include <stdio.h>
+#include "euler_util.h"
+
 #include <string.h>
 
 #define FIBONACCI 1000
@@ -40,8 +40,7 @@ void zero_out(int arr[], int size)
 
 int main(int argc, char *argv[])
 {
-    clock_t start, stop;
-    start = clock();
+    float start = timeit();
 
     int cur[FIBONACCI + 1];
     int nxt[FIBONACCI + 1];
@@ -67,10 +66,10 @@ int main(int argc, char *argv[])
         answer++;
     } while (hd < FIBONACCI);
 
-    stop = clock();
+    float stop = timeit();
 
     printf("Answer: %d\n", answer);
-    printf("Time: %f\n", ((float) stop - (float) start) / CLOCKS_PER_SEC);
+    printf("Time: %f\n", stop - start);
 
     return 0;
 }
