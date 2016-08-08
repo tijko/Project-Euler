@@ -7,6 +7,7 @@
 #include <sched.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <sys/resource.h>
 #include <linux/version.h>
 
 
@@ -41,6 +42,8 @@ static inline void iso_proc_cpu(void)
 
 float timeit(void)
 {
+    float time = -1.0;
+
 #ifdef _POSIX_CPUTIME
     if (LINUX_VERSION_CODE < KERNEL_VERSION(2, 6, 12))
         iso_proc_cpu();
@@ -49,11 +52,12 @@ float timeit(void)
     if (clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &tm_spec) < 0)
         perror("clock_gettime");
 
-    float time = (float) tm_spec.tv_sec + (float) tm_spec.tv_nsec / NANO;
+    time = (float) tm_spec.tv_sec + (float) tm_spec.tv_nsec / NANO;
 #else
     clock_t init_clock = clock();
 
-    float time = (float) init_clock / CLOCKS_PER_SEC;            
+    time = (float) init_clock / CLOCKS_PER_SEC;
+
 #endif
 
     return time;
