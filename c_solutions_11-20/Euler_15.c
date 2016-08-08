@@ -150,7 +150,9 @@ void factorial_calc(char *factorial, int factorial_deg)
         memcpy(factorial, carry_over[1], MAX_CARRY);
         memset(carry_over[0], '0', MAX_CARRY);
         memset(carry_over[1], '0', MAX_CARRY);
-   }
+    }
+
+    factorial[MAX_CARRY - 1] = '\0';
 }
 
 void factorial_mul(char *factorial, char *product)
