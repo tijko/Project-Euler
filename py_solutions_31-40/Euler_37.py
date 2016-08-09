@@ -4,6 +4,10 @@
 import math
 import timeit
 
+try:
+    range = xrange
+except NameError:
+    pass
 
 start = timeit.default_timer()
 
@@ -12,14 +16,14 @@ def is_prime(x):
         return True
     if x % 2 == 0 or x == 1:
         return False
-    for i in xrange(3, int(math.sqrt(x)) + 1, 2):
+    for i in range(3, int(math.sqrt(x)) + 1, 2):
         if x % i == 0:
             return False
     return True
 
 def euler_37():
-    return sum([p for p in (i for i in xrange(11, 1000000) if is_prime(i) and not set(str(i)).intersection(['0', '4', '6', '8'])) if all(is_prime(int(str(p)[:-v])) for v in xrange(1, len(str(p)))) and all(is_prime(int(str(p)[v:])) for v in xrange(1, len(str(p))))])
+    return sum([p for p in (i for i in range(11, 1000000) if is_prime(i) and not set(str(i)).intersection(['0', '4', '6', '8'])) if all(is_prime(int(str(p)[:-v])) for v in range(1, len(str(p)))) and all(is_prime(int(str(p)[v:])) for v in range(1, len(str(p))))])
 
-print "Answer: %s" % euler_37()
+print("Answer: %s" % euler_37())
 stop = timeit.default_timer()
-print "Time: %f" % (stop - start)
+print("Time: %f" % (stop - start))
