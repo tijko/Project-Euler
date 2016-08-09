@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include "euler_util.h"
 
 
 int gcd(int a, int b)
@@ -10,6 +10,8 @@ int gcd(int a, int b)
 
 int main(int argc, char *argv[])
 {
+    float start = timeit();
+
     int numerator_prod_sum = 1;
     int denominator_prod_sum = 1;
 
@@ -47,9 +49,11 @@ int main(int argc, char *argv[])
         }
     }
 
+    float stop = timeit();
     printf("Answer: %d\n", denominator_prod_sum / 
                            gcd(denominator_prod_sum, 
                                numerator_prod_sum));
+    printf("Time: %f\n", stop - start);
 
     return 0;
 }

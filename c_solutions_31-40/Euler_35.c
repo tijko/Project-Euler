@@ -1,6 +1,5 @@
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include "euler_util.h"
+
 
 #define MAX_DIGITS 6
 
@@ -13,20 +12,6 @@ static inline void shift(int max)
     for (int i=1; i < max; i++)
         prime_digits[i - 1] = prime_digits[i];
     prime_digits[max - 1] = head;
-}
-
-int is_prime(int value)
-{
-    if (value == 2)
-        return 1;
-    else if (value < 2)
-        return 0;
-
-    int range = (int) sqrt(value) + 1;
-
-    for (int i=2; i < range; i++)
-        if (value % i == 0) return 0;
-    return 1;
 }
 
 int is_circular(int value)
@@ -60,6 +45,8 @@ int is_circular(int value)
 
 int main(int argc, char *argv[])
 {
+    float start = timeit();
+
     int circular_primes = 0;
 
     for (int i=0; i < pow(10, 6) + 1; i++) {
@@ -67,7 +54,10 @@ int main(int argc, char *argv[])
             circular_primes++;
     }
 
+    float stop = timeit();
+
     printf("Answer: %d\n", circular_primes);
+    printf("Time: %f\n", stop - start);
  
     return 0;
 }

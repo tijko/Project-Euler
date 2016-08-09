@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include "euler_util.h"
 
 #define CAP 8
 
@@ -20,6 +20,8 @@ static inline int calculate_total(void)
 
 int main(int argc, char *argv[])
 {
+    float start = timeit();
+
     int ways = 0;
     int idx = 0;
 
@@ -38,7 +40,10 @@ int main(int argc, char *argv[])
         } 
     }
 
+    float stop = timeit();
+
     printf("Answer: %d\n", ways);
+    printf("Time: %f\n", stop - start);
 
     return 0;
 }

@@ -3,7 +3,7 @@
 #include <string.h>
 
 #define MAX 13 
-#define TABLE_SIZE 7000
+#define TABLE_SIZE 7001 // set table size as prime number
 
 char pandigital[10];
 char *pandigital_string = "123456789";
@@ -15,11 +15,16 @@ struct pandigital_entry {
 };
 
 unsigned long create_pandigital_hash(char *prime_str)
-{
-    unsigned long hash = 5381;
+{ 
+    /* CRC variant for char hashing */
+    unsigned long hash = 0;
 
-    for (char c=*prime_str++; *prime_str; prime_str++)
-        hash = ((hash << 5) + hash) + c;
+    for (char c=*prime_str++; *prime_str; prime_str++) {
+        unsigned highorder = hash & 0xf8000000;
+        hash <<= 5;
+        hash ^= (highorder >> 27);
+        hash ^= c;
+    }
 
     hash %= TABLE_SIZE;
 

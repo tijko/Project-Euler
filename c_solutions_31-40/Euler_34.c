@@ -1,4 +1,5 @@
-#include <stdio.h>
+#include "euler_util.h"
+
 
 #define DIGITS 10
 
@@ -62,6 +63,8 @@ void create_factorials(void)
   
 int main(int argc, char *argv[])
 {
+    float start = timeit();
+
     create_factorials();
     int max = max_digits();
 
@@ -72,7 +75,10 @@ int main(int argc, char *argv[])
     for (long i=3; i < high; i++) 
         total += factorial_sum(i);
 
+    float stop = timeit();
+
     printf("Answer: %ld\n", total);
+    printf("Time: %f\n", stop - start);
 
     return 0;
 }

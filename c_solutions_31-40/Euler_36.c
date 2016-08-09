@@ -1,5 +1,4 @@
-#include <math.h>
-#include <stdio.h>
+#include "euler_util.h"
 
 
 int base10[7];
@@ -38,6 +37,8 @@ int palindrome(int *narray, int length)
 
 int main(int argc, char *argv[])
 {
+    float start = timeit();
+
     int double_palindromes = 0;
 
     for (int i=1; i < pow(10, 6); i++) { 
@@ -47,7 +48,9 @@ int main(int argc, char *argv[])
         }
     }
 
+    float stop = timeit();
     printf("Answer: %d\n", double_palindromes);
+    printf("Time: %f\n", stop - start);
 
     return 0;
 }

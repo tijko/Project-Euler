@@ -1,24 +1,9 @@
-#include <math.h>
-#include <stdio.h>
+#include "euler_util.h"
+
 #include <string.h>
-#include <stdlib.h>
 
 #define MAX 32
 
-
-int is_prime(int value)
-{
-    if (value == 2)
-        return 1;    
-    else if (value <= 1 || value % 2 == 0)
-        return 0;
-
-    int limit = (int) sqrt(value) + 1;
-    for (int i=3; i < limit; i+=2)
-        if (value % i == 0)
-            return 0;
-    return 1; 
-}
 
 char *set_prime_string(int prime)
 {
@@ -63,6 +48,8 @@ int prime_backwards(char *prime)
 
 int main(int argc, char *argv[])
 {
+    float start = timeit();
+    
     int prime_sum = 0;
     int primes = 11;
 
@@ -79,7 +66,10 @@ int main(int argc, char *argv[])
         free(prime_string);
     }
  
+    float stop = timeit();
+
     printf("Answer: %d\n", prime_sum);
+    printf("Time: %f\n", stop - start);
 
     return 0;
 }
