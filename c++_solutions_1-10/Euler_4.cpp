@@ -15,7 +15,7 @@ bool is_palindrome(int canidate)
     std::string curr_reversed(curr);
     std::reverse(curr_reversed.begin(), curr_reversed.end());
 
-    return curr.compare(curr_reversed) == 0;
+    return curr == curr_reversed;
 }
 
 int main(int argc, char *argv[])
