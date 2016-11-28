@@ -5,19 +5,21 @@
 const int PRIME_NUMBER = 10001;
 
 
+long ten_thousand_and_one_primes(int n, int prime_count)
+{
+    if (prime_count == PRIME_NUMBER)
+        return n;
+    else if (is_prime(n))
+        prime_count++;
+    return ten_thousand_and_one_primes(n + 1, prime_count);
+}
+
 int main(int argc, char *argv[])
 {
     float start = timeit();
 
-    int prime = 0;
-    int answer = 1;
+    long answer = ten_thousand_and_one_primes(1, 0) - 1;
 
-    while (prime < PRIME_NUMBER) {
-        answer += 1;
-        if (is_prime(answer))
-            prime++;
-    }
-    
     float stop = timeit();
 
     std::cout << "Answer: " << answer << std::endl;
