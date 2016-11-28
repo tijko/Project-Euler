@@ -7,15 +7,14 @@ int main(int argc, char *argv[])
 {
     float start = timeit();
 
-    int answer = 20 * 19;
+    int high = 20;
+    long answer = 20 * 19;
 
-    while (1) {
-        int dividend = 20;
-        for (; dividend > 0 && answer % dividend == 0; dividend--)
-            ;
-        if (dividend == 0)
-            break;
-        answer += 20;
+    for (int i=high; i > 0; i--) {
+        if (answer % i) {
+            answer += high;
+            i = high;
+        }
     }
 
     float stop = timeit();
