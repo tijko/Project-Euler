@@ -16,9 +16,8 @@ int main(int argc, char *argv[])
 {
     float start = timeit();
 
-    std::vector<int> range;
-    for (int i=1; i <= LIMIT; i++)
-        range.push_back(i);
+    std::vector<int> range(1000);
+    std::iota(range.begin(), range.end(), 0);
 
     std::cout << "Answer: " << std::accumulate(range.begin(), 
                                                range.end(), 
