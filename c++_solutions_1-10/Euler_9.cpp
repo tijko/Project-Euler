@@ -3,25 +3,21 @@
 #include <iostream>
 
 
+long pythagorean_triplet(int a, int b)
+{
+    double c = a + b + sqrt(a * a + b * b);
+    if (c == 1000)
+        return a * b * sqrt(a * a + b * b);
+    else if (c > 1000 || b >= 3000)
+        return pythagorean_triplet(a + 1, a + 2);
+    return pythagorean_triplet(a, b + 1);
+}
+
 int main(int argc, char *argv[])
 {
     float start = timeit();
 
-    long answer = 0;
-
-    for (int a=1; a < 3000; a++) {
-        for (int b=a+1; b < 3000; b++) {
-            double c = a + b + sqrt(a * a + b * b);
-            if (c == 1000) {
-                answer = a * b * sqrt(a * a + b * b);
-                goto done;
-            } else if (c > 1000) 
-                break;
-        }                
-    }                
-
-done:
-
+    long answer = pythagorean_triplet(1, 2);
     float stop = timeit();
 
     std::cout << "Answer: " << answer << std::endl;
