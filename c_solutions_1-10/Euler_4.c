@@ -15,11 +15,14 @@ int main(int argc, char *argv[])
         for (int y=x; y < 1000; y++) {
 
             int canidate = x * y;
+            if (canidate < high)
+                continue;
+
             size_t int_len = snprintf(product, MAX, "%d", canidate);
             int head = 0, tail = int_len - 1;
             for (;head < tail && product[head] == product[tail]; head++, tail--)
                 ;
-            if (head > tail && canidate > high)
+            if (head > tail)
                 high = canidate;
         }
     }
