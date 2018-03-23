@@ -2,8 +2,6 @@
 
 from __future__ import print_function
 
-import itertools
-import operator 
 import timeit
 
 try:
@@ -14,10 +12,14 @@ except NameError:
 start = timeit.default_timer()
 
 def euler_4():
-    canidates = itertools.combinations(range(100, 1000), 2)
-    palindrome_check = lambda x: (str(operator.mul(*x)) ==  
-                                  str(operator.mul(*x))[::-1])
-    return max([operator.mul(*i) for i in canidates if palindrome_check(i)])
+    high = 0
+    for x in range(100, 1000):
+        for y in range(x, 1000):
+            product = x * y
+            if product < high: continue
+            if str(product) == str(product)[::-1]:
+                high = product
+    return high
 
 print("Answer: {}".format(euler_4()))
 stop = timeit.default_timer()
