@@ -8,29 +8,22 @@
 int main(int argc, char *argv[]) 
 {
     float start = timeit();
-
-    char *forward = calloc(sizeof(char), sizeof(char) * MAX);
-    char *backward = calloc(sizeof(char), sizeof(char) * MAX);
-
-    size_t int_len;
-
+    char product[MAX] = { '\0' };
     int high = 0;
 
     for (int x=100; x < 1000; x++) {
-        for (int y=100; y < 1000; y++) {
+        for (int y=x; y < 1000; y++) {
 
-            int_len = snprintf(forward, MAX, "%d", x * y);
-
-            for (int i=0, str_len=int_len-1; i < int_len; i++, str_len--) 
-                backward[i] = forward[str_len];
-
-            if (strcmp(forward, backward) == 0 && atoi(backward) > high) 
-                high = atoi(backward);
+            int canidate = x * y;
+            size_t int_len = snprintf(product, MAX, "%d", canidate);
+            int head = 0, tail = int_len - 1;
+            for (;head < tail && product[head] == product[tail]; head++, tail--)
+                ;
+            if (head > tail && canidate > high)
+                high = canidate;
         }
     }
 
-    free(forward);
-    free(backward);
 
     float stop = timeit();
 
