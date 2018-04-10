@@ -31,8 +31,7 @@ with open(path + 'euler_txt/base_exp.txt') as f:
 
 def euler_99(pairs):
     # mark first pair as highest to start
-    high_pair, high_idx = pairs[0], 1
-    high_base, high_exp = high_pair
+    high_base, high_exp, high_idx = *pairs[0], 1
     for idx, pair in enumerate(pairs[1:], 2):
         curr_base, curr_exp = pair
         # creates a workable exponent by determining which of 
@@ -44,8 +43,7 @@ def euler_99(pairs):
         else:
             exp1, exp2 = 2, (curr_exp / high_exp) * 2
         if high_base**exp1 < curr_base**exp2:
-            high_pair, high_idx = pair, idx
-            high_base, high_exp = high_pair
+            high_base, high_exp, high_idx = *pair, idx
     return high_idx
     
 if __name__ == '__main__':
