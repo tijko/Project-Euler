@@ -26,6 +26,11 @@ std::string big_num =
 "71636269561882670428252483600823257530420752963450";
 
 
+int product_num(int total, char element)
+{
+    return total * (element - '0');
+}
+
 int main(int argc, char *argv[])
 {
     float start = timeit();
@@ -35,7 +40,7 @@ int main(int argc, char *argv[])
     int string_length = big_num.size();
 
     for (int pos=0; pos < string_length; pos++) {
-        int product = 1;
+        int product = 1; 
         for (int i=0; i < step; i++)
             product *= big_num[pos + i] - '0';
         answer = product > answer ? product : answer;
