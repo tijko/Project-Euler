@@ -16,7 +16,7 @@ start = timeit.default_timer()
 
 def euler_5():
     dividend = 20
-    divisors = range(1, 20)
+    divisors = [6, 8, 11, 12, 13, 14, 15, 16, 17, 18, 19]
     while True:
         if (dividend % 7 != 0 or dividend % 9 != 0 or dividend % 3 != 0 or
             sum(map(partial(mod, dividend), divisors)) != 0):
