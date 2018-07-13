@@ -12,15 +12,13 @@ except NameError:
 
 start = timeit.default_timer()
 
+
 def euler_9():
-    for a in range(1, 3000):
-        b = a + 1
-        for b in range(b, 3000):
-            c = sum([a, b, (math.sqrt(a**2 + b**2))])
-            if c == 1000:
-                return int(a * b * (math.sqrt(a**2 + b**2)))
-            elif c > 1000:
-                break
+    for x in range(1, 1000):
+        for y in range(x+1, 1000):
+            z = (x**2 + y**2)**0.5
+            if x + y + z == 1000:
+                return x * y * z
 
 print('Answer: {}'.format(euler_9()))
 stop = timeit.default_timer()
