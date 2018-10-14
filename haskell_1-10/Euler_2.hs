@@ -1,11 +1,11 @@
 module Main where
 
-fibonacci :: Int -> Int -> Int -> Int -> Int
-fibonacci n1 n2 total limit  
-    | n1 > limit        = total
-    | n1 `mod` 2 == 0   = fibonacci n2 (n2 + n1) total limit
-    | otherwise         = fibonacci n2 (n2 + n1) (total + n1) limit
+fib :: Int -> Int -> Int -> Int
+fib n1 n2 total
+    | n1 > 4000000      = total
+    | n1 `mod` 2 == 0   = fib n2 (n2 + n1) total
+    | otherwise         = fib n2 (n2 + n1) (total + n1)
 
 main =
-    print(fibonacci 0 1 0 4000000)
+    print(fib 0 1 0)
 
