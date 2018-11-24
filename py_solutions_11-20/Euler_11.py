@@ -54,23 +54,25 @@ def array_position(col, row, shift, grid):
 def euler_11(x):
     grid = [list(map(int, row.split())) for row in x.splitlines()]
     grid = np.array(grid, np.int)
+    grid_length = len(grid)
     mul = lambda x, y: x * y
-    high = list()
+    get_high = lambda high, curr: high if high > curr else curr
+    high = 0 
     row = col = shift = 0
-    while row + 4 <= len(grid):
+    while row + 4 <= grid_length:
         chk = grid[row, shift:shift + 4:]
-        high.append(reduce(mul, chk))
+        high = get_high(high, reduce(mul, chk))
         if col < 20:
             chk = grid[0:4, col]
-            high.append(reduce(mul, chk))
-        if col < 17 and row + 4 <= len(grid):
+            high = get_high(high, reduce(mul, chk))
+        if col < 17 and row + 4 <= grid_length:
             chk = [grid[i + row][i + col] for i in range(4)]
-            high.append(reduce(mul, chk))
-        if col > 3 and row + 4 <= len(grid):
+            high = get_high(high, reduce(mul, chk))
+        if col > 3 and row + 4 <= grid_length:
             chk = [grid[i + row][col - i - 1] for i in range(4)]
-            high.append(reduce(mul, chk))
-        col, row, shift = array_position(col, row, shift, len(grid))
-    return max(high)
+            high = get_high(high, reduce(mul, chk))
+        col, row, shift = array_position(col, row, shift, grid_length)
+    return high
 
 print("Answer: {}".format(euler_11(n)))
 stop = timeit.default_timer()
