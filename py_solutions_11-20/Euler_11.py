@@ -51,6 +51,8 @@ def array_position(col, row, shift, grid):
             row += 1
     return col, row, shift 
 
+# This can be done without the grid structure by making a slightly more 
+# involved indexing method
 def euler_11(x):
     grid = [list(map(int, row.split())) for row in x.splitlines()]
     grid = np.array(grid, np.int)
