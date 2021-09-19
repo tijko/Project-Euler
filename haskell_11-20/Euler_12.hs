@@ -1,5 +1,5 @@
 -- First triangle number with +500 divisors
---
+
 module Main where
 import Text.Printf
 import System.Clock
@@ -12,6 +12,7 @@ isDivisible x y = x `mod` y == 0
 range :: Int -> Int
 range n = (ceiling $ sqrt $ fromIntegral n) + 1
 
+-- keep track of the "range n" passing in an extra [Int] parameter
 divisors :: Int -> Int
 divisors n = sum [ 1 | x <- [2..range n], isDivisible n x] * 2
 
