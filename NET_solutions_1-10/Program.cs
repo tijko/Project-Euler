@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,14 +11,17 @@ namespace NET_solutions_1_10
     {
         static void Main(string[] args)
         {
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
             UInt64 total = 0;
             for (UInt64 i=0; i < 1000; i++)
             {
                 if (i % 3 == 0 || i % 5 == 0)
                     total = total + i;
             }
-
-            Console.WriteLine("Answer: {0}\n", (total));
+            stopWatch.Stop();
+            Console.WriteLine("Answer: {0}", (total));
+            Console.WriteLine($"Time: {stopWatch.ElapsedMilliseconds} ms");
         }
     }
 }
