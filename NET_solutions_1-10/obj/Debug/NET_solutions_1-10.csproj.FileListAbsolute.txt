@@ -1,0 +1,7 @@
+C:\Users\tkonick\source\repos\Project-Euler\NET_solutions_1-10\obj\Debug\NET_solutions_1-10.csproj.AssemblyReference.cache
+C:\Users\tkonick\source\repos\Project-Euler\NET_solutions_1-10\obj\Debug\NET_solutions_1-10.csproj.CoreCompileInputs.cache
+C:\Users\tkonick\source\repos\Project-Euler\NET_solutions_1-10\bin\Debug\NET_solutions_1-10.exe.config
+C:\Users\tkonick\source\repos\Project-Euler\NET_solutions_1-10\bin\Debug\NET_solutions_1-10.exe
+C:\Users\tkonick\source\repos\Project-Euler\NET_solutions_1-10\bin\Debug\NET_solutions_1-10.pdb
+C:\Users\tkonick\source\repos\Project-Euler\NET_solutions_1-10\obj\Debug\NET_solutions_1-10.exe
+C:\Users\tkonick\source\repos\Project-Euler\NET_solutions_1-10\obj\Debug\NET_solutions_1-10.pdb
