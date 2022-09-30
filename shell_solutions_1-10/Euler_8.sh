@@ -9,9 +9,9 @@ big_num="73167176531330624919225119674426574742355349194934969835203127745063262
 function product_of_five()
 {
     high=0
-    for (( i=0; i<${#big_num}-5; i++ )); do
+    for (( i=0; i<${#big_num}-13; i++ )); do
         total=1
-        for (( j=$i; j<$i+5; j++ )); do
+        for (( j=$i; j<$i+13; j++ )); do
             curr_digit=${big_num:j:1}
             ((total*=$curr_digit))
         done

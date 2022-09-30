@@ -7,11 +7,11 @@ reduce' (x:xs) = x * reduce' xs
 
 chain_high :: [Char] -> Int -> Int
 chain_high chain high 
-    | length chain < 5 = high
+    | length chain < 13 = high
     | curr > high = chain_high (tail chain) curr
     | curr <= high = chain_high (tail chain) high
   where
-    curr = reduce' ([read [x] :: Int | x <- take 5 chain])
+    curr = reduce' ([read [x] :: Int | x <- take 13 chain])
 
 main = 
   do 

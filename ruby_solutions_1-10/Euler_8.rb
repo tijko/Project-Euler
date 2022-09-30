@@ -1,22 +1,12 @@
-# find the greatest product of 5 consecutive digits in this 1000 digit number 
+#!/usr/bin/env ruby
 
-from __future__ import print_function
 
-import timeit
+require 'timeout'
 
-try:
-    range = xrange
-except NameError:
-    pass
 
-try:
-    reduce = reduce
-except NameError:
-    from functools import reduce
-
-start = timeit.default_timer()
-
-big_num = """73167176531330624919225119674426574742355349194934
+def Euler_8
+  gt_consec_prod = 0
+  big_num = "73167176531330624919225119674426574742355349194934
              96983520312774506326239578318016984801869478851843
              85861560789112949495459501737958331952853208805511
              12540698747158523863050715693290963295227443043557
@@ -35,14 +25,22 @@ big_num = """73167176531330624919225119674426574742355349194934
              07198403850962455444362981230987879927244284909188
              84580156166097919133875499200524063689912560717606
              05886116467109405077541002256983155200055935729725
-             71636269561882670428252483600823257530420752963450"""
+             71636269561882670428252483600823257530420752963450"
+  big_num = big_num.gsub("\n", "").gsub(" ", "")
+  digits = big_num.length
+  for idx in (0..digits - 12)
+    prod_str = big_num[idx..idx + 12]
+    curr_prod = prod_str.each_char.map{|c| c.to_i}.reduce{|prod,n| prod * n}
+    if curr_prod > gt_consec_prod
+      gt_consec_prod = curr_prod
+    end
+  end
+  puts "Answer: #{gt_consec_prod}"
+end
 
-
-def euler_8(n):
-    n = ''.join(n.split())    
-    mul = lambda x, y: x * y
-    return max([reduce(mul, map(int, n[v:v + 13])) for v in range(len(n) - 13)])
-
-print("Answer: {}".format(euler_8(big_num)))
-stop = timeit.default_timer()
-print("Time: {0:9.5f}".format(stop - start))
+if __FILE__ == $0
+  start = Time.now
+  Euler_8()
+  finish = Time.now - start
+  puts "Time: #{finish}"
+end
