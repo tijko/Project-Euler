@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 '''
@@ -11,15 +12,22 @@ If dn represents the nth digit of the fractional part, find the value of the fol
 d1 × d10 × d100 × d1000 × d10000 × d100000 × d1000000
 '''
 
+from __future__ import print_function
+
+from functools import reduce
 import timeit
 
+try:
+    range = xrange
+except NameError:
+    pass
 
 start = timeit.default_timer()
 
 def euler_40():
-    irrational = ''.join(map(str, xrange(1000001)))
-    return reduce(lambda x, y: x * y, map(int, [irrational[10**e] for e in xrange(6)]))
+    irrational = ''.join(map(str, range(1000001)))
+    return reduce(lambda x, y: x * y, map(int, [irrational[10**e] for e in range(6)]))
 
-print "Answer: %s" % euler_40()
+print("Answer: %s" % euler_40())
 stop = timeit.default_timer()
-print "Time: %f" % (stop - start)
+print("Time: %f" % (stop - start))
