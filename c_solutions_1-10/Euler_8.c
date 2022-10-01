@@ -13,10 +13,10 @@ int main(int argc, char *argv[])
     size_t str_len = strlen(big_strnum);
     long high = 0;
 
-    for (int i=0; i < str_len - 5; i++) {
+    for (int i=0; i < str_len - 13; i++) {
         long total = 1;
 
-        for (int j=0; j < 5; j++) 
+        for (int j=0; j < 13; j++) 
             total *= (big_strnum[i + j] - '0');
 
         if (total > high) 
