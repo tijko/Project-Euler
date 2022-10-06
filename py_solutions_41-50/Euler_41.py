@@ -1,8 +1,19 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 # largest prime pan-digital number 
+
+from __future__ import print_function
 
 import timeit
 import math
 import itertools
+
+
+try:
+    range = xrange
+except NameError:
+    pass
 
 
 start = timeit.default_timer()
@@ -26,6 +37,6 @@ def euler_41():
             return ''.join(max(primes))
         pandigital = pandigital[1:]                    
 
-print "Answer: %s" % euler_41()
+print("Answer: %s" % euler_41())
 stop = timeit.default_timer()
-print "Time: %f" % (stop - start)
+print("Time: %f" % (stop - start))

@@ -10,7 +10,7 @@ answer:
 main:
 
     push    %rbp
-    movl    %rsp, %rbp
+    mov    %rsp, %rbp
 
     xor     %rdi, %rdi
     xor     %rsi, %rsi

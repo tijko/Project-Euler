@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 '''
@@ -17,15 +18,22 @@ Let d1 be the 1st digit, d2 be the 2nd digit, and so on. In this way, we note th
 Find the sum of all 0 to 9 pandigital numbers with this property.
 '''
 
+from __future__ import print_function
+
 import itertools
 import timeit
 
 
+try:
+    range = xrange
+except NameError:
+    pass
+
 start = timeit.default_timer()
 
 def euler_43():
-    return sum([int(''.join(i)) for i in itertools.permutations('9876543210') if not sum(map(lambda x: x[0] % x[1], zip(map(int, [''.join(i)[j:j+3] for j in xrange(1, 8)]), [2, 3, 5, 7, 11, 13, 17])))]) 
+    return sum([int(''.join(i)) for i in itertools.permutations('9876543210') if not sum(map(lambda x: x[0] % x[1], zip(map(int, [''.join(i)[j:j+3] for j in range(1, 8)]), [2, 3, 5, 7, 11, 13, 17])))]) 
 
-print "Answer: %s" % euler_43()
+print("Answer: %s" % euler_43())
 stop = timeit.default_timer() 
-print "Time: %f" % (stop - start)
+print("Time: %f" % (stop - start))

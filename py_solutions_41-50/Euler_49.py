@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 '''
@@ -8,10 +9,16 @@ There are no arithmetic sequences made up of three 1-, 2-, or 3-digit primes, ex
 What 12-digit number do you form by concatenating the three terms in this sequence?
 '''
 
+from __future__ import print_function
+
 import math
 import itertools
 import timeit
 
+try:
+    range = xrange
+except NameError:
+    pass
 
 start = timeit.default_timer()
 
@@ -28,17 +35,17 @@ def is_prime(x):
 def euler_49():
     primes = [set(int(''.join(v)) for v in itertools.permutations(str(i)) if 
               is_prime(int(''.join(v))) and int(''.join(v)) > 999) for i in 
-              xrange(1000, 10000) if is_prime(i)]
+              range(1000, 10000) if is_prime(i)]
     primes = [sorted(i) for i in primes if len(i) > 2]
     for prime in primes:
         if [str(prime[i]) + str(prime[i+1]) + str((prime[i+1] - prime[i]) + 
-            prime[i+1])  for i in xrange(len(prime) - 1) if (prime[i+1] - 
+            prime[i+1])  for i in range(len(prime) - 1) if (prime[i+1] - 
             prime[i]) + prime[i+1] in prime]:
             return [str(prime[i]) + str(prime[i+1]) + str((prime[i+1] - prime[i]) 
-                    + prime[i+1])  for i in xrange(len(prime) - 1) if (prime[i+1] - 
+                    + prime[i+1])  for i in range(len(prime) - 1) if (prime[i+1] - 
                     prime[i]) + prime[i+1] in prime][0]
 
 
-print "Answer: %s" % euler_49()
+print("Answer: %s" % euler_49())
 stop = timeit.default_timer()
-print "Time: %f" % (stop - start)
+print("Time: %f" % (stop - start))
