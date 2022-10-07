@@ -1,9 +1,19 @@
-# Find lowest sum of set of five primes, that any two can be joined to form a prime in any order.
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+# Find lowest sum of set of five primes, that any two can be joined to form a 
+# prime in any order.
+
+from __future__ import print_function
 
 import math
 import itertools
 import timeit
 
+try:
+    range = xrange
+except NameError:
+    pass
 
 start = timeit.default_timer()
 
@@ -12,7 +22,7 @@ def is_prime(x):
         return True
     if x % 2 == 0 or x == 1:
         return False
-    for i in xrange(3, int(math.sqrt(x)) + 1, 2):
+    for i in range(3, int(math.sqrt(x)) + 1, 2):
         if x % i == 0:
             return False
     return True
@@ -25,7 +35,7 @@ def prime_combos(canidates):
 
 def euler_60(primes=None, combos=None):
     if not combos:
-        primes = [w for w in xrange(7, 10000) if is_prime(w)]
+        primes = [w for w in range(7, 10000) if is_prime(w)]
         for i in primes:
             combos = euler_60(primes[primes.index(i) + 1:], [str(i)])         
             if len(combos) == 5:
@@ -43,6 +53,6 @@ def euler_60(primes=None, combos=None):
         combos.pop(-1)
         return combos 
 
-print "Answer: %s" % euler_60()    
+print("Answer: %s" % euler_60())
 stop = timeit.default_timer()
-print "Time: %f" % (stop - start)
+print("Time: %f" % (stop - start))

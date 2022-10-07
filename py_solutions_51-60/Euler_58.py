@@ -1,8 +1,17 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 # grid array with primes on the diagonals at a certain percent 
+
+from __future__ import print_function
 
 import timeit
 import math
 
+try:
+    range = xrange
+except NameError:
+    pass
 
 start = timeit.default_timer()
 
@@ -11,7 +20,7 @@ def is_prime(x):
         return True
     if x % 2 == 0 or x == 1:
         return False
-    for i in xrange(3, int(math.sqrt(x)) + 1, 2):
+    for i in range(3, int(math.sqrt(x)) + 1, 2):
         if x % i == 0:
             return False
     return True
@@ -19,8 +28,8 @@ def is_prime(x):
 def euler_58():
     n, d = 16, 33
     add = lambda x: x[0] + x[1]
-    row_pos = xrange(66, 73, 2)
-    row_cnt = xrange(241, 290, 16)
+    row_pos = range(66, 73, 2)
+    row_cnt = range(241, 290, 16)
     lin = 11
     while float(n) / d * 100 >= 10:
         row_cnt = map(add, zip(row_cnt, row_pos))
@@ -31,6 +40,6 @@ def euler_58():
         d += 4
     return lin
 
-print "Answer: %s" % euler_58()
+print("Answer: %s" % euler_58())
 stop = timeit.default_timer()
-print "Time: %f" % (stop - start)
+print("Time: %f" % (stop - start))

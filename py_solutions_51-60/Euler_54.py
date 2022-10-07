@@ -1,8 +1,14 @@
-# poker hands -- calculate the amount of winning hands for player-one for the last thousand hands vs. player-two
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+# poker hands -- calculate the amount of winning hands for player-one for the 
+# last thousand hands vs. player-two
+
+from __future__ import print_function
 
 import timeit
 import os
- 
+
 
 start = timeit.default_timer()
 
@@ -33,8 +39,8 @@ def score(hand):
 
 def euler_54():
     p1_wins = 0
-    with open(os.path.abspath('').strip('solutions_51-60') + '/euler_txt/poker.txt') as f:
-        hands = [i.strip('\r\n') for i in f.readlines()]
+    with open('/home/tijko/Project-Euler/euler_txt/poker.txt') as f:
+        hands = [i.strip('\n') for i in f.readlines()]
     p1 = [i[:14] for i in hands]
     p2 = [i[15:] for i in hands]
     for i in zip(p1, p2):
@@ -43,7 +49,7 @@ def euler_54():
     return p1_wins
 
 
-print "Answer: %s" % euler_54()
+print("Answer: %s" % euler_54())
 stop = timeit.default_timer()
-print "Time: %s" % str(stop - start)
+print("Time: %s" % str(stop - start))
 
