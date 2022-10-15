@@ -1,8 +1,18 @@
-# what is the first number to have 5000 different ways to sum with prime numbers? 
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+# what is the first number to have 5000 different ways to sum with prime
+# numbers? 
+
+from __future__ import print_function
 
 import math
 import timeit
 
+try:
+    range = xrange
+except NameError:
+    pass
 
 start = timeit.default_timer()
 
@@ -18,11 +28,11 @@ def is_prime(x):
 
 def prime_sum(lim):
     lim += 1
-    o_set = [i for i in xrange(lim - 1) if is_prime(i)][::-1]
+    o_set = [i for i in range(lim - 1) if is_prime(i)][::-1]
     s_set = [0] * len(o_set)
     ways, pos, flag = 0, -2, 0
     while True:
-        for n in xrange(0, lim, o_set[-1]):
+        for n in range(0, lim, o_set[-1]):
             if sum(s_set[:-1] + [n]) == (lim - 1):
                 ways += 1
                 s_set = s_set[:-1] + [n]
@@ -62,6 +72,6 @@ def euler_77():
         ways = prime_sum(start)
     return start
 
-print "Answer: %s" % euler_77()
+print("Answer: %s" % euler_77())
 stop = timeit.default_timer()
-print "Time: %f" % (stop - start)
+print("Time: %f" % (stop - start))

@@ -1,14 +1,25 @@
-# Given that the three characters are always asked for in order, analyse the file so as to determine the shortest possible secret passcode of unknown length.
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+# Given that the three characters are always asked for in order, analyse the
+# file so as to determine the shortest possible secret passcode of unknown
+# length.
+
+from __future__ import print_function
 
 import timeit
 import os
 
+try:
+    range = xrange
+except NameError:
+    pass
 
 start = timeit.default_timer()
 
 def euler_79():
     pin = ''
-    with open(os.path.abspath('').strip('solutions_71-80') + 'euler_txt/keylog.txt') as f:
+    with open('/home/tijko/Project-Euler/euler_txt/keylog.txt') as f:
         key_series = f.read()
     key_series = key_series.split()
     key_series = [[v for v in i] for i in key_series]
@@ -24,6 +35,6 @@ def euler_79():
                 break
     return pin
 
-print "Answer: %s" % euler_79()
+print("Answer: %s" % euler_79())
 stop = timeit.default_timer()
-print "Time: %f" % (stop - start)
+print("Time: %f" % (stop - start))

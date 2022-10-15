@@ -1,8 +1,17 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 # Find the least value of n for which p(n) is divisible by one million.
+
+from __future__ import print_function
 
 import timeit
 import sys
 
+try:
+    range = xrange
+except NameError:
+    pass
 
 start = timeit.default_timer()
 
@@ -33,6 +42,6 @@ def euler_78():
         n += 1
     return n
 
-print "Answer: %s" % euler_78()
+print("Answer: %s" % euler_78())
 stop = timeit.default_timer()
-print "Time: %f" % (stop - start)
+print("Time: %f" % (stop - start))
