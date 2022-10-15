@@ -1,10 +1,18 @@
-# --*-- coding: utf-8 --*--
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
-# How many elements would be contained in the set of reduced proper fractions for d ≤ 1,000,000?
+# How many elements would be contained in the set of reduced proper fractions 
+# for d ≤ 1,000,000?
+
+from __future__ import print_function
 
 import timeit
 import math
 
+try:
+    range = xrange
+except NameError:
+    pass
 
 start = timeit.default_timer()
 
@@ -13,15 +21,15 @@ def is_prime(n):
         return True
     if n % 2 == 0 or n == 1:
         return False
-    for i in xrange(3, int(math.sqrt(n)) + 1, 2):
+    for i in range(3, int(math.sqrt(n)) + 1, 2):
         if n % i == 0:
             return False
     return True
 
 def euler_72():
-    p = [i for i in xrange(2, int(math.sqrt(1000001)) + 1) if is_prime(i)]
+    p = [i for i in range(2, int(math.sqrt(1000001)) + 1) if is_prime(i)]
     grand = 0
-    for x in xrange(2, 1000001):
+    for x in range(2, 1000001):
         total = x
         if is_prime(x):
             grand += (total - 1)
@@ -39,7 +47,7 @@ def euler_72():
     return grand
 
 
-print "Answer: %s" % euler_72()
+print("Answer: %s" % euler_72())
 stop = timeit.default_timer()
-print "Time: %f" % (stop - start)
+print("Time: %f" % (stop - start))
 

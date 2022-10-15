@@ -1,9 +1,11 @@
-# -*- coding: utf-8 -*-
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 
 # Given that L is the length of the wire, for how many values of 
 # L ≤ 1,500,000 can exactly one integer sided right angle triangle be formed?
+
+from __future__ import print_function
 
 import timeit
 import collections
@@ -39,6 +41,6 @@ def triangle(triplets, triplet):
 
 
 if __name__ == '__main__': 
-    print "Answer: %s" % euler_75()
+    print("Answer: %s" % euler_75())
     stop = timeit.default_timer()
-    print "Time: %f" % (stop - start)
+    print("Time: %f" % (stop - start))
