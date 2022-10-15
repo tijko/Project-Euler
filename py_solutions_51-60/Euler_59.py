@@ -9,10 +9,10 @@ import itertools
 import timeit
 import os
 
-try:
-    range = xrange
-except NameError:
-    pass
+#try:
+#    range = xrange
+#except NameError:
+#    pass
 
 start = timeit.default_timer()
 

@@ -1,14 +1,23 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 # for the constant e find the sum of the 10000 convergents numerator 
+
+from __future__ import print_function
 
 import timeit
 
+try:
+    range = xrange
+except NameError:
+    pass
 
 start = timeit.default_timer()
 
 def euler_65():
     n = 2
     periods = [2,1]
-    for i in xrange(33):
+    for i in range(33):
         periods += [n, 1, 1]
         n += 2
     old_n = 8
@@ -27,6 +36,6 @@ def euler_65():
     total = sum([int(i) for i in str(convergents[95][0])])
     return total
 
-print "Answer: %s" % euler_65()
+print("Answer: %s" % euler_65())
 stop = timeit.default_timer()
-print "Time: %f" % (stop - start)
+print("Time: %f" % (stop - start))

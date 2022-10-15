@@ -1,13 +1,22 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 # Diophantine equation 
+
+from __future__ import print_function
 
 import timeit
 import math
 
+try:
+    range = xrange
+except NameError:
+    pass
 
 start = timeit.default_timer()
 
 def euler_66():
-    canidates = filter(lambda i: i**0.5 % 1 != 0, xrange(1001))
+    canidates = filter(lambda i: i**0.5 % 1 != 0, range(1001))
     high_x = high_D = 0
     for canidate in canidates:
         const_a = math.floor(math.sqrt(canidate))
@@ -46,6 +55,6 @@ def euler_66():
     return high_D
 
 
-print "Answer: %s" % euler_66()
+print("Answer: %s" % euler_66())
 stop = timeit.default_timer()
-print "Time: %f" % (stop - start)
+print("Time: %f" % (stop - start))

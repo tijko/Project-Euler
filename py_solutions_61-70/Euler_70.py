@@ -1,10 +1,19 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 # permutations of eulers totient function
+
+from __future__ import print_function
 
 import math
 import timeit
 import operator
 import itertools
 
+try:
+    range = xrange
+except NameError:
+    pass
 
 start = timeit.default_timer()
 
@@ -49,7 +58,7 @@ def euler_70():
                 low_phi, low = n / phi, n
     return low
 
-print "Answer: %s" % euler_70()
+print("Answer: %s" % euler_70())
 stop = timeit.default_timer()
-print "Time: %f" % (stop - start)
+print("Time: %f" % (stop - start))
 

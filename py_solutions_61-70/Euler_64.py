@@ -1,4 +1,9 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 # How many continued fractions for N <= 10000 have an odd period?
+
+from __future__ import print_function
 
 import math
 import timeit
@@ -13,7 +18,7 @@ def repeat(seq):
             return i
 
 def euler_64():
-    out = [i for i in xrange(1, 10001) if i**0.5 % 1 != 0]
+    out = [i for i in range(1, 10001) if i**0.5 % 1 != 0]
     total = 0
     chek = []
     for i in out:
@@ -21,7 +26,7 @@ def euler_64():
         m0 =  constant_a 
         d0 = (i - (m0**2)) / 1
         a0 = int((constant_a + m0) / d0)
-        for n in xrange(445):
+        for n in range(445):
             chek.append(a0)
             m1 = (d0 * a0) - m0
             d1 = (i - (m1**2)) / d0
@@ -34,7 +39,7 @@ def euler_64():
         chek = []
     return total    
 
-print "Answer: %s" % euler_64()
+print("Answer: %s" % euler_64())
 stop = timeit.default_timer()
-print "Time: %f" % (stop - start)
+print("Time: %f" % (stop - start))
  

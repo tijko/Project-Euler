@@ -1,9 +1,18 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 # magic 5-gon ring 
 
 #import itertools
+from __future__ import print_function
+
 from itertools import combinations, permutations, chain
 import timeit
 
+try:
+    range = xrange
+except NameError:
+    pass
 
 start = timeit.default_timer()
 
@@ -11,7 +20,7 @@ def euler_68():
     rings = combinations(xrange(1, 11), 3)
     rings = [i for j in map(permutations, rings) for i in j]
     magic_gon = list()
-    for c in chain.from_iterable(([i] * 10 for i in xrange(720))):
+    for c in chain.from_iterable(([i] * 10 for i in range(720))):
         pos = 1
         for i in rings:
             h = list()
@@ -44,6 +53,6 @@ def euler_68():
                                                 for k in magic_gon]))
     return max(map(int, magic_gon)) 
 
-print "Answer: %s" % euler_68()
+print("Answer: %s" % euler_68())
 stop = timeit.default_timer()
-print "Time: %f" % (stop - start)
+print("Time: %f" % (stop - start))
