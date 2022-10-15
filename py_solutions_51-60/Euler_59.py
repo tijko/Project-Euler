@@ -9,10 +9,10 @@ import itertools
 import timeit
 import os
 
-#try:
-#    range = xrange
-#except NameError:
-#    pass
+try:
+    range = xrange
+except NameError:
+    pass
 
 start = timeit.default_timer()
 
@@ -39,7 +39,7 @@ def euler_59():
                 y = binry(next(kyd))
                 msg += alpha((''.join('0' if x[j] == y[j] else '1' for 
                               j in range(len(x))) + y[len(x):])[::-1])
-            if len(frequent_wrds.intersection(msg.split())) > 5:                
+            if len(frequent_wrds.intersection(msg.split())) > 3:                
                 return sum(map(ord, msg))
 
 
