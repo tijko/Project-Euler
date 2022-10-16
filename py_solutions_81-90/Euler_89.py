@@ -48,7 +48,8 @@ def euler_89():
     with open(path + '/euler_txt/roman_numerals.txt') as f:
         numerals = [i.strip('\n') for i in f.readlines()]
     for numeral in numerals:
-        lst = [[k,list(g)] for k,g in groupby(numeral, lambda n: numeral_values[n])]
+        lst = [[k,list(g)] for k,g in groupby(numeral, lambda n: 
+                                              numeral_values[n])]
         total = 0
         for i,v in enumerate(lst):
             try:
