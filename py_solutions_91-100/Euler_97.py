@@ -15,8 +15,11 @@ Find the last ten digits of this prime number.
 
 from __future__ import print_function
 
+import sys
 import timeit
 
+
+sys.set_int_max_str_digits(20000000)
 
 def euler_97():
     massive_prime = 28433 * 2**7830457 + 1
