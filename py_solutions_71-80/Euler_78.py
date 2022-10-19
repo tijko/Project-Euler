@@ -15,7 +15,7 @@ except NameError:
 
 start = timeit.default_timer()
 
-sys.setrecursionlimit(5000)
+sys.setrecursionlimit(25000)
 
 def pent(n):
     return int((0.5 * n) * ((3 * n) - 1))
@@ -37,7 +37,7 @@ def partition(n):
     return total
 
 def euler_78():
-    n = 2001
+    n = 15001
     while partition(n) % 1000000 != 0:
         n += 1
     return n
