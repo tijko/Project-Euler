@@ -2,6 +2,48 @@
 
 require "timeout"
 
+$max = 20
+$step = 3 
+
+def down(x, y, grid)
+  curr = 1
+  if x + $step < $max
+    for x_idx in (x..x+$step)
+      curr = curr * grid[x_idx][y]
+    end
+  end
+  curr
+end
+
+def right(x, y, grid)
+  curr = 1
+  if y + $step < $max
+    for y_idx in (y..y+$step)
+      curr = curr * grid[x][y_idx]
+    end
+  end
+  curr  
+end
+
+def diag_lf(x, y, grid)
+  curr = 1
+  if (y - $step >= 0) and (x + $step < $max)
+    for i in (0..$step)
+      curr = curr * grid[x+i][y-i]
+    end
+  end
+  curr
+end
+
+def diag_rt(x, y, grid)
+  curr = 1
+  if (x + $step < $max) and (y + $step < $max)
+    for i in (0..$step)
+      curr = curr * grid[x+i][y+i]
+    end
+  end
+  curr
+end
 
 def Euler_11
   n ="08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08\n"\
@@ -27,10 +69,33 @@ def Euler_11
   grid = n.split("\n")
   grid = grid.map{|line| line.split()}
   grid = grid.map{|coord| coord.map{|x| x.to_i}}
-  grid.each do |line|
-    puts "Line: #{line}"
+  high = 0
+  col_max = row_max = grid.length() - 1
+  for col in (0..col_max) 
+    for row in (0..row_max)
+      # Down: [row..row+step][col]
+      # Right: [row][col..col+step]
+      # DiagRt: [row..row+step][col..col+step]
+      # DiagLt: [row..row+step][col..col-step]
+      dwn = down(row, col, grid) 
+      if high < dwn 
+        high = dwn 
+      end
+      rg = right(row, col, grid)
+      if high < rg 
+        high = rg 
+      end
+      drt = diag_rt(row, col, grid)
+      if high < drt 
+        high = drt 
+      end
+      dlf = diag_lf(row, col, grid)
+      if high < dlf 
+        high = dlf 
+      end
+    end
   end
-  #puts "Answer: #{n}"
+  puts "Answer: #{high}"
 end
 
 if __FILE__ == $0
