@@ -3,6 +3,7 @@
 import groovy.time.TimeCategory
 import groovy.time.TimeDuration
 
+
 class Euler_1 {
 
     static void main(String[] args) {
