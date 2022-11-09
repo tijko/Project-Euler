@@ -3,7 +3,7 @@
 ### Compile and Run
 
 All the Haskell problems are able to be compiled using `ghc` 
-(gnu-haskell-compiler).  With the help of a top-level global `Makefile`
+(glasgow-haskell-compiler).  With the help of a top-level global `Makefile`
 run the follow command:
 
     $> make problem="Euler_7"
