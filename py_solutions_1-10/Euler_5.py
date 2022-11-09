@@ -1,4 +1,5 @@
-# What is the smallest number that can be divided evenly by all the numbers from 1-20?  
+# What is the smallest number that can be divided evenly by all the numbers 
+# from 1-20?  
 
 from __future__ import print_function
 
