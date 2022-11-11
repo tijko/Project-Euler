@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 # Find the sum of all the primes below two million. 
 
 from __future__ import print_function

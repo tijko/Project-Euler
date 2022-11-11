@@ -1,0 +1,44 @@
+#!/usr/bin/env groovy
+
+import groovy.time.TimeCategory
+import groovy.time.TimeDuration
+
+
+class Euler_7 {
+
+    public static boolean is_prime(int n) {
+        if (n == 2) {
+            return true
+        } else if (n < 2) {
+            return false
+        }
+
+        def limit = (int) Math.sqrt(n) + 1
+        for (int i=2; i < limit; i++) {
+            if (n % i == 0) {
+                return false
+            }
+        }
+
+        return true
+    }
+
+    static void main(String[] args) {
+        /* Find 10001st Prime */
+        Date start = new Date()
+        def answer = 1 
+        def prime = 3
+        while (answer < 10001) {
+            if (is_prime(prime)) {
+                answer += 1
+            }
+            prime += 2
+        }
+
+        prime -= 2
+        Date end = new Date()
+        println("Answer: ${prime}")
+        TimeDuration time = TimeCategory.minus(end, start)
+        println("Time: ${time}")
+    }
+}

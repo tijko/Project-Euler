@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 # Find the only pythagorean triplet that a + b + c = 1000 
 
 from __future__ import print_function

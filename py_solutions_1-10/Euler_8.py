@@ -1,4 +1,7 @@
-# find the greatest product of 5 consecutive digits in this 1000 digit number 
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+# find the greatest product of 13 consecutive digits in this 1000 digit number
 
 from __future__ import print_function
 
