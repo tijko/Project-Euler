@@ -1,25 +1,30 @@
-use ::std::time::Instant;
+// sum of even fibonacci numbers below 4 million? 
+
+use std::time::Instant;
 
 
 fn main() {
 
-    let start = Instant::now();
-    let mut total = 0;
+    let timer:Instant = Instant::now();
+    
+    let mut total:i64 = 0;
+    let (mut a, mut b) = (0, 1);
 
-    let mut x = 0;
-    let mut y = 1;
-    let mut tmp = y;
+    let answer = loop {
 
-    while y <= 4000000 {
-        tmp = x;
-        x = y;
-        y = tmp + x;
-        if y % 2 == 0 {
-            total = total + y;
-        }
-    }
-    let stop = Instant::now();
+        if b > 4000000 {
+            break total;
+        };
 
-    println!("Answer: {}", total);
-    println!("Time:   {:#?}", stop - start);
+        if b % 2 == 0 {
+            total += b;
+        };
+
+        let c = a + b;
+        a = b;
+        b = c;
+    };
+
+    println!("Answer: {}", answer);
+    println!("Time:   {:?}", timer.elapsed());
 }
