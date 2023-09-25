@@ -1,9 +1,11 @@
+// sum of all multiples of 3 and 5 below 1000?
+
 use std::time::Instant;
 
 
 fn main() {
 
-    let start = Instant::now();
+    let timer = Instant::now();
     let mut val = 0; 
 
     for n in 1..1000 {
@@ -13,8 +15,6 @@ fn main() {
         }
     }
 
-    let stop = Instant::now();
     println!("Answer: {}", val);
-    println!("Time:   {:#?}", stop - start);
-
+    println!("Time:   {:?}", timer.elapsed());
 }
