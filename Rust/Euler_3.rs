@@ -11,7 +11,7 @@ fn is_prime(n:u64) -> bool {
         return false;
     }
 
-    let range:u64 = n.sqrt() + 1;
+    let range:u64 = (n as f64).sqrt() as u64;
 
     for i in 3..range {
         if n % i == 0 {
@@ -26,16 +26,14 @@ fn main() {
     let timer = Instant::now();
 
     let factor:u64 = 600851475143;
-    let current:u64 = factor / 2;
+    let mut current:u64 = (factor as f64).sqrt() as u64;
 
-    let answer = {
-        while true {
-            if factor % current == 0 && is_prime(current) {
-                break current;
-            }
+    let answer = loop {
+        if factor % current == 0 && is_prime(current) {
+            break current;
+        }
 
-            current -= 1;
-        };
+        current -= 1;
     };
 
     println!("Answer: {}", answer);
