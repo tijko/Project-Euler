@@ -3,17 +3,12 @@
 use std::time::Instant;
 
 fn is_prime(n:u64) -> bool {
-    if n == 2 {
-        return true;
-    }
-
     if n < 2 || n % 2 == 0 {
         return false;
     }
 
-    let mut range:u64 = (n as f64).sqrt() as u64;
-    range += 1;
-    for i in 3..range {
+    let range:u64 = (n as f64).sqrt() as u64;
+    for i in 3..range+1 {
         if n % i == 0 {
             return false;
         }
