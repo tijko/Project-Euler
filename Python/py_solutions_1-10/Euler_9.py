@@ -21,7 +21,7 @@ def euler_9():
         for y in range(x+1, 1000):
             z = (x**2 + y**2)**0.5
             if x + y + z == 1000:
-                return x * y * z
+                return int(x * y * z)
 
 print('Answer: {}'.format(euler_9()))
 stop = timeit.default_timer()
