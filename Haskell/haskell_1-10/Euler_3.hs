@@ -1,4 +1,7 @@
+-- Find the largest prime factor
 module Main where
+import Text.Printf
+import System.Clock
 
 
 is_factor :: Int -> [Int] -> Bool
@@ -26,9 +29,16 @@ is_prime n
     s = ceiling ( sqrt(fromIntegral n) ) + 1
     divs = [3..s]
 
+getTotalTime :: TimeSpec -> Float
+getTotalTime t = fromIntegral (sec t) + (fromIntegral(nsec t) / 10^9)
+
+main :: IO ()
 main =
   do
+    start <- getTime Monotonic
     let target = 600851475143
     let x = round(sqrt(fromIntegral target))
     let lst = reverse [ 2..x ]
-    print( prime_factor target lst )
+    printf "Answer:  %d\n" ( prime_factor target lst )
+    stop <- getTime Monotonic
+    printf "Time:    %.6f\n" (getTotalTime(stop) - getTotalTime(start))
