@@ -1,41 +1,43 @@
-.globl main
+.section .data
+ 
+.section .text
+  .globl main 
 
-.data
+  main:
+    pushq    %rbp
+    movq     %rsp, %rbp
+    xor      %rdi, %rdi
+    xor      %rsi, %rsi
+    jmp      factor
 
-answer:
-    .asciz "Answer: "
+  found:
+    mov     $total, %eax
+    add     $count, %eax
+    jmp     factor
 
-.text
+  factor:
+    mov      $count, %ecx
+    cmp      $0x3e8, %ecx
+    je       end 
+    mov      $count, %ax
+    mov      $5, %bl
+    div      %bl 
+    cmp      $0, %ah
+    je       found
+    jmp      factor       
 
-main:
-
-    push    %rbp
-    mov    %rsp, %rbp
-
-    xor     %rdi, %rdi
-    xor     %rsi, %rsi
-
-factor:
-    mod     $5, %rdi
-    jnz     loop
-    mod     $3, %rdi
-    jnz     loop
-    inc     %rsi
-
-loop:
-    cmp     $1000, %rdi
-    jz      complete
-    inc     %rdi
-
-print_answer:
-
-    movl    $1, %rax
-    movl    answer, %rdi
-    movl    $8, %rsi
+  count: .word 0
+  total: .word 0
+        
+  end:
+    mov      $1, %rax
+    mov      $1, %rdi
+    mov      $10,%rdx
+    mov      $answer, %rsi
     syscall 
-    
-done:
-    movl    $60, %rax
-    movl    $0,  %rax
+    movq     $60, %rax
+    movq     $0,  %rdi
     syscall
-    
+
+  answer:
+   .asciz "Answer: \n"

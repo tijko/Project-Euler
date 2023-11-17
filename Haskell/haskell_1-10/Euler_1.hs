@@ -20,6 +20,3 @@ main =
     printf "Answer: %d\n" (sum (map five_or_three [1..999]))
     stop <- getTime Monotonic
     printf "Time:   %.6f\n" (getTotalTime(stop) - getTotalTime(start))
-
-
-                    

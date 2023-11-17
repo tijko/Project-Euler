@@ -1,3 +1,4 @@
+-- Total of all even fibonacci numbers below 4 million
 module Main where
 import Text.Printf
 import System.Clock
@@ -19,4 +20,3 @@ main =
     printf "Answer:  %d\n" (fib 0 1 0)
     stop <- getTime Monotonic
     printf "Time:    %.6f\n" (getTotalTime(stop) - getTotalTime(start))
-
