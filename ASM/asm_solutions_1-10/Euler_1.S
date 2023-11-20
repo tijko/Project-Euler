@@ -1,43 +1,50 @@
 .section .data
- 
+    answer: .asciz "Answer: %d\n"
+    anslen: .word 12 
+
 .section .text
-  .globl main 
+    .globl main 
 
-  main:
-    pushq    %rbp
-    movq     %rsp, %rbp
-    xor      %rdi, %rdi
-    xor      %rsi, %rsi
-    jmp      factor
+    main:
+        pushq    %rbp
+        movq     %rsp, %rbp
+        xor      %rdi, %rdi
+        xor      %rsi, %rsi
+        jmp      setup
 
-  found:
-    mov     $total, %eax
-    add     $count, %eax
-    jmp     factor
+    setup:
+        movq    $3, %rbx # count
+        movq    $0, %rcx # total
+        movq    $3, %rsi # dividend
+        movq    $5, %rdi # dividend
+        jmp     loop
 
-  factor:
-    mov      $count, %ecx
-    cmp      $0x3e8, %ecx
-    je       end 
-    mov      $count, %ax
-    mov      $5, %bl
-    div      %bl 
-    cmp      $0, %ah
-    je       found
-    jmp      factor       
+    found:
+        add     %rbx, %rcx
+        inc     %rbx
+        jmp     loop
 
-  count: .word 0
-  total: .word 0
-        
-  end:
-    mov      $1, %rax
-    mov      $1, %rdi
-    mov      $10,%rdx
-    mov      $answer, %rsi
-    syscall 
-    movq     $60, %rax
-    movq     $0,  %rdi
-    syscall
+    loop:
+        cmp     $1000, %rbx
+        je      exit 
+        movq    %rbx, %rax
+        xor     %rdx, %rdx
+        div     %rsi
+        cmp     $0, %rdx
+        je      found
+        movq    %rbx, %rax
+        xor     %rdx, %rdx
+        div     %rdi
+        cmp     $0, %rdx
+        je      found     
+        inc     %rbx
+        jmp     loop
 
-  answer:
-   .asciz "Answer: \n"
+    exit:
+        leaq    answer(%rip), %rdi
+        movq    %rcx, %rsi
+        callq   printf
+
+        movq    $60, %rax
+        movq    $1, %rdi
+        syscall
