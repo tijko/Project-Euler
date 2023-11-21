@@ -1,9 +1,9 @@
 .section .data
     answer: .asciz "Answer: %d\n"
-    anslen: .word 12 
+    anslen: .word 12
 
 .section .text
-    .globl main 
+    .globl main
 
     main:
         pushq    %rbp
@@ -15,8 +15,6 @@
     setup:
         movq    $3, %rbx # count
         movq    $0, %rcx # total
-        movq    $3, %rsi # dividend
-        movq    $5, %rdi # dividend
         jmp     loop
 
     found:
@@ -26,17 +24,19 @@
 
     loop:
         cmp     $1000, %rbx
-        je      exit 
+        je      exit
         movq    %rbx, %rax
         xor     %rdx, %rdx
+        movq    $3, %rsi
         div     %rsi
         cmp     $0, %rdx
         je      found
         movq    %rbx, %rax
         xor     %rdx, %rdx
-        div     %rdi
+        movq    $5, %rsi
+        div     %rsi
         cmp     $0, %rdx
-        je      found     
+        je      found
         inc     %rbx
         jmp     loop
 
