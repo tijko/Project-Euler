@@ -15,28 +15,33 @@
     setup:
         movq    $3, %rbx # count
         movq    $0, %rcx # total
-        jmp     loop
-
-    found:
-        add     %rbx, %rcx
-        inc     %rbx
+        mov     $3, %rsi
+        mov     $5, %rdi
         jmp     loop
 
     loop:
         cmp     $1000, %rbx
         je      exit
+
         movq    %rbx, %rax
         xor     %rdx, %rdx
-        movq    $3, %rsi
+
         div     %rsi
         cmp     $0, %rdx
         je      found
+
         movq    %rbx, %rax
         xor     %rdx, %rdx
-        movq    $5, %rsi
-        div     %rsi
+
+        div     %rdi
         cmp     $0, %rdx
         je      found
+
+        inc     %rbx
+        jmp     loop
+
+    found:
+        add     %rbx, %rcx
         inc     %rbx
         jmp     loop
 
