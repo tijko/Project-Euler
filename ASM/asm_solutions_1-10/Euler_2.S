@@ -34,8 +34,8 @@
         xor     %rdx, %rdx
         movq    %rsi, %rax
         div     %r9
-        cmp     $0, %rdx
-        je      found
+        test    %rdx, %rdx
+        jz      found
         jmp     loop
 
     loop:
