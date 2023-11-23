@@ -3,10 +3,10 @@ LFLAGS := -static -lc
 CFLAGS := -c -g -fverbose-asm
 
 default:
-	$(CC) $(CFLAGS) Euler_1.S
+	$(CC) $(CFLAGS) Euler_2.S
 
 link:
-	$(CC) $(LFLAGS) Euler_1.o -o Euler_1
+	$(CC) $(LFLAGS) Euler_2.o -o Euler_2
 
 clean:
-	rm Euler_1.o Euler_1
+	rm Euler_2.o Euler_2
