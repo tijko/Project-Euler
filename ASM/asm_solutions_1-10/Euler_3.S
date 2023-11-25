@@ -8,7 +8,7 @@
     # Layout:
     #   r8  -> BigInt
     #   r9  -> Start of Canidates
-    #   r10 -> Half of Current-Canidate
+    #   r10 -> Factors of Current-Canidate
     #   r11 -> Range (2..r10/2)
     main:
         pushq   %rbp
