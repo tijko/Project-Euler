@@ -36,22 +36,10 @@
         jmp     L1
 
     L1:
-        movq    $10, %r8
-        movq    %rax, %r15
-        movq    $0, %rsi
-        movq    $3, %rdi
-        jmp     L4
-
-    L4:
-        cmp     %rsi, %rdi
-        je      L0 
-        shr     $1, %rax
-        div     %r8
-        movq    %rdx, %
-        #leaq    message(%rip), %rdi
-        #movq    %rax, %rsi
-        #callq   printf
-        #jmp     L0
+        leaq    message(%rip), %rdi
+        movq    %rax, %rsi
+        callq   printf
+        jmp     L0
 
     L2:
         movq    %r13, %r15
