@@ -1,6 +1,6 @@
 CC := gcc
 LFLAGS := -static -lc
-CFLAGS := -c -g -fverbose-asm
+CFLAGS := -c -g -mno-red-zone -fomit-frame-pointer -fverbose-asm
 
 default:
 	$(CC) $(CFLAGS) Euler_4.S
