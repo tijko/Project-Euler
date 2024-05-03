@@ -25,8 +25,9 @@ public class Euler_21
     }
 
     public static List<Integer> getRange(int start, int end) {
-        List<Integer> range = IntStream.range(start, end).boxed()
-                                                         .collect(Collectors.toList());
+        List<Integer> range = IntStream.range(start, end)
+                                       .boxed()
+                                       .collect(Collectors.toList());
         return range;
     }
 
