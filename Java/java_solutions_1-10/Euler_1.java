@@ -4,19 +4,21 @@
 /   Find the sum of all the multiples of 3 or 5 below 1000
 /
 */
-
+import java.util.stream.*;
+import java.util.List;
 
 public class Euler_1
 {
-    public static int factors(int limit, int ... factorsOf)
+    public static int factors(int limit)
     {
         int sum = 0;
-        int numFactors = factorsOf.length;
-
-        for (int j, i = 0; i < limit; i++) {
-            for (j = 0; j < numFactors; j++)
-                if (i % factorsOf[j] == 0) break;
-            sum += j == numFactors ? 0 : i;
+        // IntStream 'boxed' method to convert from primitive [int] type
+        List<Integer> range = IntStream.range(1, limit)
+                                       .boxed()
+                                       .collect(Collectors.toList());
+        for (int i:range) {
+            if (i % 5 == 0 || i % 3 == 0)
+                sum += i;
         }
 
         return sum;
@@ -26,11 +28,10 @@ public class Euler_1
     {
         long start = System.nanoTime();
 
-        int factor_sum = factors(1000, 3, 5);
+        int factor_sum = factors(1000);
 
         long stop = System.nanoTime();
         System.out.println("Answer: " + factor_sum); 
         System.out.printf("Time: %.7f\n", ((float) stop - (float) start) / 10000000);
-
     }
 }    
