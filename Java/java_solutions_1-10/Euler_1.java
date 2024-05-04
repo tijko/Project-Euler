@@ -11,7 +11,7 @@ public class Euler_1
 {
     public static int factors(int limit)
     {
-        // Use OptionalInt over IntStream with a map-reduce like
+        // Use OptionalInt over IntStream with a map-reduce like operation
         OptionalInt sum = IntStream.range(1, limit)
                                    .filter(x -> x % 3 == 0 ||
                                                 x % 5 == 0)
