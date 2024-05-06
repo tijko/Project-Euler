@@ -27,6 +27,6 @@ public class Euler_1
 
         long stop = System.nanoTime();
         System.out.println("Answer: " + factor_sum);
-        System.out.printf("Time: %.7f\n", ((float) stop - (float) start) / 10000000);
+        System.out.printf("Time: %.4f\n", ((float) stop - (float) start) / 1_000_000_000);
     }
 }

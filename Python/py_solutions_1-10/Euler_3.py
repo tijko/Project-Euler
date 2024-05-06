@@ -2,7 +2,7 @@
 
 from __future__ import print_function
 
-import math
+from math import sqrt, ceil
 import timeit
 
 
@@ -18,14 +18,11 @@ def is_prime(x):
         return True
     if x == 1 or x % 2 == 0:
         return False
-    for i in range(3,int(math.sqrt(x)) + 1, 2):
-        if x % i == 0:
-            return False
-    return True
+    return all(x % i != 0 for i in range(3, ceil(sqrt(x)), 2))
 
 def euler_3():
     FACTOR_OF = 600851475143
-    return max([i for i in range(1, int(math.sqrt(FACTOR_OF)) + 1, 2) 
+    return max([i for i in range(1, ceil(sqrt(FACTOR_OF)), 2) 
                 if FACTOR_OF % i == 0 and is_prime(i)])
 
 

@@ -27,7 +27,7 @@ public class Euler_2
         long sumFibonacci = fibonacci(3, 2, 4000000, 0);
         long stop = System.nanoTime();
         System.out.println("Answer: " + sumFibonacci);
-        System.out.printf("Time: %.7f\n", ((float) stop - start));
+        System.out.printf("Time: %.4f\n", ((float) stop - start) / 1_000_000_000);
     }
 }
             
