@@ -5,7 +5,8 @@
 /
 */
 
-import static java.lang.Math.sqrt;
+import java.util.stream.IntStream;
+import java.lang.Math;
 
 
 public class Euler_7
@@ -14,19 +15,20 @@ public class Euler_7
     {
         if (n < 2) return false;
         else if (n == 2) return true;
-
-        for (int i = 3; i < sqrt(n) + 1; i++)
-            if (n % i == 0) return false;
-
-        return true;
+        int limit = (int) Math.sqrt(n);
+        return IntStream.range(3, limit + 1)
+                        .allMatch(x -> n % x != 0);
     }
 
     public static void main(String[] args)
     {
+        long start = System.nanoTime();
         int i = 3;
         for (int primeCount=1; primeCount < 10001; i+=2)
             if (isPrime(i)) primeCount++;
 
         System.out.println("Answer: " + (i - 2));
+        long stop = System.nanoTime();
+        System.out.printf("Time: %.4f\n", ((float) stop - start) / 1_000_000_000);
     }
 }
