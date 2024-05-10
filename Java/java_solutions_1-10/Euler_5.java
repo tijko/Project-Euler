@@ -6,19 +6,24 @@
 /
 */
 
+import java.util.stream.IntStream;
+
+
 public class Euler_5
 {
     public static boolean allDivisible(int dividend)
     {
-        for (int i = 20; i > 1; i--)
-            if (dividend % i != 0) return false;
-        return true;
+        return IntStream.range(1, 20)
+                        .allMatch(x -> dividend % x == 0);
     }
 
     public static void main(String[] args)
     {
+        long start = System.nanoTime();
         int dividend = 20;
         while (!allDivisible(dividend)) dividend += 20;
         System.out.println("Answer: " + dividend);
+        long stop = System.nanoTime();
+        System.out.printf("Time: %.4f\n", ((float) stop - start) / 1_000_000_000);
     }
 }
