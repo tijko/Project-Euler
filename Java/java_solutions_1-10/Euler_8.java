@@ -33,6 +33,7 @@ public class Euler_8
 
     public static void main(String[] args)
     {
+        long start = System.nanoTime();
         long greatestProduct = 0;
 
         for (int i = 0; i < largeDigitStr.length() - 12; i++) {
@@ -43,7 +44,8 @@ public class Euler_8
             if (currentProduct > greatestProduct) 
                 greatestProduct = currentProduct;
         }
-
+        long stop = System.nanoTime();
         System.out.println("Answer: " + greatestProduct);
+        System.out.printf("Time: %.4f\n", ((float) stop - start) / 1_000_000_000);
     }
 }

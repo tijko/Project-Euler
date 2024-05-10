@@ -7,36 +7,28 @@
 
 public class Euler_4
 {
-    static int largestPalindrome = 0;
-
-    public static void findLargestPalindrome(int m1, int m2)
-    {
-        Integer threeDigitProduct = m1 * m2;
-        if (threeDigitProduct < largestPalindrome) return;
-
-        String productStr = threeDigitProduct.toString();
-
-        int productStrLen = productStr.length();
-        int j = productStrLen - 1;
-
-        for (int i = 0; i < productStrLen; i++) {
-            if (productStr.charAt(i) != productStr.charAt(j)) 
-                return;
-            j--;
-        }
-
-        largestPalindrome = threeDigitProduct;
+    public static boolean isPalindrome(String candidate) {
+        return new StringBuilder(candidate).reverse()
+                                           .toString()
+                                           .equals(candidate);
     }
 
     public static void main(String[] args)
     {
-        Integer threeDigitProduct;
-        String productStr;
+        long start = System.nanoTime();
+        int largestPalindrome = 0;
 
-        for (int i = 100; i < 1000; i++) 
-            for (int j = 100; j < 1000; j++) 
-                findLargestPalindrome(i, j);
-
+        for (int i = 100; i < 1000; i++) { 
+            for (int j = 100; j < i; j++) {
+                int current = i * j;
+                if (current > largestPalindrome && 
+                    isPalindrome(String.valueOf(current))) { 
+                    largestPalindrome = current;
+                }
+            }
+        }
+        long stop = System.nanoTime();
         System.out.println("Answer: " + largestPalindrome);
+        System.out.printf("Time: %.4f\n", ((float) stop - start) / 1_000_000_000);
     }
 }
