@@ -6,21 +6,22 @@
 /
 */
 
+import java.util.stream.IntStream;
+
 
 public class Euler_6
 {
     public static void main(String[] args)
     {
-        long sumOfSq = 0;
-        long sqOfSum = 0;
-
-        for (int i = 0; i <= 100; i++) {
-            sqOfSum += i;
-            sumOfSq += i * i;
-        }
-
+        long start = System.nanoTime();
+        long sumOfSq = IntStream.range(1, 100)
+                                .map(x -> x * x)
+                                .sum();
+        long sqOfSum = IntStream.range(1, 100)
+                                .sum();
         long answer = (sqOfSum * sqOfSum) - sumOfSq;
-
+        long stop = System.nanoTime();
         System.out.println("Answer: " + answer);
+        System.out.printf("Time: %.4f\n", ((float) stop - start) / 1_000_000_000);
     }
 } 
