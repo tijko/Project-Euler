@@ -23,6 +23,7 @@ public class Euler_10
 
     public static void main(String[] args)
     {
+        long start = System.nanoTime();
         long primeSum = 0;
         for (int i = 1; i < 2000000; i++) {
             if (!isPrime(i)) continue;
@@ -30,5 +31,7 @@ public class Euler_10
         }
 
         System.out.println("Answer: " + primeSum);
+        long stop = System.nanoTime();
+        System.out.printf("Time: %.4f\n", ((float) stop - start) / 1_000_000_000);
     }
 }
