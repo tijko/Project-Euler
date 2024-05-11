@@ -6,6 +6,8 @@
 /
 */
 
+import java.util.Arrays;
+
 
 public class Euler_8
 {
@@ -37,12 +39,15 @@ public class Euler_8
         long greatestProduct = 0;
 
         for (int i = 0; i < largeDigitStr.length() - 12; i++) {
-            long currentProduct = 1;
-            for (int j = 0; j < 13; j++) 
-                currentProduct *= ((int) largeDigitStr.charAt(i+j) - 48);
-
-            if (currentProduct > greatestProduct) 
-                greatestProduct = currentProduct;
+            String digitSubString = largeDigitStr.substring(i, i + 13); 
+            long[] digitArray = Arrays.stream(digitSubString.split(""))
+                                     .mapToLong(Integer::parseInt)
+                                     .toArray();
+            long digitProduct = Arrays.stream(digitArray)
+                                      .reduce(1, (x, y) -> x * y);
+            if (digitProduct > greatestProduct) { 
+                greatestProduct = digitProduct;
+            }
         }
         long stop = System.nanoTime();
         System.out.println("Answer: " + greatestProduct);
