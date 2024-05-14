@@ -7,25 +7,33 @@
 */
 
 import static java.lang.Math.sqrt;
+import java.util.stream.IntStream;
 
 
 public class Euler_12
 {
+    public static long findTriangleDivisors(long triangleNumber) {
+        int divisors = 0; 
+        int triangleLimit = (int) sqrt(triangleNumber);
+        IntStream triangleRange = IntStream.range(1, triangleLimit)
+                                           .filter(x -> triangleNumber % x == 0);
+        return triangleRange.count() * 2;
+    }
+
+    public static long findHighlyDivisibleTriangle(int limit, long count, long triangleNumber) {
+        if (findTriangleDivisors(triangleNumber) > limit) {
+            return triangleNumber;
+        } 
+
+        return findHighlyDivisibleTriangle(limit, count + 1, triangleNumber + count);
+    }
+
     public static void main(String[] args)
     {
-        long triangleNum = 0;
-        int triangleCount = 1;
-        int divisors = 0; 
-        while (divisors < 500) {
-            divisors = 0; 
-            triangleNum += triangleCount;
-            triangleCount++;
-
-            for (int i = 1; i < sqrt(triangleNum) + 1; i++) 
-                if (triangleNum % i == 0) divisors += 2;
-        }
-
-
-        System.out.println("Answer: " + triangleNum); 
+        long start = System.nanoTime();
+        long answer = findHighlyDivisibleTriangle(500, 1, 0);
+        long stop = System.nanoTime();
+        System.out.println("Answer: " + answer); 
+        System.out.printf("Time: %.4f\n", ((float) stop - start) / 1_000_000_000);
     }
 }
