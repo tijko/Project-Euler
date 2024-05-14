@@ -55,7 +55,7 @@ def array_position(col, row, shift, grid):
 # involved indexing method
 def euler_11(x):
     grid = [list(map(int, row.split())) for row in x.splitlines()]
-    grid = np.array(grid, np.int)
+    grid = np.array(grid, np.int64)
     grid_length = len(grid)
     span = range(4)
     mul = lambda x, y: x * y

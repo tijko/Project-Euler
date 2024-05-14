@@ -85,14 +85,19 @@ public class Euler_11
 
     public static void main(String[] args)
     {
+        long start = System.nanoTime();
         createGrid();
 
         long greatestProduct = 0;
 
-        for (int row = 0; row < grid.length; row++) 
-            for (int col = 0; col < grid[row].length; col++) 
+        for (int row = 0; row < grid.length; row++) {
+            for (int col = 0; col < grid[row].length; col++) {
                 greatestProduct = checkAdjacentNodes(row, col, greatestProduct);
+            }
+        }
 
+        long stop = System.nanoTime();
         System.out.println("Answer: " + greatestProduct);
+        System.out.printf("Time: %.4f\n", ((float) stop - start) / 1_000_000_000);
     }
 }
