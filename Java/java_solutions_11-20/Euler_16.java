@@ -19,13 +19,13 @@ public class Euler_16
         BigInteger powerOf = new BigInteger("1");
         BigInteger baseExp = new BigInteger("2");
 
-        for (int i = 1; i <= exponentLimit; i++) 
+        for (int i = 1; i <= exponentLimit; i++)
             powerOf = powerOf.multiply(baseExp);
 
         String baseExpStr = powerOf.toString();
 
         long expSum = 0;
-        for (int i = 0; i < baseExpStr.length(); i++) 
+        for (int i = 0; i < baseExpStr.length(); i++)
             expSum += Integer.parseInt(baseExpStr.substring(i, i + 1));
 
         System.out.println("Answer: " + expSum);

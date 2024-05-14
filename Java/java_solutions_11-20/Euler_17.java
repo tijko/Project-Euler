@@ -28,7 +28,7 @@ public class Euler_17
             curNumber = number;
 
             if (curNumber / 1000 > 0) {
-                letterCount += (numWords[0][curNumber / 1000].length() + 
+                letterCount += (numWords[0][curNumber / 1000].length() +
                                 numWords[4][0].length());
             }
 
@@ -46,7 +46,7 @@ public class Euler_17
             }
 
             curNumber %= 100;
-            
+
             if (curNumber / 10 == 1) {
                 letterCount += numWords[1][curNumber % 10].length();
                 continue;

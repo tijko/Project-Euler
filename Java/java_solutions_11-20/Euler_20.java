@@ -25,8 +25,8 @@ public class Euler_20
         String factorialString = oneHundredFactorial.toString();
         String[] factorialStringSplit = factorialString.split("");
 
-        for (int i = 0; i < factorialStringSplit.length; i++) 
-            if (!factorialStringSplit[i].equals("")) 
+        for (int i = 0; i < factorialStringSplit.length; i++)
+            if (!factorialStringSplit[i].equals(""))
                 sumOfDigits += Integer.parseInt(factorialStringSplit[i]);
 
         System.out.println("Answer: " + sumOfDigits);

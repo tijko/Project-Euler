@@ -18,7 +18,7 @@ public class Euler_15
         for (int i = 1; i <= 40; i++) {
             factor = new BigInteger(String.valueOf(i));
             fortySide = fortySide.multiply(factor);
-            if (i == 20) 
+            if (i == 20)
                 twentySide = fortySide;
         }
 
