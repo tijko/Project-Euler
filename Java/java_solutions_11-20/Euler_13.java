@@ -116,6 +116,7 @@ public class Euler_13
 
     public static void main(String[] args)
     {
+        long start = System.nanoTime();
         String[] fiftyArray = fiftyDigitStr.split(" ");
         BigInteger sumOfFifty = new BigInteger("0");
         for (int i = 0; i < fiftyArray.length; i++) {
@@ -123,6 +124,8 @@ public class Euler_13
         }
 
         String fiftySumStr = sumOfFifty.toString();
+        long stop = System.nanoTime();
         System.out.println("Answer: " + fiftySumStr.substring(0, 10));
+        System.out.printf("Time: %.4f\n", ((float) stop - start) / 1_000_000_000);
     }
 }
