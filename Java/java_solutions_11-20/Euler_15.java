@@ -12,6 +12,7 @@ public class Euler_15
 {
     public static void main(String[] args)
     {
+        long start = System.nanoTime();
         BigInteger factor;
         BigInteger twentySide = new BigInteger("1");
         BigInteger fortySide = new BigInteger("1");
@@ -24,7 +25,8 @@ public class Euler_15
 
         twentySide = twentySide.multiply(twentySide);
         fortySide = fortySide.divide(twentySide);
-
+        long stop = System.nanoTime();
         System.out.println("Answer: " + fortySide.toString());
+        System.out.printf("Time: %.4f\n", ((float) stop - start) / 1_000_000_000);
     }
 }

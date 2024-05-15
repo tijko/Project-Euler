@@ -3,6 +3,7 @@
 /
 /   Which starting number, under one million, produces the longest chain?
 /
+/   Compile with Stack Size increased -Xss400m
 */
 
 

@@ -12,6 +12,7 @@ public class Euler_20
 {
     public static void main(String[] args)
     {
+        long start = System.nanoTime();
         BigInteger oneHundredFactorial = new BigInteger("2");
         BigInteger nextFactorial;
 
@@ -25,11 +26,15 @@ public class Euler_20
         String factorialString = oneHundredFactorial.toString();
         String[] factorialStringSplit = factorialString.split("");
 
-        for (int i = 0; i < factorialStringSplit.length; i++)
-            if (!factorialStringSplit[i].equals(""))
+        for (int i = 0; i < factorialStringSplit.length; i++) {
+            if (!factorialStringSplit[i].equals("")) {
                 sumOfDigits += Integer.parseInt(factorialStringSplit[i]);
+            }
+        }
 
+        long stop = System.nanoTime();
         System.out.println("Answer: " + sumOfDigits);
+        System.out.printf("Time: %.4f\n", ((float) stop - start) / 1_000_000_000);
     }
 
 }

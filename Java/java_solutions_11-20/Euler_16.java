@@ -12,10 +12,9 @@ public class Euler_16
 {
     public static void main(String[] args)
     {
+        long start = System.nanoTime();
         int exponentLimit = 1000;
         int base = 2;
-
-
         BigInteger powerOf = new BigInteger("1");
         BigInteger baseExp = new BigInteger("2");
 
@@ -28,6 +27,8 @@ public class Euler_16
         for (int i = 0; i < baseExpStr.length(); i++)
             expSum += Integer.parseInt(baseExpStr.substring(i, i + 1));
 
+        long stop = System.nanoTime();
         System.out.println("Answer: " + expSum);
+        System.out.printf("Time: %.4f\n", ((float) stop - start) / 1_000_000_000);
     }
 }
