@@ -11,6 +11,7 @@ public class Euler_19
 {
     public static void main(String[] args)
     {
+        long start = System.nanoTime();
         int sundayCount = 0;
         int[] mosLengths = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31, 29};
 
@@ -25,23 +26,26 @@ public class Euler_19
             { 
                 int mosDay = 0;
 
-                if (mos == 1 && yr % 4 == 0) 
+                if (mos == 1 && yr % 4 == 0) { 
                     mosLength = mosLengths[12];
-                else 
+                } else { 
                     mosLength = mosLengths[mos];
-                if (curDay == 0)
+                }
+                if (curDay == 0) {
                     sundayCount++;
- 
+                }
                 while (mosDay < mosLength)
                 {
                     for (; curDay < weekLength && mosDay < mosLength; 
                            curDay++, mosDay++);
-                    if (curDay == weekLength)
+                    if (curDay == weekLength) {
                         curDay = 0;
+                    }
                 }
             }
         }
-
+        long stop = System.nanoTime();
         System.out.println("Answer: " + sundayCount);
+        System.out.printf("Time: %.4f\n", ((float) stop - start) / 1_000_000_000);
     }
 }   
