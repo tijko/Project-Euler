@@ -9,8 +9,7 @@ import timeit
 start = timeit.default_timer()
 
 def euler_18():
-    path = os.getcwd().strip('py_solutions_11-20')
-    with open(path + '/euler_txt/triangle1.txt') as f:
+    with open('/home/tijko/Project-Euler/euler_txt/triangle1.txt') as f:
         tri = [list(map(int, i.split())) for i in f.readlines()]
     row = col = total = 0
     while row < len(tri) - 2:

@@ -10,6 +10,7 @@ public class Euler_17
 {
     public static void main(String[] args)
     {
+        long start = System.nanoTime();
         String[][] numWords = {{"", "one", "two", "three", "four",
                                 "five", "six", "seven", "eight", "nine"},
                                {"ten", "eleven", "twelve", "thirteen",
@@ -61,6 +62,8 @@ public class Euler_17
             letterCount += numWords[0][curNumber % 10].length();
         }
 
+        long stop = System.nanoTime();
         System.out.println("Answer: " + letterCount);
+        System.out.printf("Time: %.4f\n", ((float) stop - start) / 1_000_000_000);
     }
 }

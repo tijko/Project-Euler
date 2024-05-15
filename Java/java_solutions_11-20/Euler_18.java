@@ -26,10 +26,11 @@ public class Euler_18
 
     public static void main(String[] args)
     {
+        long start = System.nanoTime();
         int maxPath = 0;
         int triFileSize;
 
-        String triFileName = "euler_txt/triangle1.txt";
+        String triFileName = "~/Project-Euler/euler_txt/triangle1.txt";
         String  triFilePath = pathBuilder(triFileName);
 
         int col;
@@ -100,6 +101,8 @@ public class Euler_18
         else
             maxPath += pyramid[row + 1][col + 1];
 
+        long stop = System.nanoTime();
         System.out.println("Answer: " + maxPath);
+        System.out.printf("Time: %.4f\n", ((float) stop - start) / 1_000_000_000);
     }
 }

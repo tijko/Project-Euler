@@ -20,15 +20,15 @@ public class Euler_19
         int yearLength = 12;
         int mosLength = 0;
 
-        for (int yr = 1901; yr < 2000; yr++) 
+        for (int yr = 1901; yr < 2000; yr++)
         {
             for (int mos = 0; mos < yearLength; mos++)
-            { 
+            {
                 int mosDay = 0;
 
-                if (mos == 1 && yr % 4 == 0) { 
+                if (mos == 1 && yr % 4 == 0) {
                     mosLength = mosLengths[12];
-                } else { 
+                } else {
                     mosLength = mosLengths[mos];
                 }
                 if (curDay == 0) {
@@ -36,7 +36,7 @@ public class Euler_19
                 }
                 while (mosDay < mosLength)
                 {
-                    for (; curDay < weekLength && mosDay < mosLength; 
+                    for (; curDay < weekLength && mosDay < mosLength;
                            curDay++, mosDay++);
                     if (curDay == weekLength) {
                         curDay = 0;
@@ -48,4 +48,4 @@ public class Euler_19
         System.out.println("Answer: " + sundayCount);
         System.out.printf("Time: %.4f\n", ((float) stop - start) / 1_000_000_000);
     }
-}   
+}
