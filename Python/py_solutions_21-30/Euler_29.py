@@ -56,7 +56,7 @@ def euler_29():
                 limit = max_exp 
                 for exp in range(base_power2 + 1, limit + 1):
                     # From here, you're grabbing the exponents that could 
-                    # possibly be a canidate for a repeat from the previous 
+                    # possibly be a candidate for a repeat from the previous 
                     # exponent.
                     #
                     # Check the previous exponent * the current exponent is
