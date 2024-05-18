@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 
 '''
-For a number written in Roman numerals to be considered valid there are basic 
-rules which must be followed. Even though the rules allow some numbers to be 
-expressed in more than one way there is always a "best" way of writing a 
+For a number written in Roman numerals to be considered valid there are basic
+rules which must be followed. Even though the rules allow some numbers to be
+expressed in more than one way there is always a "best" way of writing a
 particular number.
 
 For example, it would appear that there are at least six ways of writing the
@@ -17,8 +17,8 @@ XIIIIII
 VVVI
 XVI
 
-However, according to the rules only XIIIIII and XVI are valid, and the last 
-example is considered to be the most efficient, as it uses the least number 
+However, according to the rules only XIIIIII and XVI are valid, and the last
+example is considered to be the most efficient, as it uses the least number
 of numerals.
 
 Find the number of characters saved by writing each of these in their minimal
@@ -38,9 +38,9 @@ from time import sleep
 def euler_89():
     path = os.getcwd().strip('py_solutions_81-90')
     numeral_values = {'M':1000, 'D':500, 'C':100, 'L':50, 'X':10, 'V':5, 'I':1}
-    shorts = {'M':1000, 'CM':900, 'DCCC':800, 'DCC':700, 'DC':600, 'D':500, 
+    shorts = {'M':1000, 'CM':900, 'DCCC':800, 'DCC':700, 'DC':600, 'D':500,
               'CD':400, 'CCC':300, 'CC':200, 'C':100, 'XC':90, 'LXXX':80,
-              'LXX':70, 'LX':60, 'L':50, 'XL':40, 'XXX':30, 'XX':20, 'X':10, 
+              'LXX':70, 'LX':60, 'L':50, 'XL':40, 'XXX':30, 'XX':20, 'X':10,
               'IX':9, 'VIII':8, 'VII':7, 'VI':6, 'V':5, 'IV':4, 'I':1}
     shorts = {v:k for k,v in shorts.items()}
     txt_value = {}
@@ -48,7 +48,7 @@ def euler_89():
     with open(path + '/euler_txt/roman_numerals.txt') as f:
         numerals = [i.strip('\n') for i in f.readlines()]
     for numeral in numerals:
-        lst = [[k,list(g)] for k,g in groupby(numeral, lambda n: 
+        lst = [[k,list(g)] for k,g in groupby(numeral, lambda n:
                                               numeral_values[n])]
         total = 0
         for i,v in enumerate(lst):
