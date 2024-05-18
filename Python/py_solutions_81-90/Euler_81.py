@@ -21,7 +21,7 @@ except NameError:
 path = os.getcwd().strip('py_solutions_81-90')
 
 with open(path + 'euler_txt/matrix.txt') as f:
-    edges = [list(map(int, v.split(','))) for v in f.readlines()] 
+    edges = [list(map(int, v.split(','))) for v in f.readlines()]
     traveled = [['inf'] * 80 for _ in range(80)]
 
 def euler_81():
@@ -29,7 +29,7 @@ def euler_81():
     heap = [[y, x]]
     while heap:
         y, x = heap.pop(0)
-        traverse(y, x, heap)         
+        traverse(y, x, heap)
     return traveled[79][79]
 
 def traverse(y, x, heap):
@@ -48,7 +48,7 @@ def traverse(y, x, heap):
     if d_vertex and r_vertex:
         if d_vertex < r_vertex:
             heap.append([y, x + 1])
-            traverse(y + 1, x, heap) 
+            traverse(y + 1, x, heap)
         else:
             heap.append([y + 1, x])
             traverse(y, x + 1, heap)
@@ -57,15 +57,15 @@ def traverse(y, x, heap):
     elif r_vertex:
         traverse(y, x + 1, heap)
 
-def y_edge(y, x, curr): 
+def y_edge(y, x, curr):
     d_vertex = curr + edges[y+1][x]
     if traveled[y+1][x] == 'inf':
         traveled[y+1][x] = d_vertex
     elif d_vertex < traveled[y+1][x]:
-        traveled[y+1][x] = d_vertex 
+        traveled[y+1][x] = d_vertex
     else:
         d_vertex = False
-    return d_vertex 
+    return d_vertex
 
 def x_edge(y, x, curr):
     r_vertex = curr + edges[y][x+1]
