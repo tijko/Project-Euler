@@ -32,23 +32,23 @@ def euler_83():
     while heap:
         y, x = heap.pop(0)
         traverse(y, x, heap)
-    return traveled[79][79] 
+    return traveled[79][79]
 
 
 def traverse(y, x, heap):
-    bounds = 80 
-    r_vertex = d_vertex = u_vertex = l_vertex = False 
+    bounds = 80
+    r_vertex = d_vertex = u_vertex = l_vertex = False
     if traveled[y][x] == 'inf':
         traveled[y][x] = curr = edges[y][x]
     else:
         curr = traveled[y][x]
-    if x + 1 >= bounds and y + 1 >= bounds: 
+    if x + 1 >= bounds and y + 1 >= bounds:
         return
     if y + 1 < bounds:
         d_vertex = d_edge(y, x, curr)
     if x + 1 < bounds:
         r_vertex = r_edge(y, x, curr)
-    if y - 1 >= 0:  
+    if y - 1 >= 0:
         u_vertex = u_edge(y, x, curr)
     if x - 1 >= 0:
         l_vertex = l_edge(y, x, curr)
@@ -76,7 +76,7 @@ def d_edge(y, x, curr):
     if traveled[y + 1][x] == 'inf':
         traveled[y + 1][x] = d_vertex
     elif d_vertex < traveled[y + 1][x]:
-        traveled[y + 1][x] = d_vertex 
+        traveled[y + 1][x] = d_vertex
     else:
         d_vertex = False
     return d_vertex
