@@ -2,14 +2,14 @@
 # -*- coding: utf-8 -*-
 
 '''
-A natural number, N, that can be written as the sum and product of a given set 
-of at least two natural numbers, {a1, a2, ... , ak} is called a product-sum 
+A natural number, N, that can be written as the sum and product of a given set
+of at least two natural numbers, {a1, a2, ... , ak} is called a product-sum
 number: N = a1 + a2 + ... + ak = a1 × a2 × ... × ak.
 
 For example, 6 = 1 + 2 + 3 = 1 × 2 × 3.
 
-For a given set of size, k, we shall call the smallest N with this property a 
-minimal product-sum number. The minimal product-sum numbers for sets of size, 
+For a given set of size, k, we shall call the smallest N with this property a
+minimal product-sum number. The minimal product-sum numbers for sets of size,
 k = 2, 3, 4, 5, and 6 are as follows.
 
 k=2: 4 = 2 × 2 = 2 + 2
@@ -18,10 +18,10 @@ k=4: 8 = 1 × 1 × 2 × 4 = 1 + 1 + 2 + 4
 k=5: 8 = 1 × 1 × 2 × 2 × 2 = 1 + 1 + 2 + 2 + 2
 k=6: 12 = 1 × 1 × 1 × 1 × 2 × 6 = 1 + 1 + 1 + 1 + 2 + 6
 
-Hence for 2≤k≤6, the sum of all the minimal product-sum numbers is 
+Hence for 2≤k≤6, the sum of all the minimal product-sum numbers is
 4+6+8+12 = 30; note that 8 is only counted once in the sum.
 
-In fact, as the complete set of minimal product-sum numbers for 
+In fact, as the complete set of minimal product-sum numbers for
 2≤k≤12 is {4, 6, 8, 12, 15, 16}, the sum is 61.
 
 What is the sum of all the minimal product-sum numbers for 2≤k≤12000?
@@ -55,12 +55,12 @@ def euler_88(limit):
 
 def check_current_min(n, lst):
     lst_sum = sum(lst)
-    canidate = (n - lst_sum) + len(lst)
-    if canidate > 12000 or canidate < 2:
+    candidate = (n - lst_sum) + len(lst)
+    if candidate > 12000 or candidate < 2:
         return
-    current = min_prod_sum.get(canidate)
+    current = min_prod_sum.get(candidate)
     if current is None or n < current:
-        min_prod_sum[canidate] = n
+        min_prod_sum[candidate] = n
 
 def int_to_list_combo(n, n_list, f, flst):
     for factor in flst:
@@ -90,7 +90,7 @@ def find_factors(n):
         if n % i == 0:
             f2 = int(n / i)
             create_factor_combos(n, i, f2)
-            
+
 if __name__ == "__main__":
     start = timeit.default_timer()
     print('Answer: {}'.format(euler_88(12000)))
