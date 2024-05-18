@@ -14,14 +14,9 @@ public class Euler_21
 {
     public static int amicablePair(int amicableSum)
     {
-        int amicablePairSum = 0;
-
-        for (int i = 1; i < (amicableSum / 2) + 1; i++) {
-            if (amicableSum % i == 0)
-                amicablePairSum += i;
-        }
-
-        return amicablePairSum;
+        return IntStream.range(1, (amicableSum / 2) + 1)
+                        .filter(x -> amicableSum % x == 0)
+                        .sum();
     }
 
     public static List<Integer> getRange(int start, int end) {
@@ -33,23 +28,24 @@ public class Euler_21
 
     public static void main(String[] args)
     {
+        long start = System.nanoTime();
         int amicableLimit = 10000;
         int amicablePairSum = 0;
         List<Integer> amicableRange = getRange(4, amicableLimit);
         for (int i:amicableRange) {
-            int amicableSum = 0;
-            for (int j = 1; j < (i / 2) + 1; j++) {
-                if (i % j == 0)
-                    amicableSum += j;
-            }    
-     
+            int amicableSum = IntStream.range(1, (i / 2) + 1)
+                                       .filter(x -> i % x == 0)
+                                       .sum();
             if (amicableSum != i) { 
                 int candidate = amicablePair(amicableSum);
-                if (candidate == i)
+                if (candidate == i) {
                     amicablePairSum += i;
+                }
             }
         }
 
+        long stop = System.nanoTime();
         System.out.println("Answer: " + amicablePairSum);
+        System.out.printf("Time: %.4f\n", ((float) stop - start) / 1_000_000_000);
     }
 }
