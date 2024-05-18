@@ -26,8 +26,8 @@ with open(path + 'euler_txt/matrix.txt') as f:
 traveler = lambda: [['inf'] * 80 for _ in range(80)]
 
 def euler_82():
-    sopf = [999999] 
-    cols = [[i, 0] for i in range(80)]  
+    sopf = [999999]
+    cols = [[i, 0] for i in range(80)]
     for col in cols:
         heap = [col]
         traveled = traveler()
@@ -37,13 +37,13 @@ def euler_82():
     return sopf[0]
 
 def traverse(y, x, heap, sopf, traveled):
-    bounds = 80 
-    r_vertex = d_vertex = u_vertex = False 
+    bounds = 80
+    r_vertex = d_vertex = u_vertex = False
     if traveled[y][x] == 'inf':
         traveled[y][x] = curr = edges[y][x]
     else:
         curr = traveled[y][x]
-    if x + 1 >= bounds: 
+    if x + 1 >= bounds:
         if traveled[y][x] < sopf[0]:
             sopf[0]= traveled[y][x]
         return
@@ -51,7 +51,7 @@ def traverse(y, x, heap, sopf, traveled):
         d_vertex = d_edge(y, x, curr, traveled)
     if x + 1 < bounds:
         r_vertex = r_edge(y, x, curr, traveled)
-    if y - 1 >= 0:  
+    if y - 1 >= 0:
         u_vertex = u_edge(y, x, curr, traveled)
     mvs = {d_vertex:'d_vertex',
            r_vertex:'r_vertex',
@@ -66,7 +66,7 @@ def d_edge(y, x, curr, traveled):
     if traveled[y + 1][x] == 'inf':
         traveled[y + 1][x] = d_vertex
     elif d_vertex < traveled[y + 1][x]:
-        traveled[y + 1][x] = d_vertex 
+        traveled[y + 1][x] = d_vertex
     else:
         d_vertex = False
     return d_vertex
