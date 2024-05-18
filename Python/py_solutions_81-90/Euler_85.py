@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 '''
-Although there exists no rectangular grid that contains exactly two million 
+Although there exists no rectangular grid that contains exactly two million
 rectangles, find the area of the grid with the nearest solution.
 '''
 
@@ -38,7 +38,7 @@ def euler_85():
         if i == 2:
             return close_area
         n += 1
-                
+
 if __name__ == "__main__":
     start = timeit.default_timer()
     print('Answer: {}'.format(euler_85()))
