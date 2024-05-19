@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# Euler's Totient Function 
+# Euler's Totient Function
 
 from __future__ import print_function, division
 
@@ -39,7 +39,7 @@ def euler_69():
     limit = 1000001
     primes_list = build_primes_list(int(math.sqrt(limit)) + 1)
     for i in range(2, limit):
-        prime_factor = int(math.sqrt(i)) 
+        prime_factor = int(math.sqrt(i))
         phi = calculate_phi(i, primes_list[:prime_factor])
         current = i / phi
         if current > high_phi:
