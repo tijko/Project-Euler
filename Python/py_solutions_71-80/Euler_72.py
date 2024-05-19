@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# How many elements would be contained in the set of reduced proper fractions 
+# How many elements would be contained in the set of reduced proper fractions
 # for d ≤ 1,000,000?
 
 from __future__ import print_function
