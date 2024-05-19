@@ -19,9 +19,10 @@ def euler_63():
     for n in range(1, 100):
         for i in range(1, 100):
             if len(str(i**n)) == n:
-                total += 1    
+                total += 1
     return total
 
-print("Answer: %s" % euler_63())
-stop = timeit.default_timer()
-print("Time: %f" % (stop - start)) 
+if __name__ == '__main__':
+    print("Answer: {}".format(euler_63()))
+    stop = timeit.default_timer()
+    print("Time: {:.4f}".format(stop - start))
