@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # How many different ways can 100 hundred be written by adding at least two
-# numbers 
+# numbers
 
 from __future__ import print_function
 
