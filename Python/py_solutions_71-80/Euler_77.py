@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # what is the first number to have 5000 different ways to sum with prime
-# numbers? 
+# numbers?
 
 from __future__ import print_function
 
