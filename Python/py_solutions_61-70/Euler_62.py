@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# find the smallest cube that can be permutated to 5 other cubes 
+# find the smallest cube that can be permutated to 5 other cubes
 
 from __future__ import print_function
 
@@ -22,6 +22,7 @@ def euler_62():
         if cubes.count(cube) == 5:
             return (cubes.index(cube)**3)
 
-print("Answer: %s" % euler_62())
-stop = timeit.default_timer()
-print("Time: %f" % (stop - start))
+if __name__ == '__main__':
+    print("Answer: %s" % euler_62())
+    stop = timeit.default_timer()
+    print("Time: %f" % (stop - start))
