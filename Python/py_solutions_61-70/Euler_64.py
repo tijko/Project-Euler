@@ -23,7 +23,7 @@ def euler_64():
     chek = []
     for i in out:
         constant_a = math.floor(math.sqrt(i))
-        m0 =  constant_a 
+        m0 =  constant_a
         d0 = (i - (m0**2)) / 1
         a0 = int((constant_a + m0) / d0)
         for n in range(445):
@@ -37,9 +37,9 @@ def euler_64():
         if repeat(chek) % 2 != 0:
             total += 1
         chek = []
-    return total    
+    return total
 
-print("Answer: %s" % euler_64())
-stop = timeit.default_timer()
-print("Time: %f" % (stop - start))
- 
+if __name__ == '__main__':
+    print("Answer: %s" % euler_64())
+    stop = timeit.default_timer()
+    print("Time: %f" % (stop - start))
