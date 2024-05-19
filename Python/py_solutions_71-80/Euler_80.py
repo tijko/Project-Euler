@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# sum of the first 100 natural numbers decimal square root 
+# sum of the first 100 natural numbers decimal square root
 
 from __future__ import print_function
 
