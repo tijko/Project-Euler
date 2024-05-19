@@ -52,13 +52,14 @@ def euler_70():
     low_phi, low = 10**7, 0
     for n in canidates:
         factor = int(math.sqrt(n))
-        phi = calculate_phi(n, primes[:factor])        
+        phi = calculate_phi(n, primes[:factor])
         if sorted(str(n)) == sorted(str(int(phi))):
             if n / phi < low_phi:
                 low_phi, low = n / phi, n
     return low
 
-print("Answer: %s" % euler_70())
-stop = timeit.default_timer()
-print("Time: %f" % (stop - start))
+if __name__ == '__main__':
+    print("Answer: %s" % euler_70())
+    stop = timeit.default_timer()
+    print("Time: %f" % (stop - start))
 
