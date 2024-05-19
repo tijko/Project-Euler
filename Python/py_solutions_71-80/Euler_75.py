@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 
-# Given that L is the length of the wire, for how many values of 
+# Given that L is the length of the wire, for how many values of
 # L ≤ 1,500,000 can exactly one integer sided right angle triangle be formed?
 
 from __future__ import print_function
@@ -34,13 +34,13 @@ def triangle(triplets, triplet):
                  [(-1, 2, 2), (-2, 1, 2), (-2, 2, 3)]]
     zip_trip = partial(zip, triplet)
     for triangle in triangles:
-        new_triplet = [reduce(add, starmap(imul, i)) 
+        new_triplet = [reduce(add, starmap(imul, i))
                        for i in map(zip_trip, triangle)]
         if sum(new_triplet) <= 1500000:
             triplets.append(new_triplet)
 
 
-if __name__ == '__main__': 
+if __name__ == '__main__':
     print("Answer: %s" % euler_75())
     stop = timeit.default_timer()
     print("Time: %f" % (stop - start))
