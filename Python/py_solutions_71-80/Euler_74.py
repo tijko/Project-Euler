@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# factorial of each digit of a number to sequence 
-# all numbers under a million max have 60 length sequence 
+# factorial of each digit of a number to sequence
+# all numbers under a million max have 60 length sequence
 
 from __future__ import print_function
 
@@ -23,7 +23,7 @@ def euler_74():
         if len(chain) >= 60:
             total += 1
         chain = [n]
-        pos = 0    
+        pos = 0
         while True:
             next_term = sum([math.factorial(int(v)) for v in [j for j in str(chain[pos])]])
             if set(chain).intersection([next_term]):
@@ -37,4 +37,4 @@ def euler_74():
 print("Answer: %s" % euler_74())
 stop = timeit.default_timer()
 print("Time: %f" % (stop - start))
-                
+
