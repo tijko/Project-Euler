@@ -1,7 +1,7 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 
-# larger triangle path 
+# larger triangle path
 
 from __future__ import print_function
 
@@ -25,7 +25,8 @@ def euler_67():
 		    r[x + 1][y] = max(r[x][y]+r[x + 1][y],r[x][y + 1]+r[x + 1][y])
     return r[len(r) - 1][0]
 
-print("Answer: %s" % euler_67())
-stop = timeit.default_timer()
-print("Time: %f" % (stop - start))
+if __name__ == '__main__':
+    print("Answer: %s" % euler_67())
+    stop = timeit.default_timer()
+    print("Time: %f" % (stop - start))
 
