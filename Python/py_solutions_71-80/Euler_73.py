@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# how many fractions between 1/2 and 1/3 in 12001 reduced 
+# how many fractions between 1/2 and 1/3 in 12001 reduced
 
 from __future__ import print_function
 
