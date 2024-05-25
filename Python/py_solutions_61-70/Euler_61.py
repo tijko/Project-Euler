@@ -1,9 +1,16 @@
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 '''
  cyclic number of six 4-digit that are in one of each and doesn't have to be
- in ranking order (i.e. tri,sq,pent...)
+ in ranking order (i.e. tri, sq, pent...)
+
+ the sequence is considered two-digits leading into the next number
+ (e.g. 1245 -> 4590)
+
+ then the 'wrap' sequence is the last two-digits 'wrapping' around to the
+ leading number (e.g. 1245 -> 4590 -> 9012)
 
  triangle = n * (n + 1) / 2
  square   = n**2
@@ -14,9 +21,11 @@
 '''
 
 from __future__ import print_function
+
+from collections import defaultdict
+from functools import partial
 from sys import setrecursionlimit
 
-from functools import partial
 import itertools
 import timeit
 
@@ -44,15 +53,11 @@ def match_cyclical_pair(p1, p2):
         return True
     return False
 
-def find_cyclic_set(n, c_set, cyclic, cyclic_idx):
-    if len(c_set) == 6:
+def match_lists(poly, poly_hash, c_set):
+    if not poly_hash[poly]:
         return c_set
-    # XXX check the wrap on the last polygonal-number
-    for polygonal_number in cyclic[cyclic_idx]:
-        if match_cyclical_pair(n, polygonal_number):
-            return find_cyclic_set(polygonal_number, c_set + [n], cyclic, cyclic_idx + 1)
-    n = c_set.pop(-1)
-    return find_cyclic_set(n, c_set, cyclic, cyclic_idx - 1)
+    for p in poly_hash[poly]:
+        return match_lists(p, poly_hash, c_set + [p])
 
 def euler_61():
     triangle = lambda n: int(n * (n + 1) / 2)
@@ -62,13 +67,23 @@ def euler_61():
     heptagon = lambda n: int(n * (5 * n - 3) / 2)
     octagon  = lambda n: n * (3 * n - 2)
     polygonal_four_digit = partial(create_four_digit_polygonal_set, 999, 10000)
-    cyclic = list(map(polygonal_four_digit, [triangle, square, pentagon,
-                                             hexagon, heptagon, octagon]))
-    return sum(find_cyclic_set(cyclic[0][0], [], cyclic, 0))
+    cyclical_sets = list(map(polygonal_four_digit, [triangle, square, pentagon,
+                                                    hexagon, heptagon, octagon]))
+    polygonal_matches = defaultdict(dict)
+    for idx, cyclical_set in enumerate(cyclical_sets):
+        for polygonal_number in cyclical_set:
+            polygonal_matches[polygonal_number] = dict()
+            for match_idx, match_set in enumerate(cyclical_sets):
+                if match_idx == idx: continue
+                for sequence in match_set:
+                    if match_cyclical_pair(polygonal_number, sequence):
+                        polygonal_matches[polygonal_number].update(polygonal_matches
+    for match in polygonal_matches:
+        print('Polygonal: {} Type: {}'.format(match[1], match[0] + 3))
+        print('{}'.format(['{} - {}'.format(i[1], i[0] + 3) for i in polygonal_matches[match]]))
 
 if __name__ == '__main__':
-    recursion_limit = 3000
-    setrecursionlimit(recursion_limit)
+    setrecursionlimit(2000000)
     print("Answer: {}".format(euler_61()))
     stop = timeit.default_timer()
     print("Time: {:.4f}".format(stop - start))
